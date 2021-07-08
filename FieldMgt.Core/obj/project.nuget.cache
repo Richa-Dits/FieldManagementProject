@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BWmcMv2cc1mFV6nUmnukOWePUtNpVXiu0vt0YN0gITxmD7ehfqDK0zhFY9P0X8lsODxyw0blHF/t6iI1DMMHFw==",
+  "dgSpecHash": "S0cDfZYn9AWVrOT8cz81RHPZsF8/bDtJoKdg7UOXXVl5sob3dGioXDxSF/2bzdfaoZKj8R3pYFgVpkBQrQ8Vhw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ditsd\\source\\repos\\FieldMgt\\FieldMgt.Core\\FieldMgt.Core.csproj",
+  "projectFilePath": "C:\\Users\\ditsd\\source\\repos\\FieldManage\\FieldMgt.Core\\FieldMgt.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ditsd\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\ditsd\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

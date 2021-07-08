@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ditsd\\source\\repos\\FieldMgt\\FieldMgt.Core\\FieldMgt.Core.csproj": {}
+    "C:\\Users\\ditsd\\source\\repos\\FieldManage\\FieldMgt.Core\\FieldMgt.Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ditsd\\source\\repos\\FieldMgt\\FieldMgt.Core\\FieldMgt.Core.csproj": {
+    "C:\\Users\\ditsd\\source\\repos\\FieldManage\\FieldMgt.Core\\FieldMgt.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ditsd\\source\\repos\\FieldMgt\\FieldMgt.Core\\FieldMgt.Core.csproj",
+        "projectUniqueName": "C:\\Users\\ditsd\\source\\repos\\FieldManage\\FieldMgt.Core\\FieldMgt.Core.csproj",
         "projectName": "FieldMgt.Core",
-        "projectPath": "C:\\Users\\ditsd\\source\\repos\\FieldMgt\\FieldMgt.Core\\FieldMgt.Core.csproj",
+        "projectPath": "C:\\Users\\ditsd\\source\\repos\\FieldManage\\FieldMgt.Core\\FieldMgt.Core.csproj",
         "packagesPath": "C:\\Users\\ditsd\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ditsd\\source\\repos\\FieldMgt\\FieldMgt.Core\\obj\\",
+        "outputPath": "C:\\Users\\ditsd\\source\\repos\\FieldManage\\FieldMgt.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
