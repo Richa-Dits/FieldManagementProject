@@ -63,7 +63,7 @@ namespace FieldMgt.Controllers
                     }
                     else
                     {
-                        return BadRequest("Employee can not be created");
+                        return BadRequest("Unable to create employee");
                     }
                 }
                 else
