@@ -29,20 +29,17 @@ namespace FieldMgt.Controllers
         public async Task<IActionResult> CreateLeadAsync(CreateLeadDTO model)
         {
             CreateLeadDTO modelDTO = new CreateLeadDTO();
-            modelDTO.LeadName = model.LeadName;
+            modelDTO.FirstName = model.FirstName;
+            modelDTO.LastName = model.LastName;
             modelDTO.LeadDescription = model.LeadDescription;
             modelDTO.LeadContact = model.LeadContact;
             modelDTO.LeadSource = model.LeadSource;
             modelDTO.LeadStatus = model.LeadStatus;
             modelDTO.Gender = model.Gender;
-            modelDTO.PermaAddress1 = model.PermaAddress1;
-            modelDTO.PermaAddress2 = model.PermaAddress2;
-            modelDTO.PermaCity = model.PermaCity;
-            modelDTO.PermaCountry = model.PermaCountry;
-            modelDTO.CoresAddress1 = model.CoresAddress1;
-            modelDTO.CoresAddress2 = model.CoresAddress2;
-            modelDTO.CoresCity = model.CoresCity;
-            modelDTO.CoresCountry = model.CoresCountry;
+            modelDTO.Address = model.Address;
+            modelDTO.City = model.City;
+            modelDTO.State = model.State;
+            modelDTO.Country = model.Country;
             modelDTO.Zip = model.Zip;
             modelDTO.Email = model.Email;
             modelDTO.LeadStage = model.LeadStage;

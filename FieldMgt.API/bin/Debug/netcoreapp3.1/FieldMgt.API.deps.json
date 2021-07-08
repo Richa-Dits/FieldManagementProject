@@ -1884,7 +1884,8 @@
           "EntityFramework": "6.4.4",
           "FluentValidation.WebApi": "8.6.1",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.7",
-          "Microsoft.EntityFrameworkCore": "5.0.7"
+          "Microsoft.EntityFrameworkCore": "5.0.7",
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.7"
         },
         "runtime": {
           "FieldMgt.Core.dll": {}

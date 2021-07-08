@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 namespace FieldMgt.Core.DomainModels
 {
     public class LeadActivity
@@ -9,7 +8,7 @@ namespace FieldMgt.Core.DomainModels
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int LeadActivityId { get; set; }
-        [Column(TypeName = "varchar(255)")]
+        [Column(TypeName = "nvarchar(255)")]
         public string Description { get; set;}
         public DateTime? DueDate { get; set; }
         public int Status { get; set; }

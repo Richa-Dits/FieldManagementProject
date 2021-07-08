@@ -44,6 +44,7 @@ namespace FieldMgt.Controllers
                     modelDTO.EmployeeId = null;
                     modelDTO.Address = model.Address;
                     modelDTO.City = model.City;
+                    modelDTO.State = model.State;
                     modelDTO.Country = model.Country;
                     modelDTO.Email = model.Email;
                     modelDTO.FirstName = model.FirstName;
@@ -63,7 +64,7 @@ namespace FieldMgt.Controllers
                     }
                     else
                     {
-                        return BadRequest("Employee can not be created");
+                        return BadRequest("Unable to create Employee");
                     }
                 }
                 else

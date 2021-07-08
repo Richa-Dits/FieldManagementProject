@@ -4,20 +4,61 @@ using FieldMgt.Core.DomainModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace FieldMgt.API.Migrations
+namespace FieldMgt.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210709082543_fieldmgt.core.wgfwek0230")]
+    partial class fieldmgtcorewgfwek0230
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.City", b =>
+                {
+                    b.Property<int>("CityID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CityName")
+                        .HasColumnType("varchar(40)");
+
+                    b.Property<int>("StateId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CityID");
+
+                    b.HasIndex("StateId");
+
+                    b.ToTable("City");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Country", b =>
+                {
+                    b.Property<int>("CountryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CountryCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(40)");
+
+                    b.HasKey("CountryID");
+
+                    b.ToTable("Country");
+                });
 
             modelBuilder.Entity("FieldMgt.Core.DomainModels.Employee", b =>
                 {
@@ -26,23 +67,17 @@ namespace FieldMgt.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
-                        .HasColumnType("varchar(80)");
-
-                    b.Property<int>("City")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Country")
-                        .HasColumnType("int");
-
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DOB")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("DeletedBy")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
@@ -50,42 +85,28 @@ namespace FieldMgt.API.Migrations
                     b.Property<int>("Designation")
                         .HasColumnType("int");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("varchar(250)");
-
                     b.Property<string>("FirstName")
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(30)");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(30)");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Phone")
-                        .HasColumnType("varchar(14)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
                     b.Property<string>("UserId")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("ZipCode")
-                        .HasMaxLength(5)
-                        .HasColumnType("varchar(5)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("EmployeeID");
-
-                    b.HasIndex("City");
-
-                    b.HasIndex("Country");
 
                     b.HasIndex("CreatedBy");
 
@@ -107,32 +128,24 @@ namespace FieldMgt.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CoresAddress1")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("CoresAddress2")
-                        .HasColumnType("varchar(80)");
-
-                    b.Property<int>("CoresCity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CoresCountry")
-                        .HasColumnType("int");
-
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeletedBy")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("varchar(30)");
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");
@@ -143,15 +156,14 @@ namespace FieldMgt.API.Migrations
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("LastName")
+                        .HasColumnType("varchar(30)");
+
                     b.Property<string>("LeadContact")
                         .HasColumnType("varchar(15)");
 
                     b.Property<string>("LeadDescription")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("LeadName")
-                        .IsRequired()
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("LeadSource")
                         .HasColumnType("int");
@@ -163,32 +175,12 @@ namespace FieldMgt.API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PermaAddress1")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("PermaAddress2")
-                        .HasColumnType("varchar(80)");
-
-                    b.Property<int>("PermaCity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PermaCountry")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Zip")
-                        .HasMaxLength(10)
-                        .HasColumnType("char(10)");
-
                     b.HasKey("LeadId");
-
-                    b.HasIndex("CoresCity");
-
-                    b.HasIndex("CoresCountry");
 
                     b.HasIndex("CreatedBy");
 
@@ -203,10 +195,6 @@ namespace FieldMgt.API.Migrations
                     b.HasIndex("LeadStatus");
 
                     b.HasIndex("ModifiedBy");
-
-                    b.HasIndex("PermaCity");
-
-                    b.HasIndex("PermaCountry");
 
                     b.ToTable("Lead");
                 });
@@ -228,7 +216,7 @@ namespace FieldMgt.API.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("DueDate")
                         .HasColumnType("datetime2");
@@ -274,7 +262,7 @@ namespace FieldMgt.API.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("LeadId")
                         .HasColumnType("int");
@@ -300,71 +288,59 @@ namespace FieldMgt.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CoresAddress1")
-                        .HasColumnType("varchar(100)");
+                    b.Property<string>("Address")
+                        .HasColumnType("varchar(150)");
 
-                    b.Property<string>("CoresAddress2")
-                        .HasColumnType("varchar(80)");
-
-                    b.Property<int>("CoresCity")
+                    b.Property<int>("CityId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CoresCountry")
+                    b.Property<int>("CountryId")
                         .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeletedBy")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(30)");
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(30)");
 
                     b.Property<int>("LeadId")
                         .HasColumnType("int");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PermaAddress1")
-                        .HasColumnType("varchar(80)");
-
-                    b.Property<string>("PermaAddress2")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<int>("PermaCity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PermaCountry")
-                        .HasColumnType("int");
-
                     b.Property<string>("Phone")
                         .HasColumnType("varchar(14)");
 
+                    b.Property<int>("StateId")
+                        .HasColumnType("int");
+
                     b.HasKey("LeadContactID");
 
-                    b.HasIndex("CoresCity");
+                    b.HasIndex("CityId");
 
-                    b.HasIndex("CoresCountry");
+                    b.HasIndex("CountryId");
 
                     b.HasIndex("CreatedBy");
 
@@ -376,11 +352,150 @@ namespace FieldMgt.API.Migrations
 
                     b.HasIndex("ModifiedBy");
 
-                    b.HasIndex("PermaCity");
-
-                    b.HasIndex("PermaCountry");
+                    b.HasIndex("StateId");
 
                     b.ToTable("LeadContact");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("ActualCompletionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("AssignedTo")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LeadId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OrderDescription")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("OrderStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PocContact")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PocName")
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("ReferenceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SPLocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TeamLead")
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("AssignedTo");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("DeletedBy");
+
+                    b.HasIndex("LeadId");
+
+                    b.HasIndex("ModifiedBy");
+
+                    b.HasIndex("ReferenceId");
+
+                    b.HasIndex("SPLocationId");
+
+                    b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Product", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IssueThreshold")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductMasterId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("QuantityAvailable")
+                        .HasColumnType("real");
+
+                    b.HasKey("ProductId");
+
+                    b.HasIndex("ProductMasterId");
+
+                    b.ToTable("Product");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.ProductMaster", b =>
+                {
+                    b.Property<int>("ProductMasterId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProductCreatedBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("ProductDescription")
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<int?>("ReferenceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductMasterId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("ReferenceId");
+
+                    b.ToTable("ProductMaster");
                 });
 
             modelBuilder.Entity("FieldMgt.Core.DomainModels.Reference", b =>
@@ -399,6 +514,217 @@ namespace FieldMgt.API.Migrations
                     b.HasKey("ReferenceId");
 
                     b.ToTable("Reference");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.SPLocation", b =>
+                {
+                    b.Property<int>("SPLocationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("varchar(14)");
+
+                    b.Property<string>("SPLocationIncharge")
+                        .HasMaxLength(15)
+                        .HasColumnType("varchar(15)");
+
+                    b.Property<string>("SPLocationName")
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<int>("StakeholderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SPLocationId");
+
+                    b.HasIndex("StakeholderId");
+
+                    b.ToTable("SPLocation");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Stakeholder", b =>
+                {
+                    b.Property<int>("StakeholderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ReferenceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StakeholderName")
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<int>("StakeholderType")
+                        .HasColumnType("int");
+
+                    b.HasKey("StakeholderId");
+
+                    b.HasIndex("ReferenceId");
+
+                    b.ToTable("Stakeholder");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.State", b =>
+                {
+                    b.Property<int>("StateID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StateName")
+                        .HasColumnType("varchar(40)");
+
+                    b.HasKey("StateID");
+
+                    b.HasIndex("CountryId");
+
+                    b.ToTable("State");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.StockIssue", b =>
+                {
+                    b.Property<int>("StockIssueId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("IssuedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("IssuedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("QuantityIssued")
+                        .HasColumnType("real");
+
+                    b.HasKey("StockIssueId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("StockIssue");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.UserAddress", b =>
+                {
+                    b.Property<int>("AddressId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<int>("AddressType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LeadId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ReferenceId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SPLocationId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StakeholderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ZipCode")
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
+                    b.HasKey("AddressId");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("LeadId");
+
+                    b.HasIndex("ReferenceId");
+
+                    b.HasIndex("SPLocationId");
+
+                    b.HasIndex("StakeholderId");
+
+                    b.HasIndex("StateId");
+
+                    b.ToTable("UserAddress");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.UserContact", b =>
+                {
+                    b.Property<int>("AddressId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AlternateEmail")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("AlternatePhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LeadId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PrimaryEmail")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("PrimaryPhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SPLocationId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StakeholderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AddressId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("LeadId");
+
+                    b.HasIndex("SPLocationId");
+
+                    b.HasIndex("StakeholderId");
+
+                    b.ToTable("UserContact");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -632,22 +958,19 @@ namespace FieldMgt.API.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.City", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.State", "State")
+                        .WithMany()
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("State");
+                });
+
             modelBuilder.Entity("FieldMgt.Core.DomainModels.Employee", b =>
                 {
-                    b.HasOne("FieldMgt.Core.DomainModels.Reference", "EmpCity")
-                        .WithMany("Ref1Navigation")
-                        .HasForeignKey("City")
-                        .HasConstraintName("City_FK")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("FieldMgt.Core.DomainModels.Reference", "EmpCountry")
-                        .WithMany("Ref2Navigation")
-                        .HasForeignKey("Country")
-                        .HasConstraintName("Country_FK")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "EmpCreatedBy")
                         .WithMany("Ref2Navigation")
                         .HasForeignKey("CreatedBy")
@@ -659,10 +982,10 @@ namespace FieldMgt.API.Migrations
                         .HasConstraintName("Deleted_FK");
 
                     b.HasOne("FieldMgt.Core.DomainModels.Reference", "EmpDesignation")
-                        .WithMany("Ref3Navigation")
+                        .WithMany("Ref1Navigation")
                         .HasForeignKey("Designation")
                         .HasConstraintName("Designation_FK")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "EmpModifiedBy")
@@ -674,10 +997,6 @@ namespace FieldMgt.API.Migrations
                         .WithMany("Ref1Navigation")
                         .HasForeignKey("UserId")
                         .HasConstraintName("UserId_FK");
-
-                    b.Navigation("EmpCity");
-
-                    b.Navigation("EmpCountry");
 
                     b.Navigation("EmpCreatedBy");
 
@@ -692,20 +1011,6 @@ namespace FieldMgt.API.Migrations
 
             modelBuilder.Entity("FieldMgt.Core.DomainModels.Lead", b =>
                 {
-                    b.HasOne("FieldMgt.Core.DomainModels.Reference", "RefCCity")
-                        .WithMany("Lead6Navigation")
-                        .HasForeignKey("CoresCity")
-                        .HasConstraintName("LCoresCity_FK")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("FieldMgt.Core.DomainModels.Reference", "RefCCountry")
-                        .WithMany("Lead7Navigation")
-                        .HasForeignKey("CoresCountry")
-                        .HasConstraintName("LCoresCountry_FK")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "LeadCreatedBy")
                         .WithMany("Ref5Navigation")
                         .HasForeignKey("CreatedBy")
@@ -720,14 +1025,14 @@ namespace FieldMgt.API.Migrations
                         .WithMany("Lead3Navigation")
                         .HasForeignKey("Gender")
                         .HasConstraintName("LGender_FK")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.Reference", "RefSource")
                         .WithMany("Lead2Navigation")
                         .HasForeignKey("LeadSource")
                         .HasConstraintName("LeadSource_FK")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.Reference", "RefStatus")
@@ -739,7 +1044,7 @@ namespace FieldMgt.API.Migrations
                         .WithMany("Lead1Navigation")
                         .HasForeignKey("LeadStatus")
                         .HasConstraintName("LeadStatus_FK")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "LeadModifiedBy")
@@ -747,35 +1052,13 @@ namespace FieldMgt.API.Migrations
                         .HasForeignKey("ModifiedBy")
                         .HasConstraintName("LModifiedBy_FK");
 
-                    b.HasOne("FieldMgt.Core.DomainModels.Reference", "RefPCity")
-                        .WithMany("Lead4Navigation")
-                        .HasForeignKey("PermaCity")
-                        .HasConstraintName("LPermaCity_FK")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("FieldMgt.Core.DomainModels.Reference", "RefPCountry")
-                        .WithMany("Lead5Navigation")
-                        .HasForeignKey("PermaCountry")
-                        .HasConstraintName("LPermaCountry_FK")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.Navigation("LeadCreatedBy");
 
                     b.Navigation("LeadDeletedBy");
 
                     b.Navigation("LeadModifiedBy");
 
-                    b.Navigation("RefCCity");
-
-                    b.Navigation("RefCCountry");
-
                     b.Navigation("RefGender");
-
-                    b.Navigation("RefPCity");
-
-                    b.Navigation("RefPCountry");
 
                     b.Navigation("RefSource");
 
@@ -800,7 +1083,7 @@ namespace FieldMgt.API.Migrations
                         .WithMany("Ref1LeadId")
                         .HasForeignKey("LeadId")
                         .HasConstraintName("LALeadId_FK")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "LeadActivityModifiedBy")
@@ -812,7 +1095,7 @@ namespace FieldMgt.API.Migrations
                         .WithMany("LeadActivity1Navigation")
                         .HasForeignKey("Status")
                         .HasConstraintName("LAStatus_FK")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("LeadActivityAssignedTo");
@@ -837,14 +1120,14 @@ namespace FieldMgt.API.Migrations
                         .WithMany("Ref2LeadId")
                         .HasForeignKey("LeadId")
                         .HasConstraintName("LCLeadId_FK")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.Reference", "RefLeadCallStatus")
                         .WithMany("LeadCall1Navigation")
                         .HasForeignKey("Status")
                         .HasConstraintName("LCStatus_FK")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("LeadCalledBy");
@@ -856,18 +1139,16 @@ namespace FieldMgt.API.Migrations
 
             modelBuilder.Entity("FieldMgt.Core.DomainModels.LeadContact", b =>
                 {
-                    b.HasOne("FieldMgt.Core.DomainModels.Reference", "RefCCity")
-                        .WithMany("LeadContact4Navigation")
-                        .HasForeignKey("CoresCity")
-                        .HasConstraintName("LCCoresCity_FK")
-                        .OnDelete(DeleteBehavior.NoAction)
+                    b.HasOne("FieldMgt.Core.DomainModels.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FieldMgt.Core.DomainModels.Reference", "RefCCountry")
-                        .WithMany("LeadContact5Navigation")
-                        .HasForeignKey("CoresCountry")
-                        .HasConstraintName("LCCoresCountry_FK")
-                        .OnDelete(DeleteBehavior.NoAction)
+                    b.HasOne("FieldMgt.Core.DomainModels.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "LeadContactCreatedBy")
@@ -884,13 +1165,13 @@ namespace FieldMgt.API.Migrations
                         .WithMany("LeadContact1Navigation")
                         .HasForeignKey("Gender")
                         .HasConstraintName("LCGender_FK")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.Lead", "Lead")
                         .WithMany()
                         .HasForeignKey("LeadId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "LeadContactModifiedBy")
@@ -898,19 +1179,15 @@ namespace FieldMgt.API.Migrations
                         .HasForeignKey("ModifiedBy")
                         .HasConstraintName("LCModifiedBy_FK");
 
-                    b.HasOne("FieldMgt.Core.DomainModels.Reference", "RefPCity")
-                        .WithMany("LeadContact2Navigation")
-                        .HasForeignKey("PermaCity")
-                        .HasConstraintName("LCPermaCity_FK")
-                        .OnDelete(DeleteBehavior.NoAction)
+                    b.HasOne("FieldMgt.Core.DomainModels.State", "State")
+                        .WithMany()
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FieldMgt.Core.DomainModels.Reference", "RefPCountry")
-                        .WithMany("LeadContact3Navigation")
-                        .HasForeignKey("PermaCountry")
-                        .HasConstraintName("LCPermaCountry_FK")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                    b.Navigation("City");
+
+                    b.Navigation("Country");
 
                     b.Navigation("Lead");
 
@@ -920,15 +1197,220 @@ namespace FieldMgt.API.Migrations
 
                     b.Navigation("LeadContactModifiedBy");
 
-                    b.Navigation("RefCCity");
-
-                    b.Navigation("RefCCountry");
-
                     b.Navigation("RefGender");
 
-                    b.Navigation("RefPCity");
+                    b.Navigation("State");
+                });
 
-                    b.Navigation("RefPCountry");
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Order", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "OrderAssignedTo")
+                        .WithMany("Ref20Navigation")
+                        .HasForeignKey("AssignedTo")
+                        .HasConstraintName("OrderAssignedTo_FK");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "OrderCreatedBy")
+                        .WithMany("Ref17Navigation")
+                        .HasForeignKey("CreatedBy")
+                        .HasConstraintName("OrderCreatedBy_FK");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "OrderDeletedBy")
+                        .WithMany("Ref19Navigation")
+                        .HasForeignKey("DeletedBy")
+                        .HasConstraintName("OrderDeletedBy_FK");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.Lead", "Lead")
+                        .WithMany()
+                        .HasForeignKey("LeadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "OrderModifiedBy")
+                        .WithMany("Ref18Navigation")
+                        .HasForeignKey("ModifiedBy")
+                        .HasConstraintName("OrderModifiedBy_FK");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.Reference", "Reference")
+                        .WithMany()
+                        .HasForeignKey("ReferenceId");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.SPLocation", "SPLocation")
+                        .WithMany()
+                        .HasForeignKey("SPLocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Lead");
+
+                    b.Navigation("OrderAssignedTo");
+
+                    b.Navigation("OrderCreatedBy");
+
+                    b.Navigation("OrderDeletedBy");
+
+                    b.Navigation("OrderModifiedBy");
+
+                    b.Navigation("Reference");
+
+                    b.Navigation("SPLocation");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Product", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.ProductMaster", "ProductMaster")
+                        .WithMany()
+                        .HasForeignKey("ProductMasterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductMaster");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.ProductMaster", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.Reference", "Reference")
+                        .WithMany()
+                        .HasForeignKey("ReferenceId");
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Reference");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.SPLocation", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.Stakeholder", "Stakeholder")
+                        .WithMany()
+                        .HasForeignKey("StakeholderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Stakeholder");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Stakeholder", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.Reference", "Reference")
+                        .WithMany()
+                        .HasForeignKey("ReferenceId");
+
+                    b.Navigation("Reference");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.State", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.StockIssue", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.UserAddress", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FieldMgt.Core.DomainModels.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FieldMgt.Core.DomainModels.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.Lead", "Lead")
+                        .WithMany()
+                        .HasForeignKey("LeadId");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.Reference", "Reference")
+                        .WithMany()
+                        .HasForeignKey("ReferenceId");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.SPLocation", "SPLocation")
+                        .WithMany()
+                        .HasForeignKey("SPLocationId");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.Stakeholder", "Stakeholder")
+                        .WithMany()
+                        .HasForeignKey("StakeholderId");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.State", "State")
+                        .WithMany()
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+
+                    b.Navigation("Country");
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("Lead");
+
+                    b.Navigation("Reference");
+
+                    b.Navigation("SPLocation");
+
+                    b.Navigation("Stakeholder");
+
+                    b.Navigation("State");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.UserContact", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.Lead", "Lead")
+                        .WithMany()
+                        .HasForeignKey("LeadId");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.SPLocation", "SPLocation")
+                        .WithMany()
+                        .HasForeignKey("SPLocationId");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.Stakeholder", "Stakeholder")
+                        .WithMany()
+                        .HasForeignKey("StakeholderId");
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("Lead");
+
+                    b.Navigation("SPLocation");
+
+                    b.Navigation("Stakeholder");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -936,7 +1418,7 @@ namespace FieldMgt.API.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -945,7 +1427,7 @@ namespace FieldMgt.API.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -954,7 +1436,7 @@ namespace FieldMgt.API.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -963,13 +1445,13 @@ namespace FieldMgt.API.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -978,7 +1460,7 @@ namespace FieldMgt.API.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -1014,14 +1496,6 @@ namespace FieldMgt.API.Migrations
 
                     b.Navigation("Lead3Navigation");
 
-                    b.Navigation("Lead4Navigation");
-
-                    b.Navigation("Lead5Navigation");
-
-                    b.Navigation("Lead6Navigation");
-
-                    b.Navigation("Lead7Navigation");
-
                     b.Navigation("Lead8Navigation");
 
                     b.Navigation("LeadActivity1Navigation");
@@ -1030,19 +1504,7 @@ namespace FieldMgt.API.Migrations
 
                     b.Navigation("LeadContact1Navigation");
 
-                    b.Navigation("LeadContact2Navigation");
-
-                    b.Navigation("LeadContact3Navigation");
-
-                    b.Navigation("LeadContact4Navigation");
-
-                    b.Navigation("LeadContact5Navigation");
-
                     b.Navigation("Ref1Navigation");
-
-                    b.Navigation("Ref2Navigation");
-
-                    b.Navigation("Ref3Navigation");
                 });
 
             modelBuilder.Entity("FieldMgt.Core.DomainModels.ApplicationUser", b =>
@@ -1061,7 +1523,15 @@ namespace FieldMgt.API.Migrations
 
                     b.Navigation("Ref16Navigation");
 
+                    b.Navigation("Ref17Navigation");
+
+                    b.Navigation("Ref18Navigation");
+
+                    b.Navigation("Ref19Navigation");
+
                     b.Navigation("Ref1Navigation");
+
+                    b.Navigation("Ref20Navigation");
 
                     b.Navigation("Ref2Navigation");
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace FieldMgt.Core.DTOs.Response
@@ -7,6 +8,7 @@ namespace FieldMgt.Core.DTOs.Response
     public class LeadContactReponseDTO
     {
         public string Name { get; set; }
+        [Phone]
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Gender { get; set; }

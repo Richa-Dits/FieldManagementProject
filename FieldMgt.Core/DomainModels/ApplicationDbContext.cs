@@ -16,6 +16,22 @@ namespace FieldMgt.Core.DomainModels
         public DbSet<Lead> Lead { get; set; }
         public DbSet<LeadContact> LeadContact { get; set; }
         public DbSet<Reference> Reference { get; set; }
+        public DbSet<City> City { get; set; }
+        public DbSet<Country> Country { get; set; }
+        public DbSet<State> State { get; set; }
+        public DbSet<LeadActivity> LeadActivity { get; set; }
+        public DbSet<LeadCall> LeadCall { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<Product> Product { get; set; }
+        //public DbSet<ServiceProvider> ServiceProvider { get; set; }
+        public DbSet<SPLocation> SPLocation { get; set; }
+        public DbSet<StockIssue> StockIssue { get; set; }
+        //public DbSet<Vendor> Vendor { get; set; }
+        public DbSet<UserAddress> UserAddress { get; set; }
+        public DbSet<UserContact> UserContact { get; set; }
+        public DbSet<Stakeholder> Stakeholder { get; set; }
+        public DbSet<ProductMaster> ProductMaster { get; set; }
+
         protected virtual void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
         {
             OnModelCreating(modelBuilder);
@@ -39,20 +55,20 @@ namespace FieldMgt.Core.DomainModels
         {
             modelBuilder.Entity<Employee>(act =>
             {
-                act.HasOne(field => field.EmpCity)
-                .WithMany(fk => fk.Ref1Navigation)
-                .HasForeignKey(fk => fk.City)
-                .HasConstraintName("City_FK");
+                //act.HasOne(field => field.EmpCity)
+                //.WithMany(fk => fk.Ref1Navigation)
+                //.HasForeignKey(fk => fk.City)
+                //.HasConstraintName("City_FK");
 
                 act.HasOne(field => field.EmpDesignation)
-               .WithMany(fk => fk.Ref3Navigation)
+               .WithMany(fk => fk.Ref1Navigation)
                .HasForeignKey(fk => fk.Designation)
                .HasConstraintName("Designation_FK");
 
-                act.HasOne(field => field.EmpCountry)
-                .WithMany(fk => fk.Ref2Navigation)
-                .HasForeignKey(fk => fk.Country)
-                .HasConstraintName("Country_FK");
+                //act.HasOne(field => field.EmpCountry)
+                //.WithMany(fk => fk.Ref3Navigation)
+                //.HasForeignKey(fk => fk.Country)
+                //.HasConstraintName("Country_FK");
 
                 act.HasOne(field => field.EmpUserID)
                 .WithMany(fk => fk.Ref1Navigation)
@@ -91,25 +107,25 @@ namespace FieldMgt.Core.DomainModels
                 .HasForeignKey(fk => fk.Gender)
                 .HasConstraintName("LGender_FK");
 
-                act.HasOne(field => field.RefPCity)
-                .WithMany(fk => fk.Lead4Navigation)
-                .HasForeignKey(fk => fk.PermaCity)
-                .HasConstraintName("LPermaCity_FK");
+               // act.HasOne(field => field.RefPCity)
+               // .WithMany(fk => fk.Lead4Navigation)
+               // .HasForeignKey(fk => fk.PermaCity)
+               // .HasConstraintName("LPermaCity_FK");
 
-                act.HasOne(field => field.RefPCountry)
-               .WithMany(fk => fk.Lead5Navigation)
-               .HasForeignKey(fk => fk.PermaCountry)
-               .HasConstraintName("LPermaCountry_FK");
+               // act.HasOne(field => field.RefPCountry)
+               //.WithMany(fk => fk.Lead5Navigation)
+               //.HasForeignKey(fk => fk.PermaCountry)
+               //.HasConstraintName("LPermaCountry_FK");
 
-                act.HasOne(field => field.RefCCity)
-                .WithMany(fk => fk.Lead6Navigation)
-                .HasForeignKey(fk => fk.CoresCity)
-                .HasConstraintName("LCoresCity_FK");
+               // act.HasOne(field => field.RefCCity)
+               // .WithMany(fk => fk.Lead6Navigation)
+               // .HasForeignKey(fk => fk.CoresCity)
+               // .HasConstraintName("LCoresCity_FK");
 
-                act.HasOne(field => field.RefCCountry)
-                .WithMany(fk => fk.Lead7Navigation)
-                .HasForeignKey(fk => fk.CoresCountry)
-                .HasConstraintName("LCoresCountry_FK");
+               // act.HasOne(field => field.RefCCountry)
+               // .WithMany(fk => fk.Lead7Navigation)
+               // .HasForeignKey(fk => fk.CoresCountry)
+               // .HasConstraintName("LCoresCountry_FK");
 
                 act.HasOne(field => field.RefStatus)
                .WithMany(fk => fk.Lead8Navigation)
@@ -138,25 +154,25 @@ namespace FieldMgt.Core.DomainModels
                 .HasForeignKey(fk => fk.Gender)
                 .HasConstraintName("LCGender_FK");
 
-                act.HasOne(field => field.RefPCity)
-                .WithMany(fk => fk.LeadContact2Navigation)
-                .HasForeignKey(fk => fk.PermaCity)
-                .HasConstraintName("LCPermaCity_FK");
+               // act.HasOne(field => field.RefPCity)
+               // .WithMany(fk => fk.LeadContact2Navigation)
+               // .HasForeignKey(fk => fk.PermaCity)
+               // .HasConstraintName("LCPermaCity_FK");
 
-                act.HasOne(field => field.RefPCountry)
-               .WithMany(fk => fk.LeadContact3Navigation)
-               .HasForeignKey(fk => fk.PermaCountry)
-               .HasConstraintName("LCPermaCountry_FK");
+               // act.HasOne(field => field.RefPCountry)
+               //.WithMany(fk => fk.LeadContact3Navigation)
+               //.HasForeignKey(fk => fk.PermaCountry)
+               //.HasConstraintName("LCPermaCountry_FK");
 
-                act.HasOne(field => field.RefCCity)
-                .WithMany(fk => fk.LeadContact4Navigation)
-                .HasForeignKey(fk => fk.CoresCity)
-                .HasConstraintName("LCCoresCity_FK");
+               // act.HasOne(field => field.RefCCity)
+               // .WithMany(fk => fk.LeadContact4Navigation)
+               // .HasForeignKey(fk => fk.CoresCity)
+               // .HasConstraintName("LCCoresCity_FK");
 
-                act.HasOne(field => field.RefCCountry)
-                .WithMany(fk => fk.LeadContact5Navigation)
-                .HasForeignKey(fk => fk.CoresCountry)
-                .HasConstraintName("LCCoresCountry_FK");
+               // act.HasOne(field => field.RefCCountry)
+               // .WithMany(fk => fk.LeadContact5Navigation)
+               // .HasForeignKey(fk => fk.CoresCountry)
+               // .HasConstraintName("LCCoresCountry_FK");
 
                 act.HasOne(field => field.LeadContactCreatedBy)
                .WithMany(fk => fk.Ref8Navigation)
@@ -228,6 +244,28 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.Ref16Navigation)
                 .HasForeignKey(fk => fk.CreatedBy)
                 .HasConstraintName("UserCreatedBy_FK");
+            });
+            modelBuilder.Entity<Order>(act =>
+            {
+                act.HasOne(field => field.OrderCreatedBy)
+                .WithMany(fk => fk.Ref17Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("OrderCreatedBy_FK");
+
+                act.HasOne(field => field.OrderModifiedBy)
+                .WithMany(fk => fk.Ref18Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("OrderModifiedBy_FK");
+
+                act.HasOne(field => field.OrderDeletedBy)
+                .WithMany(fk => fk.Ref19Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("OrderDeletedBy_FK");
+
+                act.HasOne(field => field.OrderAssignedTo)
+                .WithMany(fk => fk.Ref20Navigation)
+                .HasForeignKey(fk => fk.AssignedTo)
+                .HasConstraintName("OrderAssignedTo_FK");
             });
             base.OnModelCreating(modelBuilder);
         }

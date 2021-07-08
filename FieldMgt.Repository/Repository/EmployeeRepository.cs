@@ -31,7 +31,9 @@ namespace FieldMgt.Repository.Repository
         }
         public UserManagerReponse DeleteEmployee(string userName, string deletedBy)
         {
-            var emp = _dbContext.Employee.Where(a => a.Email == userName).Single();
+            var emp = _dbContext.Employee.FirstOrDefault();
+            //commented to create the db
+            //var emp = _dbContext.Employee.Where(a => a.Email == userName).Single();
             if(!(emp==null|| emp.IsDeleted==true))
             {
                 emp.IsDeleted = true;

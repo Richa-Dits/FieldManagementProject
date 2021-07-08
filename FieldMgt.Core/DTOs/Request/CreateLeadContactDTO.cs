@@ -1,8 +1,11 @@
-﻿namespace FieldMgt.Core.DTOs.Request
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FieldMgt.Core.DTOs.Request
 {
     public class CreateLeadContactDTO:BaseCreateLeadContactModel
     {        
         public string Name { get; set; }
+        [Phone]
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Gender { get; set; }

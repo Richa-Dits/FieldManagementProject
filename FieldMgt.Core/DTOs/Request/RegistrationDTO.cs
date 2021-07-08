@@ -12,10 +12,12 @@ namespace FieldMgt.Core.DTOs.Request
         public string LastName { get; set; }
         public string Address { get; set; }
         public int City { get; set; }
+        public int State { get; set; }
         public int Country { get; set; }
         public string ZipCode { get; set; }
         public int Status { get; set; }
         public string UserId { get; set; }
+        [Phone]
         public string Phone { get; set; }
         public int Designation { get; set; }
         public string CreatedBy { get; set; }

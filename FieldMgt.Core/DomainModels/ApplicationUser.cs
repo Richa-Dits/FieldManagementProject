@@ -26,6 +26,10 @@ namespace FieldMgt.Core.DomainModels
             Ref14Navigation = new HashSet<LeadCall>();
             Ref15Navigation = new HashSet<ApplicationUser>();
             Ref16Navigation = new HashSet<ApplicationUser>();
+            Ref17Navigation = new HashSet<Order>();
+            Ref18Navigation = new HashSet<Order>();
+            Ref19Navigation = new HashSet<Order>();
+            Ref20Navigation = new HashSet<Order>();
         }                    
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
@@ -53,5 +57,9 @@ namespace FieldMgt.Core.DomainModels
         public ICollection<LeadCall> Ref14Navigation { get; set; }
         public ICollection<ApplicationUser> Ref15Navigation { get; set; }
         public ICollection<ApplicationUser> Ref16Navigation { get; set; }
+        public ICollection<Order> Ref17Navigation { get; set; }
+        public ICollection<Order> Ref18Navigation { get; set; }
+        public ICollection<Order> Ref19Navigation { get; set; }
+        public ICollection<Order> Ref20Navigation { get; set; }
     }
 }
