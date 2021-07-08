@@ -1,0 +1,12 @@
+C:\Users\ditsd\source\repos\Identitytest\IdentityDemo.Shared\bin\Debug\netcoreapp3.1\IdentityDemo.Core.deps.json
+C:\Users\ditsd\source\repos\Identitytest\IdentityDemo.Shared\bin\Debug\netcoreapp3.1\IdentityDemo.Core.runtimeconfig.json
+C:\Users\ditsd\source\repos\Identitytest\IdentityDemo.Shared\bin\Debug\netcoreapp3.1\IdentityDemo.Core.runtimeconfig.dev.json
+C:\Users\ditsd\source\repos\Identitytest\IdentityDemo.Shared\bin\Debug\netcoreapp3.1\IdentityDemo.Core.dll
+C:\Users\ditsd\source\repos\Identitytest\IdentityDemo.Shared\bin\Debug\netcoreapp3.1\IdentityDemo.Core.pdb
+C:\Users\ditsd\source\repos\Identitytest\IdentityDemo.Shared\obj\Debug\netcoreapp3.1\IdentityDemo.Core.AssemblyInfoInputs.cache
+C:\Users\ditsd\source\repos\Identitytest\IdentityDemo.Shared\obj\Debug\netcoreapp3.1\IdentityDemo.Core.AssemblyInfo.cs
+C:\Users\ditsd\source\repos\Identitytest\IdentityDemo.Shared\obj\Debug\netcoreapp3.1\IdentityDemo.Core.csproj.CoreCompileInputs.cache
+C:\Users\ditsd\source\repos\Identitytest\IdentityDemo.Shared\obj\Debug\netcoreapp3.1\IdentityDemo.Core.dll
+C:\Users\ditsd\source\repos\Identitytest\IdentityDemo.Shared\obj\Debug\netcoreapp3.1\IdentityDemo.Core.pdb
+C:\Users\ditsd\source\repos\Identitytest\IdentityDemo.Shared\obj\Debug\netcoreapp3.1\IdentityDemo.Core.genruntimeconfig.cache
+C:\Users\ditsd\source\repos\Identitytest\IdentityDemo.Shared\obj\Debug\netcoreapp3.1\IdentityDemo.Core.csproj.AssemblyReference.cache

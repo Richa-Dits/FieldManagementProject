@@ -1,0 +1,236 @@
+﻿using FluentValidation.WebApi;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace FieldMgt.Core.DomainModels
+{
+    public class ApplicationDbContext:IdentityDbContext
+    {
+        public ApplicationDbContext(DbContextOptions options):base(options)
+        {
+
+        }
+        public DbSet<Employee> Employee { get; set; }
+        public DbSet<Lead> Lead { get; set; }
+        public DbSet<LeadContact> LeadContact { get; set; }
+        public DbSet<Reference> Reference { get; set; }
+        protected virtual void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
+        {
+            OnModelCreating(modelBuilder);
+
+            //modelBuilder.Entity<MyObject>()
+            //    .HasRequired(c => c.ApplicationUser)
+            //    .WithMany(t => t.MyObjects)
+            //    .Map(m => m.MapKey("UserId"));
+            modelBuilder.Entity<ApplicationUser>().HasKey(m => m.Id);
+
+            modelBuilder.Entity<Lead>().Property(s => s.LeadId).HasDatabaseGeneratedOption
+(DatabaseGeneratedOption.Identity); ;
+            modelBuilder.Entity<Employee>().Property(s => s.EmployeeID).HasDatabaseGeneratedOption
+(DatabaseGeneratedOption.Identity); ;
+            modelBuilder.Entity<LeadContact>().Property(s =>  s.LeadContactID ).HasDatabaseGeneratedOption
+                (DatabaseGeneratedOption.Identity); ;
+            modelBuilder.Entity<Reference>().Property(s => s.ReferenceId).HasDatabaseGeneratedOption
+                (DatabaseGeneratedOption.Identity); ;
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Employee>(act =>
+            {
+                act.HasOne(field => field.EmpCity)
+                .WithMany(fk => fk.Ref1Navigation)
+                .HasForeignKey(fk => fk.City)
+                .HasConstraintName("City_FK");
+
+                act.HasOne(field => field.EmpDesignation)
+               .WithMany(fk => fk.Ref3Navigation)
+               .HasForeignKey(fk => fk.Designation)
+               .HasConstraintName("Designation_FK");
+
+                act.HasOne(field => field.EmpCountry)
+                .WithMany(fk => fk.Ref2Navigation)
+                .HasForeignKey(fk => fk.Country)
+                .HasConstraintName("Country_FK");
+
+                act.HasOne(field => field.EmpUserID)
+                .WithMany(fk => fk.Ref1Navigation)
+                .HasForeignKey(fk => fk.UserId)
+                .HasConstraintName("UserId_FK");
+
+                act.HasOne(field => field.EmpCreatedBy)
+               .WithMany(fk => fk.Ref2Navigation)
+               .HasForeignKey(fk => fk.CreatedBy)
+               .HasConstraintName("Created_FK");
+
+                act.HasOne(field => field.EmpModifiedBy)
+                .WithMany(fk => fk.Ref3Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("Modified_FK");
+
+                act.HasOne(field => field.EmpDeletedBy)
+                .WithMany(fk => fk.Ref4Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("Deleted_FK");
+            });
+            modelBuilder.Entity<Lead>(act =>
+            {
+                act.HasOne(field => field.RefStage)
+                .WithMany(fk => fk.Lead1Navigation)
+                .HasForeignKey(fk => fk.LeadStatus)
+                .HasConstraintName("LeadStatus_FK");
+
+                act.HasOne(field => field.RefSource)
+               .WithMany(fk => fk.Lead2Navigation)
+               .HasForeignKey(fk => fk.LeadSource)
+               .HasConstraintName("LeadSource_FK");
+
+                act.HasOne(field => field.RefGender)
+                .WithMany(fk => fk.Lead3Navigation)
+                .HasForeignKey(fk => fk.Gender)
+                .HasConstraintName("LGender_FK");
+
+                act.HasOne(field => field.RefPCity)
+                .WithMany(fk => fk.Lead4Navigation)
+                .HasForeignKey(fk => fk.PermaCity)
+                .HasConstraintName("LPermaCity_FK");
+
+                act.HasOne(field => field.RefPCountry)
+               .WithMany(fk => fk.Lead5Navigation)
+               .HasForeignKey(fk => fk.PermaCountry)
+               .HasConstraintName("LPermaCountry_FK");
+
+                act.HasOne(field => field.RefCCity)
+                .WithMany(fk => fk.Lead6Navigation)
+                .HasForeignKey(fk => fk.CoresCity)
+                .HasConstraintName("LCoresCity_FK");
+
+                act.HasOne(field => field.RefCCountry)
+                .WithMany(fk => fk.Lead7Navigation)
+                .HasForeignKey(fk => fk.CoresCountry)
+                .HasConstraintName("LCoresCountry_FK");
+
+                act.HasOne(field => field.RefStatus)
+               .WithMany(fk => fk.Lead8Navigation)
+               .HasForeignKey(fk => fk.LeadStage)
+               .HasConstraintName("LeadStage_FK");
+
+                act.HasOne(field => field.LeadCreatedBy)
+               .WithMany(fk => fk.Ref5Navigation)
+               .HasForeignKey(fk => fk.CreatedBy)
+               .HasConstraintName("LCreatedBy_FK");
+
+                act.HasOne(field => field.LeadModifiedBy)
+                .WithMany(fk => fk.Ref6Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("LModifiedBy_FK");
+
+                act.HasOne(field => field.LeadDeletedBy)
+                .WithMany(fk => fk.Ref7Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("LDeletedBy_FK");
+            });
+            modelBuilder.Entity<LeadContact>(act =>
+            {                
+                act.HasOne(field => field.RefGender)
+                .WithMany(fk => fk.LeadContact1Navigation)
+                .HasForeignKey(fk => fk.Gender)
+                .HasConstraintName("LCGender_FK");
+
+                act.HasOne(field => field.RefPCity)
+                .WithMany(fk => fk.LeadContact2Navigation)
+                .HasForeignKey(fk => fk.PermaCity)
+                .HasConstraintName("LCPermaCity_FK");
+
+                act.HasOne(field => field.RefPCountry)
+               .WithMany(fk => fk.LeadContact3Navigation)
+               .HasForeignKey(fk => fk.PermaCountry)
+               .HasConstraintName("LCPermaCountry_FK");
+
+                act.HasOne(field => field.RefCCity)
+                .WithMany(fk => fk.LeadContact4Navigation)
+                .HasForeignKey(fk => fk.CoresCity)
+                .HasConstraintName("LCCoresCity_FK");
+
+                act.HasOne(field => field.RefCCountry)
+                .WithMany(fk => fk.LeadContact5Navigation)
+                .HasForeignKey(fk => fk.CoresCountry)
+                .HasConstraintName("LCCoresCountry_FK");
+
+                act.HasOne(field => field.LeadContactCreatedBy)
+               .WithMany(fk => fk.Ref8Navigation)
+               .HasForeignKey(fk => fk.CreatedBy)
+               .HasConstraintName("LCCreatedBy_FK");
+
+                act.HasOne(field => field.LeadContactModifiedBy)
+                .WithMany(fk => fk.Ref9Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("LCModifiedBy_FK");
+
+                act.HasOne(field => field.LeadContactDeletedBy)
+                .WithMany(fk => fk.Ref10Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("LCDeletedBy_FK");
+            });
+            modelBuilder.Entity<LeadActivity>(act =>
+            {
+                act.HasOne(field => field.RefLeadActivityStatus)
+                .WithMany(fk => fk.LeadActivity1Navigation)
+                .HasForeignKey(fk => fk.Status)
+                .HasConstraintName("LAStatus_FK");
+
+                act.HasOne(field => field.LeadActivityCreatedBy)
+                .WithMany(fk => fk.Ref11Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("LACreatedBy_FK");
+
+                act.HasOne(field => field.LeadActivityModifiedBy)
+               .WithMany(fk => fk.Ref12Navigation)
+               .HasForeignKey(fk => fk.ModifiedBy)
+               .HasConstraintName("LAModifiedBy_FK");
+
+                act.HasOne(field => field.LeadActivityAssignedTo)
+                .WithMany(fk => fk.Ref13Navigation)
+                .HasForeignKey(fk => fk.AssignedTo)
+                .HasConstraintName("LAAssignedTo_FK");
+
+                act.HasOne(field => field.RefLeadId)
+                .WithMany(fk => fk.Ref1LeadId)
+                .HasForeignKey(fk => fk.LeadId)
+                .HasConstraintName("LALeadId_FK");
+            });
+            modelBuilder.Entity<LeadCall>(act =>
+            {
+                act.HasOne(field => field.LeadCalledBy)
+                .WithMany(fk => fk.Ref14Navigation)
+                .HasForeignKey(fk => fk.CalledBy)
+                .HasConstraintName("LCCalledBy_FK");
+
+                act.HasOne(field => field.RefLeadCallStatus)
+               .WithMany(fk => fk.LeadCall1Navigation)
+               .HasForeignKey(fk => fk.Status)
+               .HasConstraintName("LCStatus_FK");
+
+                act.HasOne(field => field.RefCallLeadId)
+                .WithMany(fk => fk.Ref2LeadId)
+                .HasForeignKey(fk => fk.LeadId)
+                .HasConstraintName("LCLeadId_FK");
+            });
+            modelBuilder.Entity<ApplicationUser>(act =>
+            {
+                act.HasOne(field => field.RefDeletedBy)
+                .WithMany(fk => fk.Ref15Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("UserDeletedBy_FK");
+
+                act.HasOne(field => field.RefCreatedBy)
+                .WithMany(fk => fk.Ref16Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("UserCreatedBy_FK");
+            });
+            base.OnModelCreating(modelBuilder);
+        }
+    }
+}
+

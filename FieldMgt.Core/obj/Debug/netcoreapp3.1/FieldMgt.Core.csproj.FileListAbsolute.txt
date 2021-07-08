@@ -1,0 +1,11 @@
+C:\Users\ditsd\source\repos\FieldMgt\FieldMgt.Core\bin\Debug\netcoreapp3.1\FieldMgt.Core.deps.json
+C:\Users\ditsd\source\repos\FieldMgt\FieldMgt.Core\bin\Debug\netcoreapp3.1\FieldMgt.Core.runtimeconfig.json
+C:\Users\ditsd\source\repos\FieldMgt\FieldMgt.Core\bin\Debug\netcoreapp3.1\FieldMgt.Core.runtimeconfig.dev.json
+C:\Users\ditsd\source\repos\FieldMgt\FieldMgt.Core\bin\Debug\netcoreapp3.1\FieldMgt.Core.dll
+C:\Users\ditsd\source\repos\FieldMgt\FieldMgt.Core\bin\Debug\netcoreapp3.1\FieldMgt.Core.pdb
+C:\Users\ditsd\source\repos\FieldMgt\FieldMgt.Core\obj\Debug\netcoreapp3.1\FieldMgt.Core.AssemblyInfoInputs.cache
+C:\Users\ditsd\source\repos\FieldMgt\FieldMgt.Core\obj\Debug\netcoreapp3.1\FieldMgt.Core.AssemblyInfo.cs
+C:\Users\ditsd\source\repos\FieldMgt\FieldMgt.Core\obj\Debug\netcoreapp3.1\FieldMgt.Core.csproj.CoreCompileInputs.cache
+C:\Users\ditsd\source\repos\FieldMgt\FieldMgt.Core\obj\Debug\netcoreapp3.1\FieldMgt.Core.dll
+C:\Users\ditsd\source\repos\FieldMgt\FieldMgt.Core\obj\Debug\netcoreapp3.1\FieldMgt.Core.pdb
+C:\Users\ditsd\source\repos\FieldMgt\FieldMgt.Core\obj\Debug\netcoreapp3.1\FieldMgt.Core.genruntimeconfig.cache
