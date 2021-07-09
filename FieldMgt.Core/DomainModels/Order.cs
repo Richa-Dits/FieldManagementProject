@@ -28,9 +28,12 @@ namespace FieldMgt.Core.DomainModels
         public string TeamLead { get; set; }
         public string PocContact { get; set; }
         public DateTime? DueDate { get; set; }
+        public float OrderAmount { get; set; }
         public DateTime? ActualCompletionDate { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string AssignedTo { get; set; }
+        [Column(TypeName = "nvarchar(255)")]
+        public string CompletionCertifcate { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FieldMgt.Core.Migrations
 {
-    public partial class fieldmgtcorewgfwek0230 : Migration
+    public partial class fieldmgtcorewgfwek02301 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -200,6 +200,112 @@ namespace FieldMgt.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Procurement",
+                columns: table => new
+                {
+                    ProcurementId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Procurement", x => x.ProcurementId);
+                    table.ForeignKey(
+                        name: "FK_Procurement_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ServiceProvider",
+                columns: table => new
+                {
+                    ServiceProviderId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ServiceProviderName = table.Column<string>(type: "varchar(30)", nullable: true),
+                    ServiceProviderIncharge = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
+                    DeletedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SPCreatedById = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    SPModifiedById = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    SPDeletedById = table.Column<string>(type: "nvarchar(255)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ServiceProvider", x => x.ServiceProviderId);
+                    table.ForeignKey(
+                        name: "FK_ServiceProvider_AspNetUsers_SPCreatedById",
+                        column: x => x.SPCreatedById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ServiceProvider_AspNetUsers_SPDeletedById",
+                        column: x => x.SPDeletedById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ServiceProvider_AspNetUsers_SPModifiedById",
+                        column: x => x.SPModifiedById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Vendor",
+                columns: table => new
+                {
+                    VendorId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    VendorName = table.Column<string>(type: "varchar(30)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
+                    DeletedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    VendorCreatedById = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    VendorModifiedById = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    VendorDeletedById = table.Column<string>(type: "nvarchar(255)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Vendor", x => x.VendorId);
+                    table.ForeignKey(
+                        name: "FK_Vendor_AspNetUsers_VendorCreatedById",
+                        column: x => x.VendorCreatedById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Vendor_AspNetUsers_VendorDeletedById",
+                        column: x => x.VendorDeletedById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Vendor_AspNetUsers_VendorModifiedById",
+                        column: x => x.VendorModifiedById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "State",
                 columns: table => new
                 {
@@ -220,61 +326,6 @@ namespace FieldMgt.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Employee",
-                columns: table => new
-                {
-                    EmployeeID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "varchar(30)", nullable: true),
-                    LastName = table.Column<string>(type: "varchar(30)", nullable: true),
-                    DOB = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Designation = table.Column<int>(type: "int", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(255)", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Employee", x => x.EmployeeID);
-                    table.ForeignKey(
-                        name: "Created_FK",
-                        column: x => x.CreatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "Deleted_FK",
-                        column: x => x.DeletedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "Designation_FK",
-                        column: x => x.Designation,
-                        principalTable: "Reference",
-                        principalColumn: "ReferenceId",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "Modified_FK",
-                        column: x => x.ModifiedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "UserId_FK",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Lead",
                 columns: table => new
                 {
@@ -290,6 +341,7 @@ namespace FieldMgt.Core.Migrations
                     Email = table.Column<string>(type: "varchar(50)", nullable: true),
                     LeadStage = table.Column<int>(type: "int", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: true),
+                    Proposal = table.Column<string>(type: "nvarchar(255)", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
@@ -376,24 +428,81 @@ namespace FieldMgt.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Stakeholder",
+                name: "Staff",
                 columns: table => new
                 {
-                    StakeholderId = table.Column<int>(type: "int", nullable: false)
+                    StaffID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StakeholderName = table.Column<string>(type: "varchar(30)", nullable: true),
-                    StakeholderType = table.Column<int>(type: "int", nullable: false),
-                    ReferenceId = table.Column<int>(type: "int", nullable: true)
+                    FirstName = table.Column<string>(type: "varchar(30)", nullable: true),
+                    LastName = table.Column<string>(type: "varchar(30)", nullable: true),
+                    DOB = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Designation = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
+                    DeletedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Stakeholder", x => x.StakeholderId);
+                    table.PrimaryKey("PK_Staff", x => x.StaffID);
                     table.ForeignKey(
-                        name: "FK_Stakeholder_Reference_ReferenceId",
-                        column: x => x.ReferenceId,
+                        name: "Created_FK",
+                        column: x => x.CreatedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "Deleted_FK",
+                        column: x => x.DeletedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "Designation_FK",
+                        column: x => x.Designation,
                         principalTable: "Reference",
                         principalColumn: "ReferenceId",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "Modified_FK",
+                        column: x => x.ModifiedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "UserId_FK",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SPLocation",
+                columns: table => new
+                {
+                    SPLocationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SPLocationName = table.Column<string>(type: "varchar(30)", nullable: true),
+                    SPLocationIncharge = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: true),
+                    Email = table.Column<string>(type: "varchar(50)", nullable: true),
+                    Phone = table.Column<string>(type: "varchar(14)", nullable: true),
+                    ServiceProviderId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SPLocation", x => x.SPLocationId);
+                    table.ForeignKey(
+                        name: "FK_SPLocation_ServiceProvider_ServiceProviderId",
+                        column: x => x.ServiceProviderId,
+                        principalTable: "ServiceProvider",
+                        principalColumn: "ServiceProviderId",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -417,17 +526,85 @@ namespace FieldMgt.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Estimation",
+                columns: table => new
+                {
+                    EstimationID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EstimationAmount = table.Column<float>(type: "real", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LeadId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Estimation", x => x.EstimationID);
+                    table.ForeignKey(
+                        name: "EstimationCreatedBy_FK",
+                        column: x => x.CreatedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "EstimationModifiedBy_FK",
+                        column: x => x.ModifiedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Estimation_Lead_LeadId",
+                        column: x => x.LeadId,
+                        principalTable: "Lead",
+                        principalColumn: "LeadId",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Feedback",
+                columns: table => new
+                {
+                    FeedbackId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    CreatedDate = table.Column<string>(type: "nvarchar(255)", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: true),
+                    LeadId = table.Column<int>(type: "int", nullable: false),
+                    FeebackUserIDId = table.Column<string>(type: "nvarchar(255)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Feedback", x => x.FeedbackId);
+                    table.ForeignKey(
+                        name: "FK_Feedback_AspNetUsers_FeebackUserIDId",
+                        column: x => x.FeebackUserIDId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Feedback_Lead_LeadId",
+                        column: x => x.LeadId,
+                        principalTable: "Lead",
+                        principalColumn: "LeadId",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LeadActivity",
                 columns: table => new
                 {
                     LeadActivityId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    ActivityDescription = table.Column<string>(type: "nvarchar(255)", nullable: true),
                     DueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
                     LeadId = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
                     AssignedTo = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -503,6 +680,137 @@ namespace FieldMgt.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LeadRequirement",
+                columns: table => new
+                {
+                    LeadRequirementId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RequirementDescription = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    RequirementGatheredOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LeadId = table.Column<int>(type: "int", nullable: false),
+                    RequirementGatheredBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LeadRequirement", x => x.LeadRequirementId);
+                    table.ForeignKey(
+                        name: "FK_LeadRequirement_Lead_LeadId",
+                        column: x => x.LeadId,
+                        principalTable: "Lead",
+                        principalColumn: "LeadId",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "RequirementCreatedBy_FK",
+                        column: x => x.RequirementGatheredBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "RequirementModifiedBy_FK",
+                        column: x => x.ModifiedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Quotation",
+                columns: table => new
+                {
+                    QuotationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BuyerDesiredPrice = table.Column<float>(type: "real", nullable: false),
+                    InitialQuotedPrice = table.Column<float>(type: "real", nullable: false),
+                    LastQuotedPrice = table.Column<float>(type: "real", nullable: false),
+                    MinPossiblePrice = table.Column<float>(type: "real", nullable: false),
+                    LeadID = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Quotation", x => x.QuotationId);
+                    table.ForeignKey(
+                        name: "FK_Quotation_Lead_LeadID",
+                        column: x => x.LeadID,
+                        principalTable: "Lead",
+                        principalColumn: "LeadId",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "QuotationCreatedBy_FK",
+                        column: x => x.CreatedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "QuotationModifiedBy_FK",
+                        column: x => x.ModifiedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderProduct",
+                columns: table => new
+                {
+                    OrderProductId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductMasterId = table.Column<int>(type: "int", nullable: false),
+                    QuantityRequired = table.Column<float>(type: "real", nullable: false),
+                    LeadID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderProduct", x => x.OrderProductId);
+                    table.ForeignKey(
+                        name: "FK_OrderProduct_Lead_LeadID",
+                        column: x => x.LeadID,
+                        principalTable: "Lead",
+                        principalColumn: "LeadId",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_OrderProduct_ProductMaster_ProductMasterId",
+                        column: x => x.ProductMasterId,
+                        principalTable: "ProductMaster",
+                        principalColumn: "ProductMasterId",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProcurementItems",
+                columns: table => new
+                {
+                    ProcurementItemId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    VendorId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    ProductMasterId = table.Column<int>(type: "int", nullable: true),
+                    Quantity = table.Column<float>(type: "real", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProcurementItems", x => x.ProcurementItemId);
+                    table.ForeignKey(
+                        name: "FK_ProcurementItems_ProductMaster_ProductMasterId",
+                        column: x => x.ProductMasterId,
+                        principalTable: "ProductMaster",
+                        principalColumn: "ProductMasterId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProcurementItems_Vendor_VendorId",
+                        column: x => x.VendorId,
+                        principalTable: "Vendor",
+                        principalColumn: "VendorId",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Product",
                 columns: table => new
                 {
@@ -524,26 +832,129 @@ namespace FieldMgt.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SPLocation",
+                name: "Order",
                 columns: table => new
                 {
-                    SPLocationId = table.Column<int>(type: "int", nullable: false)
+                    OrderId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SPLocationName = table.Column<string>(type: "varchar(30)", nullable: true),
-                    SPLocationIncharge = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: true),
-                    Email = table.Column<string>(type: "varchar(50)", nullable: true),
-                    Phone = table.Column<string>(type: "varchar(14)", nullable: true),
-                    StakeholderId = table.Column<int>(type: "int", nullable: false)
+                    LeadId = table.Column<int>(type: "int", nullable: false),
+                    OrderDescription = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    OrderStatus = table.Column<int>(type: "int", nullable: false),
+                    ReferenceId = table.Column<int>(type: "int", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true),
+                    SPLocationId = table.Column<int>(type: "int", nullable: false),
+                    PocName = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    TeamLead = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    PocContact = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    OrderAmount = table.Column<float>(type: "real", nullable: false),
+                    ActualCompletionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    AssignedTo = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    CompletionCertifcate = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SPLocation", x => x.SPLocationId);
+                    table.PrimaryKey("PK_Order", x => x.OrderId);
                     table.ForeignKey(
-                        name: "FK_SPLocation_Stakeholder_StakeholderId",
-                        column: x => x.StakeholderId,
-                        principalTable: "Stakeholder",
-                        principalColumn: "StakeholderId",
+                        name: "FK_Order_Lead_LeadId",
+                        column: x => x.LeadId,
+                        principalTable: "Lead",
+                        principalColumn: "LeadId",
                         onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Order_Reference_ReferenceId",
+                        column: x => x.ReferenceId,
+                        principalTable: "Reference",
+                        principalColumn: "ReferenceId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Order_SPLocation_SPLocationId",
+                        column: x => x.SPLocationId,
+                        principalTable: "SPLocation",
+                        principalColumn: "SPLocationId",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "OrderAssignedTo_FK",
+                        column: x => x.AssignedTo,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "OrderCreatedBy_FK",
+                        column: x => x.CreatedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "OrderDeletedBy_FK",
+                        column: x => x.DeletedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "OrderModifiedBy_FK",
+                        column: x => x.ModifiedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserContact",
+                columns: table => new
+                {
+                    AddressId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PrimaryPhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AlternatePhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PrimaryEmail = table.Column<string>(type: "varchar(50)", nullable: true),
+                    AlternateEmail = table.Column<string>(type: "varchar(50)", nullable: true),
+                    EmployeeId = table.Column<int>(type: "int", nullable: true),
+                    ServiceProviderId = table.Column<int>(type: "int", nullable: true),
+                    VendorId = table.Column<int>(type: "int", nullable: true),
+                    LeadId = table.Column<int>(type: "int", nullable: true),
+                    SPLocationId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserContact", x => x.AddressId);
+                    table.ForeignKey(
+                        name: "FK_UserContact_Lead_LeadId",
+                        column: x => x.LeadId,
+                        principalTable: "Lead",
+                        principalColumn: "LeadId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserContact_ServiceProvider_ServiceProviderId",
+                        column: x => x.ServiceProviderId,
+                        principalTable: "ServiceProvider",
+                        principalColumn: "ServiceProviderId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserContact_SPLocation_SPLocationId",
+                        column: x => x.SPLocationId,
+                        principalTable: "SPLocation",
+                        principalColumn: "SPLocationId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserContact_Staff_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Staff",
+                        principalColumn: "StaffID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserContact_Vendor_VendorId",
+                        column: x => x.VendorId,
+                        principalTable: "Vendor",
+                        principalColumn: "VendorId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -623,79 +1034,6 @@ namespace FieldMgt.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
-                columns: table => new
-                {
-                    OrderId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    LeadId = table.Column<int>(type: "int", nullable: false),
-                    OrderDescription = table.Column<string>(type: "nvarchar(255)", nullable: true),
-                    OrderStatus = table.Column<int>(type: "int", nullable: false),
-                    ReferenceId = table.Column<int>(type: "int", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: true),
-                    SPLocationId = table.Column<int>(type: "int", nullable: false),
-                    PocName = table.Column<string>(type: "nvarchar(50)", nullable: true),
-                    TeamLead = table.Column<string>(type: "nvarchar(50)", nullable: true),
-                    PocContact = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ActualCompletionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    AssignedTo = table.Column<string>(type: "nvarchar(255)", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Order", x => x.OrderId);
-                    table.ForeignKey(
-                        name: "FK_Order_Lead_LeadId",
-                        column: x => x.LeadId,
-                        principalTable: "Lead",
-                        principalColumn: "LeadId",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Order_Reference_ReferenceId",
-                        column: x => x.ReferenceId,
-                        principalTable: "Reference",
-                        principalColumn: "ReferenceId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Order_SPLocation_SPLocationId",
-                        column: x => x.SPLocationId,
-                        principalTable: "SPLocation",
-                        principalColumn: "SPLocationId",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "OrderAssignedTo_FK",
-                        column: x => x.AssignedTo,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "OrderCreatedBy_FK",
-                        column: x => x.CreatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "OrderDeletedBy_FK",
-                        column: x => x.DeletedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "OrderModifiedBy_FK",
-                        column: x => x.ModifiedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UserAddress",
                 columns: table => new
                 {
@@ -709,7 +1047,9 @@ namespace FieldMgt.Core.Migrations
                     AddressType = table.Column<int>(type: "int", nullable: false),
                     ReferenceId = table.Column<int>(type: "int", nullable: true),
                     EmployeeId = table.Column<int>(type: "int", nullable: true),
-                    StakeholderId = table.Column<int>(type: "int", nullable: true),
+                    StaffID = table.Column<int>(type: "int", nullable: true),
+                    VendorID = table.Column<int>(type: "int", nullable: true),
+                    ServiceProviderID = table.Column<int>(type: "int", nullable: true),
                     LeadId = table.Column<int>(type: "int", nullable: true),
                     SPLocationId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -729,12 +1069,6 @@ namespace FieldMgt.Core.Migrations
                         principalColumn: "CountryID",
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_UserAddress_Employee_EmployeeId",
-                        column: x => x.EmployeeId,
-                        principalTable: "Employee",
-                        principalColumn: "EmployeeID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_UserAddress_Lead_LeadId",
                         column: x => x.LeadId,
                         principalTable: "Lead",
@@ -747,16 +1081,22 @@ namespace FieldMgt.Core.Migrations
                         principalColumn: "ReferenceId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
+                        name: "FK_UserAddress_ServiceProvider_ServiceProviderID",
+                        column: x => x.ServiceProviderID,
+                        principalTable: "ServiceProvider",
+                        principalColumn: "ServiceProviderId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_UserAddress_SPLocation_SPLocationId",
                         column: x => x.SPLocationId,
                         principalTable: "SPLocation",
                         principalColumn: "SPLocationId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_UserAddress_Stakeholder_StakeholderId",
-                        column: x => x.StakeholderId,
-                        principalTable: "Stakeholder",
-                        principalColumn: "StakeholderId",
+                        name: "FK_UserAddress_Staff_StaffID",
+                        column: x => x.StaffID,
+                        principalTable: "Staff",
+                        principalColumn: "StaffID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_UserAddress_State_StateId",
@@ -764,50 +1104,65 @@ namespace FieldMgt.Core.Migrations
                         principalTable: "State",
                         principalColumn: "StateID",
                         onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_UserAddress_Vendor_VendorID",
+                        column: x => x.VendorID,
+                        principalTable: "Vendor",
+                        principalColumn: "VendorId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserContact",
+                name: "EstimationProduct",
                 columns: table => new
                 {
-                    AddressId = table.Column<int>(type: "int", nullable: false)
+                    EstimationProductId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PrimaryPhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AlternatePhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PrimaryEmail = table.Column<string>(type: "varchar(50)", nullable: true),
-                    AlternateEmail = table.Column<string>(type: "varchar(50)", nullable: true),
-                    EmployeeId = table.Column<int>(type: "int", nullable: true),
-                    StakeholderId = table.Column<int>(type: "int", nullable: true),
-                    LeadId = table.Column<int>(type: "int", nullable: true),
-                    SPLocationId = table.Column<int>(type: "int", nullable: true)
+                    ProductMasterId = table.Column<int>(type: "int", nullable: false),
+                    PRoductUnitPrice = table.Column<float>(type: "real", nullable: false),
+                    QuantityRequired = table.Column<float>(type: "real", nullable: false),
+                    EstimationId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserContact", x => x.AddressId);
+                    table.PrimaryKey("PK_EstimationProduct", x => x.EstimationProductId);
                     table.ForeignKey(
-                        name: "FK_UserContact_Employee_EmployeeId",
-                        column: x => x.EmployeeId,
-                        principalTable: "Employee",
-                        principalColumn: "EmployeeID",
-                        onDelete: ReferentialAction.Restrict);
+                        name: "FK_EstimationProduct_Estimation_EstimationId",
+                        column: x => x.EstimationId,
+                        principalTable: "Estimation",
+                        principalColumn: "EstimationID",
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_UserContact_Lead_LeadId",
-                        column: x => x.LeadId,
-                        principalTable: "Lead",
-                        principalColumn: "LeadId",
-                        onDelete: ReferentialAction.Restrict);
+                        name: "FK_EstimationProduct_ProductMaster_ProductMasterId",
+                        column: x => x.ProductMasterId,
+                        principalTable: "ProductMaster",
+                        principalColumn: "ProductMasterId",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Maintenance",
+                columns: table => new
+                {
+                    MaintenanceId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    CreatedDate = table.Column<string>(type: "nvarchar(255)", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
+                    TotalCost = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    ProductId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Maintenance", x => x.MaintenanceId);
                     table.ForeignKey(
-                        name: "FK_UserContact_SPLocation_SPLocationId",
-                        column: x => x.SPLocationId,
-                        principalTable: "SPLocation",
-                        principalColumn: "SPLocationId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_UserContact_Stakeholder_StakeholderId",
-                        column: x => x.StakeholderId,
-                        principalTable: "Stakeholder",
-                        principalColumn: "StakeholderId",
-                        onDelete: ReferentialAction.Restrict);
+                        name: "FK_Maintenance_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -894,29 +1249,39 @@ namespace FieldMgt.Core.Migrations
                 column: "StateId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employee_CreatedBy",
-                table: "Employee",
+                name: "IX_Estimation_CreatedBy",
+                table: "Estimation",
                 column: "CreatedBy");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employee_DeletedBy",
-                table: "Employee",
-                column: "DeletedBy");
+                name: "IX_Estimation_LeadId",
+                table: "Estimation",
+                column: "LeadId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employee_Designation",
-                table: "Employee",
-                column: "Designation");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Employee_ModifiedBy",
-                table: "Employee",
+                name: "IX_Estimation_ModifiedBy",
+                table: "Estimation",
                 column: "ModifiedBy");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employee_UserId",
-                table: "Employee",
-                column: "UserId");
+                name: "IX_EstimationProduct_EstimationId",
+                table: "EstimationProduct",
+                column: "EstimationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EstimationProduct_ProductMasterId",
+                table: "EstimationProduct",
+                column: "ProductMasterId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Feedback_FeebackUserIDId",
+                table: "Feedback",
+                column: "FeebackUserIDId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Feedback_LeadId",
+                table: "Feedback",
+                column: "LeadId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Lead_CreatedBy",
@@ -1034,6 +1399,26 @@ namespace FieldMgt.Core.Migrations
                 column: "StateId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LeadRequirement_LeadId",
+                table: "LeadRequirement",
+                column: "LeadId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LeadRequirement_ModifiedBy",
+                table: "LeadRequirement",
+                column: "ModifiedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LeadRequirement_RequirementGatheredBy",
+                table: "LeadRequirement",
+                column: "RequirementGatheredBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Maintenance_ProductId",
+                table: "Maintenance",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Order_AssignedTo",
                 table: "Order",
                 column: "AssignedTo");
@@ -1069,6 +1454,31 @@ namespace FieldMgt.Core.Migrations
                 column: "SPLocationId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrderProduct_LeadID",
+                table: "OrderProduct",
+                column: "LeadID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderProduct_ProductMasterId",
+                table: "OrderProduct",
+                column: "ProductMasterId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Procurement_ApplicationUserId",
+                table: "Procurement",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProcurementItems_ProductMasterId",
+                table: "ProcurementItems",
+                column: "ProductMasterId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProcurementItems_VendorId",
+                table: "ProcurementItems",
+                column: "VendorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Product_ProductMasterId",
                 table: "Product",
                 column: "ProductMasterId");
@@ -1084,14 +1494,64 @@ namespace FieldMgt.Core.Migrations
                 column: "ReferenceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SPLocation_StakeholderId",
-                table: "SPLocation",
-                column: "StakeholderId");
+                name: "IX_Quotation_CreatedBy",
+                table: "Quotation",
+                column: "CreatedBy");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Stakeholder_ReferenceId",
-                table: "Stakeholder",
-                column: "ReferenceId");
+                name: "IX_Quotation_LeadID",
+                table: "Quotation",
+                column: "LeadID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Quotation_ModifiedBy",
+                table: "Quotation",
+                column: "ModifiedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ServiceProvider_SPCreatedById",
+                table: "ServiceProvider",
+                column: "SPCreatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ServiceProvider_SPDeletedById",
+                table: "ServiceProvider",
+                column: "SPDeletedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ServiceProvider_SPModifiedById",
+                table: "ServiceProvider",
+                column: "SPModifiedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SPLocation_ServiceProviderId",
+                table: "SPLocation",
+                column: "ServiceProviderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Staff_CreatedBy",
+                table: "Staff",
+                column: "CreatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Staff_DeletedBy",
+                table: "Staff",
+                column: "DeletedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Staff_Designation",
+                table: "Staff",
+                column: "Designation");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Staff_ModifiedBy",
+                table: "Staff",
+                column: "ModifiedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Staff_UserId",
+                table: "Staff",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_State_CountryId",
@@ -1119,11 +1579,6 @@ namespace FieldMgt.Core.Migrations
                 column: "CountryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserAddress_EmployeeId",
-                table: "UserAddress",
-                column: "EmployeeId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_UserAddress_LeadId",
                 table: "UserAddress",
                 column: "LeadId");
@@ -1134,19 +1589,29 @@ namespace FieldMgt.Core.Migrations
                 column: "ReferenceId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserAddress_ServiceProviderID",
+                table: "UserAddress",
+                column: "ServiceProviderID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserAddress_SPLocationId",
                 table: "UserAddress",
                 column: "SPLocationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserAddress_StakeholderId",
+                name: "IX_UserAddress_StaffID",
                 table: "UserAddress",
-                column: "StakeholderId");
+                column: "StaffID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserAddress_StateId",
                 table: "UserAddress",
                 column: "StateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserAddress_VendorID",
+                table: "UserAddress",
+                column: "VendorID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserContact_EmployeeId",
@@ -1159,14 +1624,34 @@ namespace FieldMgt.Core.Migrations
                 column: "LeadId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserContact_ServiceProviderId",
+                table: "UserContact",
+                column: "ServiceProviderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserContact_SPLocationId",
                 table: "UserContact",
                 column: "SPLocationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserContact_StakeholderId",
+                name: "IX_UserContact_VendorId",
                 table: "UserContact",
-                column: "StakeholderId");
+                column: "VendorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vendor_VendorCreatedById",
+                table: "Vendor",
+                column: "VendorCreatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vendor_VendorDeletedById",
+                table: "Vendor",
+                column: "VendorDeletedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vendor_VendorModifiedById",
+                table: "Vendor",
+                column: "VendorModifiedById");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -1187,6 +1672,12 @@ namespace FieldMgt.Core.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "EstimationProduct");
+
+            migrationBuilder.DropTable(
+                name: "Feedback");
+
+            migrationBuilder.DropTable(
                 name: "LeadActivity");
 
             migrationBuilder.DropTable(
@@ -1196,7 +1687,22 @@ namespace FieldMgt.Core.Migrations
                 name: "LeadContact");
 
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "LeadRequirement");
+
+            migrationBuilder.DropTable(
+                name: "Maintenance");
+
+            migrationBuilder.DropTable(
+                name: "OrderProduct");
+
+            migrationBuilder.DropTable(
+                name: "Procurement");
+
+            migrationBuilder.DropTable(
+                name: "ProcurementItems");
+
+            migrationBuilder.DropTable(
+                name: "Quotation");
 
             migrationBuilder.DropTable(
                 name: "StockIssue");
@@ -1211,7 +1717,10 @@ namespace FieldMgt.Core.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "ProductMaster");
+                name: "Estimation");
+
+            migrationBuilder.DropTable(
+                name: "Product");
 
             migrationBuilder.DropTable(
                 name: "Order");
@@ -1220,7 +1729,13 @@ namespace FieldMgt.Core.Migrations
                 name: "City");
 
             migrationBuilder.DropTable(
-                name: "Employee");
+                name: "Staff");
+
+            migrationBuilder.DropTable(
+                name: "Vendor");
+
+            migrationBuilder.DropTable(
+                name: "ProductMaster");
 
             migrationBuilder.DropTable(
                 name: "Lead");
@@ -1232,16 +1747,16 @@ namespace FieldMgt.Core.Migrations
                 name: "State");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Reference");
 
             migrationBuilder.DropTable(
-                name: "Stakeholder");
+                name: "ServiceProvider");
 
             migrationBuilder.DropTable(
                 name: "Country");
 
             migrationBuilder.DropTable(
-                name: "Reference");
+                name: "AspNetUsers");
         }
     }
 }

@@ -58,9 +58,9 @@ namespace FieldMgt.Core.Migrations
                     b.ToTable("Country");
                 });
 
-            modelBuilder.Entity("FieldMgt.Core.DomainModels.Employee", b =>
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Estimation", b =>
                 {
-                    b.Property<int>("EmployeeID")
+                    b.Property<int>("EstimationID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -71,29 +71,11 @@ namespace FieldMgt.Core.Migrations
                     b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DOB")
-                        .HasColumnType("datetime2");
+                    b.Property<float>("EstimationAmount")
+                        .HasColumnType("real");
 
-                    b.Property<string>("DeletedBy")
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Designation")
+                    b.Property<int>("LeadId")
                         .HasColumnType("int");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("varchar(30)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("varchar(30)");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(255)");
@@ -101,22 +83,84 @@ namespace FieldMgt.Core.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(255)");
-
-                    b.HasKey("EmployeeID");
+                    b.HasKey("EstimationID");
 
                     b.HasIndex("CreatedBy");
 
-                    b.HasIndex("DeletedBy");
-
-                    b.HasIndex("Designation");
+                    b.HasIndex("LeadId");
 
                     b.HasIndex("ModifiedBy");
 
-                    b.HasIndex("UserId");
+                    b.ToTable("Estimation");
+                });
 
-                    b.ToTable("Employee");
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.EstimationProduct", b =>
+                {
+                    b.Property<int>("EstimationProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EstimationId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("PRoductUnitPrice")
+                        .HasColumnType("real");
+
+                    b.Property<int>("ProductMasterId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("QuantityRequired")
+                        .HasColumnType("real");
+
+                    b.HasKey("EstimationProductId");
+
+                    b.HasIndex("EstimationId");
+
+                    b.HasIndex("ProductMasterId");
+
+                    b.ToTable("EstimationProduct");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Feedback", b =>
+                {
+                    b.Property<int>("FeedbackId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("FeebackUserIDId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LeadId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("FeedbackId");
+
+                    b.HasIndex("FeebackUserIDId");
+
+                    b.HasIndex("LeadId");
+
+                    b.ToTable("Feedback");
                 });
 
             modelBuilder.Entity("FieldMgt.Core.DomainModels.Lead", b =>
@@ -178,6 +222,9 @@ namespace FieldMgt.Core.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Proposal")
+                        .HasColumnType("nvarchar(255)");
+
                     b.HasKey("LeadId");
 
                     b.HasIndex("CreatedBy");
@@ -204,6 +251,9 @@ namespace FieldMgt.Core.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ActivityDescription")
+                        .HasColumnType("nvarchar(255)");
+
                     b.Property<string>("AssignedTo")
                         .HasColumnType("nvarchar(255)");
 
@@ -212,9 +262,6 @@ namespace FieldMgt.Core.Migrations
 
                     b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("DueDate")
                         .HasColumnType("datetime2");
@@ -355,6 +402,78 @@ namespace FieldMgt.Core.Migrations
                     b.ToTable("LeadContact");
                 });
 
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.LeadRequirement", b =>
+                {
+                    b.Property<int>("LeadRequirementId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("LeadId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RequirementDescription")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("RequirementGatheredBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("RequirementGatheredOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("LeadRequirementId");
+
+                    b.HasIndex("LeadId");
+
+                    b.HasIndex("ModifiedBy");
+
+                    b.HasIndex("RequirementGatheredBy");
+
+                    b.ToTable("LeadRequirement");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Maintenance", b =>
+                {
+                    b.Property<int>("MaintenanceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TotalCost")
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("MaintenanceId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Maintenance");
+                });
+
             modelBuilder.Entity("FieldMgt.Core.DomainModels.Order", b =>
                 {
                     b.Property<int>("OrderId")
@@ -366,6 +485,9 @@ namespace FieldMgt.Core.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("AssignedTo")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("CompletionCertifcate")
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("CreatedBy")
@@ -397,6 +519,9 @@ namespace FieldMgt.Core.Migrations
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<float>("OrderAmount")
+                        .HasColumnType("real");
 
                     b.Property<string>("OrderDescription")
                         .HasColumnType("nvarchar(255)");
@@ -436,6 +561,82 @@ namespace FieldMgt.Core.Migrations
                     b.HasIndex("SPLocationId");
 
                     b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.OrderProduct", b =>
+                {
+                    b.Property<int>("OrderProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("LeadID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductMasterId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("QuantityRequired")
+                        .HasColumnType("real");
+
+                    b.HasKey("OrderProductId");
+
+                    b.HasIndex("LeadID");
+
+                    b.HasIndex("ProductMasterId");
+
+                    b.ToTable("OrderProduct");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Procurement", b =>
+                {
+                    b.Property<int>("ProcurementId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ProcurementId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("Procurement");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.ProcurementItems", b =>
+                {
+                    b.Property<int>("ProcurementItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductMasterId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Quantity")
+                        .HasColumnType("real");
+
+                    b.Property<int>("VendorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProcurementItemId");
+
+                    b.HasIndex("ProductMasterId");
+
+                    b.HasIndex("VendorId");
+
+                    b.ToTable("ProcurementItems");
                 });
 
             modelBuilder.Entity("FieldMgt.Core.DomainModels.Product", b =>
@@ -496,6 +697,54 @@ namespace FieldMgt.Core.Migrations
                     b.ToTable("ProductMaster");
                 });
 
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Quotation", b =>
+                {
+                    b.Property<int>("QuotationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<float>("BuyerDesiredPrice")
+                        .HasColumnType("real");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<float>("InitialQuotedPrice")
+                        .HasColumnType("real");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<float>("LastQuotedPrice")
+                        .HasColumnType("real");
+
+                    b.Property<int>("LeadID")
+                        .HasColumnType("int");
+
+                    b.Property<float>("MinPossiblePrice")
+                        .HasColumnType("real");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("QuotationId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("LeadID");
+
+                    b.HasIndex("ModifiedBy");
+
+                    b.ToTable("Quotation");
+                });
+
             modelBuilder.Entity("FieldMgt.Core.DomainModels.Reference", b =>
                 {
                     b.Property<int>("ReferenceId")
@@ -534,37 +783,133 @@ namespace FieldMgt.Core.Migrations
                     b.Property<string>("SPLocationName")
                         .HasColumnType("varchar(30)");
 
-                    b.Property<int>("StakeholderId")
+                    b.Property<int>("ServiceProviderId")
                         .HasColumnType("int");
 
                     b.HasKey("SPLocationId");
 
-                    b.HasIndex("StakeholderId");
+                    b.HasIndex("ServiceProviderId");
 
                     b.ToTable("SPLocation");
                 });
 
-            modelBuilder.Entity("FieldMgt.Core.DomainModels.Stakeholder", b =>
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.ServiceProvider", b =>
                 {
-                    b.Property<int>("StakeholderId")
+                    b.Property<int>("ServiceProviderId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ReferenceId")
-                        .HasColumnType("int");
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("StakeholderName")
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SPCreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SPDeletedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SPModifiedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ServiceProviderIncharge")
+                        .HasMaxLength(15)
+                        .HasColumnType("varchar(15)");
+
+                    b.Property<string>("ServiceProviderName")
                         .HasColumnType("varchar(30)");
 
-                    b.Property<int>("StakeholderType")
+                    b.HasKey("ServiceProviderId");
+
+                    b.HasIndex("SPCreatedById");
+
+                    b.HasIndex("SPDeletedById");
+
+                    b.HasIndex("SPModifiedById");
+
+                    b.ToTable("ServiceProvider");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Staff", b =>
+                {
+                    b.Property<int>("StaffID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DOB")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Designation")
                         .HasColumnType("int");
 
-                    b.HasKey("StakeholderId");
+                    b.Property<string>("FirstName")
+                        .HasColumnType("varchar(30)");
 
-                    b.HasIndex("ReferenceId");
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
-                    b.ToTable("Stakeholder");
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("StaffID");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("DeletedBy");
+
+                    b.HasIndex("Designation");
+
+                    b.HasIndex("ModifiedBy");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Staff");
                 });
 
             modelBuilder.Entity("FieldMgt.Core.DomainModels.State", b =>
@@ -650,10 +995,16 @@ namespace FieldMgt.Core.Migrations
                     b.Property<int?>("SPLocationId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StakeholderId")
+                    b.Property<int?>("ServiceProviderID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StaffID")
                         .HasColumnType("int");
 
                     b.Property<int>("StateId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("VendorID")
                         .HasColumnType("int");
 
                     b.Property<string>("ZipCode")
@@ -666,17 +1017,19 @@ namespace FieldMgt.Core.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.HasIndex("EmployeeId");
-
                     b.HasIndex("LeadId");
 
                     b.HasIndex("ReferenceId");
 
                     b.HasIndex("SPLocationId");
 
-                    b.HasIndex("StakeholderId");
+                    b.HasIndex("ServiceProviderID");
+
+                    b.HasIndex("StaffID");
 
                     b.HasIndex("StateId");
+
+                    b.HasIndex("VendorID");
 
                     b.ToTable("UserAddress");
                 });
@@ -709,7 +1062,10 @@ namespace FieldMgt.Core.Migrations
                     b.Property<int?>("SPLocationId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StakeholderId")
+                    b.Property<int?>("ServiceProviderId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("VendorId")
                         .HasColumnType("int");
 
                     b.HasKey("AddressId");
@@ -720,9 +1076,65 @@ namespace FieldMgt.Core.Migrations
 
                     b.HasIndex("SPLocationId");
 
-                    b.HasIndex("StakeholderId");
+                    b.HasIndex("ServiceProviderId");
+
+                    b.HasIndex("VendorId");
 
                     b.ToTable("UserContact");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Vendor", b =>
+                {
+                    b.Property<int>("VendorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("VendorCreatedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("VendorDeletedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("VendorModifiedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("VendorName")
+                        .HasColumnType("varchar(30)");
+
+                    b.HasKey("VendorId");
+
+                    b.HasIndex("VendorCreatedById");
+
+                    b.HasIndex("VendorDeletedById");
+
+                    b.HasIndex("VendorModifiedById");
+
+                    b.ToTable("Vendor");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -967,44 +1379,65 @@ namespace FieldMgt.Core.Migrations
                     b.Navigation("State");
                 });
 
-            modelBuilder.Entity("FieldMgt.Core.DomainModels.Employee", b =>
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Estimation", b =>
                 {
-                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "EmpCreatedBy")
-                        .WithMany("Ref2Navigation")
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "EstimationCreatedBy")
+                        .WithMany("Ref25Navigation")
                         .HasForeignKey("CreatedBy")
-                        .HasConstraintName("Created_FK");
+                        .HasConstraintName("EstimationCreatedBy_FK");
 
-                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "EmpDeletedBy")
-                        .WithMany("Ref4Navigation")
-                        .HasForeignKey("DeletedBy")
-                        .HasConstraintName("Deleted_FK");
-
-                    b.HasOne("FieldMgt.Core.DomainModels.Reference", "EmpDesignation")
-                        .WithMany("Ref1Navigation")
-                        .HasForeignKey("Designation")
-                        .HasConstraintName("Designation_FK")
+                    b.HasOne("FieldMgt.Core.DomainModels.Lead", "Lead")
+                        .WithMany()
+                        .HasForeignKey("LeadId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "EmpModifiedBy")
-                        .WithMany("Ref3Navigation")
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "EstimationModifiedBy")
+                        .WithMany("Ref26Navigation")
                         .HasForeignKey("ModifiedBy")
-                        .HasConstraintName("Modified_FK");
+                        .HasConstraintName("EstimationModifiedBy_FK");
 
-                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "EmpUserID")
-                        .WithMany("Ref1Navigation")
-                        .HasForeignKey("UserId")
-                        .HasConstraintName("UserId_FK");
+                    b.Navigation("EstimationCreatedBy");
 
-                    b.Navigation("EmpCreatedBy");
+                    b.Navigation("EstimationModifiedBy");
 
-                    b.Navigation("EmpDeletedBy");
+                    b.Navigation("Lead");
+                });
 
-                    b.Navigation("EmpDesignation");
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.EstimationProduct", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.Estimation", "Estimation")
+                        .WithMany()
+                        .HasForeignKey("EstimationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("EmpModifiedBy");
+                    b.HasOne("FieldMgt.Core.DomainModels.ProductMaster", "ProductMaster")
+                        .WithMany()
+                        .HasForeignKey("ProductMasterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("EmpUserID");
+                    b.Navigation("Estimation");
+
+                    b.Navigation("ProductMaster");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Feedback", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "FeebackUserID")
+                        .WithMany()
+                        .HasForeignKey("FeebackUserIDId");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.Lead", "Lead")
+                        .WithMany()
+                        .HasForeignKey("LeadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FeebackUserID");
+
+                    b.Navigation("Lead");
                 });
 
             modelBuilder.Entity("FieldMgt.Core.DomainModels.Lead", b =>
@@ -1200,6 +1633,42 @@ namespace FieldMgt.Core.Migrations
                     b.Navigation("State");
                 });
 
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.LeadRequirement", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.Lead", "Lead")
+                        .WithMany()
+                        .HasForeignKey("LeadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "RequirementModifiedBy")
+                        .WithMany("Ref24Navigation")
+                        .HasForeignKey("ModifiedBy")
+                        .HasConstraintName("RequirementModifiedBy_FK");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "RequirementCreatedBy")
+                        .WithMany("Ref23Navigation")
+                        .HasForeignKey("RequirementGatheredBy")
+                        .HasConstraintName("RequirementCreatedBy_FK");
+
+                    b.Navigation("Lead");
+
+                    b.Navigation("RequirementCreatedBy");
+
+                    b.Navigation("RequirementModifiedBy");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Maintenance", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.Product", "product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("product");
+                });
+
             modelBuilder.Entity("FieldMgt.Core.DomainModels.Order", b =>
                 {
                     b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "OrderAssignedTo")
@@ -1253,6 +1722,51 @@ namespace FieldMgt.Core.Migrations
                     b.Navigation("SPLocation");
                 });
 
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.OrderProduct", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.Lead", "Lead")
+                        .WithMany()
+                        .HasForeignKey("LeadID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FieldMgt.Core.DomainModels.ProductMaster", "ProductMaster")
+                        .WithMany()
+                        .HasForeignKey("ProductMasterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Lead");
+
+                    b.Navigation("ProductMaster");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Procurement", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.ProcurementItems", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.ProductMaster", "ProductMaster")
+                        .WithMany()
+                        .HasForeignKey("ProductMasterId");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.Vendor", "Vendor")
+                        .WithMany()
+                        .HasForeignKey("VendorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductMaster");
+
+                    b.Navigation("Vendor");
+                });
+
             modelBuilder.Entity("FieldMgt.Core.DomainModels.Product", b =>
                 {
                     b.HasOne("FieldMgt.Core.DomainModels.ProductMaster", "ProductMaster")
@@ -1279,24 +1793,101 @@ namespace FieldMgt.Core.Migrations
                     b.Navigation("Reference");
                 });
 
-            modelBuilder.Entity("FieldMgt.Core.DomainModels.SPLocation", b =>
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Quotation", b =>
                 {
-                    b.HasOne("FieldMgt.Core.DomainModels.Stakeholder", "Stakeholder")
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "NegotitationCreatedBy")
+                        .WithMany("Ref21Navigation")
+                        .HasForeignKey("CreatedBy")
+                        .HasConstraintName("QuotationCreatedBy_FK");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.Lead", "Lead")
                         .WithMany()
-                        .HasForeignKey("StakeholderId")
+                        .HasForeignKey("LeadID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Stakeholder");
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "NegotitationModifiedBy")
+                        .WithMany("Ref22Navigation")
+                        .HasForeignKey("ModifiedBy")
+                        .HasConstraintName("QuotationModifiedBy_FK");
+
+                    b.Navigation("Lead");
+
+                    b.Navigation("NegotitationCreatedBy");
+
+                    b.Navigation("NegotitationModifiedBy");
                 });
 
-            modelBuilder.Entity("FieldMgt.Core.DomainModels.Stakeholder", b =>
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.SPLocation", b =>
                 {
-                    b.HasOne("FieldMgt.Core.DomainModels.Reference", "Reference")
+                    b.HasOne("FieldMgt.Core.DomainModels.ServiceProvider", "ServicePRovider")
                         .WithMany()
-                        .HasForeignKey("ReferenceId");
+                        .HasForeignKey("ServiceProviderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Reference");
+                    b.Navigation("ServicePRovider");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.ServiceProvider", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "SPCreatedBy")
+                        .WithMany()
+                        .HasForeignKey("SPCreatedById");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "SPDeletedBy")
+                        .WithMany()
+                        .HasForeignKey("SPDeletedById");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "SPModifiedBy")
+                        .WithMany()
+                        .HasForeignKey("SPModifiedById");
+
+                    b.Navigation("SPCreatedBy");
+
+                    b.Navigation("SPDeletedBy");
+
+                    b.Navigation("SPModifiedBy");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Staff", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "StaffCreatedBy")
+                        .WithMany("Ref2Navigation")
+                        .HasForeignKey("CreatedBy")
+                        .HasConstraintName("Created_FK");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "StaffDeletedBy")
+                        .WithMany("Ref4Navigation")
+                        .HasForeignKey("DeletedBy")
+                        .HasConstraintName("Deleted_FK");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.Reference", "StaffDesignation")
+                        .WithMany("Staff1Navigation")
+                        .HasForeignKey("Designation")
+                        .HasConstraintName("Designation_FK")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "StaffModifiedBy")
+                        .WithMany("Ref3Navigation")
+                        .HasForeignKey("ModifiedBy")
+                        .HasConstraintName("Modified_FK");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "StaffUserID")
+                        .WithMany("Ref1Navigation")
+                        .HasForeignKey("UserId")
+                        .HasConstraintName("UserId_FK");
+
+                    b.Navigation("StaffCreatedBy");
+
+                    b.Navigation("StaffDeletedBy");
+
+                    b.Navigation("StaffDesignation");
+
+                    b.Navigation("StaffModifiedBy");
+
+                    b.Navigation("StaffUserID");
                 });
 
             modelBuilder.Entity("FieldMgt.Core.DomainModels.State", b =>
@@ -1341,10 +1932,6 @@ namespace FieldMgt.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FieldMgt.Core.DomainModels.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId");
-
                     b.HasOne("FieldMgt.Core.DomainModels.Lead", "Lead")
                         .WithMany()
                         .HasForeignKey("LeadId");
@@ -1357,9 +1944,13 @@ namespace FieldMgt.Core.Migrations
                         .WithMany()
                         .HasForeignKey("SPLocationId");
 
-                    b.HasOne("FieldMgt.Core.DomainModels.Stakeholder", "Stakeholder")
+                    b.HasOne("FieldMgt.Core.DomainModels.ServiceProvider", "ServiceProvider")
                         .WithMany()
-                        .HasForeignKey("StakeholderId");
+                        .HasForeignKey("ServiceProviderID");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.Staff", "Staff")
+                        .WithMany()
+                        .HasForeignKey("StaffID");
 
                     b.HasOne("FieldMgt.Core.DomainModels.State", "State")
                         .WithMany()
@@ -1367,26 +1958,32 @@ namespace FieldMgt.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FieldMgt.Core.DomainModels.Vendor", "Vendor")
+                        .WithMany()
+                        .HasForeignKey("VendorID");
+
                     b.Navigation("City");
 
                     b.Navigation("Country");
-
-                    b.Navigation("Employee");
 
                     b.Navigation("Lead");
 
                     b.Navigation("Reference");
 
+                    b.Navigation("ServiceProvider");
+
                     b.Navigation("SPLocation");
 
-                    b.Navigation("Stakeholder");
+                    b.Navigation("Staff");
 
                     b.Navigation("State");
+
+                    b.Navigation("Vendor");
                 });
 
             modelBuilder.Entity("FieldMgt.Core.DomainModels.UserContact", b =>
                 {
-                    b.HasOne("FieldMgt.Core.DomainModels.Employee", "Employee")
+                    b.HasOne("FieldMgt.Core.DomainModels.Staff", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId");
 
@@ -1398,17 +1995,44 @@ namespace FieldMgt.Core.Migrations
                         .WithMany()
                         .HasForeignKey("SPLocationId");
 
-                    b.HasOne("FieldMgt.Core.DomainModels.Stakeholder", "Stakeholder")
+                    b.HasOne("FieldMgt.Core.DomainModels.ServiceProvider", "ServiceProvider")
                         .WithMany()
-                        .HasForeignKey("StakeholderId");
+                        .HasForeignKey("ServiceProviderId");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.Vendor", "Vendor")
+                        .WithMany()
+                        .HasForeignKey("VendorId");
 
                     b.Navigation("Employee");
 
                     b.Navigation("Lead");
 
+                    b.Navigation("ServiceProvider");
+
                     b.Navigation("SPLocation");
 
-                    b.Navigation("Stakeholder");
+                    b.Navigation("Vendor");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.Vendor", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "VendorCreatedBy")
+                        .WithMany()
+                        .HasForeignKey("VendorCreatedById");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "VendorDeletedBy")
+                        .WithMany()
+                        .HasForeignKey("VendorDeletedById");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "VendorModifiedBy")
+                        .WithMany()
+                        .HasForeignKey("VendorModifiedById");
+
+                    b.Navigation("VendorCreatedBy");
+
+                    b.Navigation("VendorDeletedBy");
+
+                    b.Navigation("VendorModifiedBy");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1502,7 +2126,7 @@ namespace FieldMgt.Core.Migrations
 
                     b.Navigation("LeadContact1Navigation");
 
-                    b.Navigation("Ref1Navigation");
+                    b.Navigation("Staff1Navigation");
                 });
 
             modelBuilder.Entity("FieldMgt.Core.DomainModels.ApplicationUser", b =>
@@ -1530,6 +2154,18 @@ namespace FieldMgt.Core.Migrations
                     b.Navigation("Ref1Navigation");
 
                     b.Navigation("Ref20Navigation");
+
+                    b.Navigation("Ref21Navigation");
+
+                    b.Navigation("Ref22Navigation");
+
+                    b.Navigation("Ref23Navigation");
+
+                    b.Navigation("Ref24Navigation");
+
+                    b.Navigation("Ref25Navigation");
+
+                    b.Navigation("Ref26Navigation");
 
                     b.Navigation("Ref2Navigation");
 

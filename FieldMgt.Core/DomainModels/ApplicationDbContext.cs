@@ -30,10 +30,16 @@ namespace FieldMgt.Core.DomainModels
         public DbSet<UserAddress> UserAddress { get; set; }
         public DbSet<UserContact> UserContact { get; set; }
         public DbSet<ProductMaster> ProductMaster { get; set; }
-        public DbSet<Maintenance> Maintenances { get; set; }
-        public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Maintenance> Maintenance { get; set; }
+        public DbSet<Feedback> Feedback { get; set; }
         public DbSet<Procurement> Procurement { get; set; }
         public DbSet<ProcurementItems> ProcurementItems { get; set; }
+        public DbSet<Estimation> Estimation { get; set; }
+        public DbSet<OrderProduct> OrderProduct { get; set; }
+        public DbSet<LeadRequirement> LeadRequirement { get; set; }
+        public DbSet<EstimationProduct> EstimationProduct { get; set; }
+        public DbSet<Quotation> Quotation { get; set; }
+
         protected virtual void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
         {
             OnModelCreating(modelBuilder);
@@ -53,12 +59,12 @@ namespace FieldMgt.Core.DomainModels
             modelBuilder.Entity<Staff>(act =>
             {
                 act.HasOne(field => field.StaffDesignation)
-               .WithMany(fk => fk.Ref1Navigation)
+               .WithMany(fk => fk.Staff1Navigation)
                .HasForeignKey(fk => fk.Designation)
                .HasConstraintName("Designation_FK");
 
                 act.HasOne(field => field.StaffUserID)
-                .WithMany(fk => fk.Ref2Navigation)
+                .WithMany(fk => fk.Ref1Navigation)
                 .HasForeignKey(fk => fk.UserId)
                 .HasConstraintName("UserId_FK");
 
@@ -213,6 +219,43 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.Ref20Navigation)
                 .HasForeignKey(fk => fk.AssignedTo)
                 .HasConstraintName("OrderAssignedTo_FK");
+            });
+
+            modelBuilder.Entity<Quotation>(act =>
+            {
+                act.HasOne(field => field.NegotitationCreatedBy)
+                .WithMany(fk => fk.Ref21Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("QuotationCreatedBy_FK");
+
+                act.HasOne(field => field.NegotitationModifiedBy)
+                .WithMany(fk => fk.Ref22Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("QuotationModifiedBy_FK");
+            });
+            modelBuilder.Entity<LeadRequirement>(act =>
+            {
+                act.HasOne(field => field.RequirementCreatedBy)
+                .WithMany(fk => fk.Ref23Navigation)
+                .HasForeignKey(fk => fk.RequirementGatheredBy)
+                .HasConstraintName("RequirementCreatedBy_FK");
+
+                act.HasOne(field => field.RequirementModifiedBy)
+                .WithMany(fk => fk.Ref24Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("RequirementModifiedBy_FK");
+            });
+            modelBuilder.Entity<Estimation>(act =>
+            {
+                act.HasOne(field => field.EstimationCreatedBy)
+                .WithMany(fk => fk.Ref25Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("EstimationCreatedBy_FK");
+
+                act.HasOne(field => field.EstimationModifiedBy)
+                .WithMany(fk => fk.Ref26Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("EstimationModifiedBy_FK");
             });
             base.OnModelCreating(modelBuilder);
         }

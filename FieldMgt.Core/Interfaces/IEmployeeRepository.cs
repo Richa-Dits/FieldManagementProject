@@ -8,9 +8,9 @@ namespace FieldMgt.Core.Interfaces
     public interface IEmployeeRepository
     {
         Task CreateStaffAsync(Staff model);
-        IEnumerable<Staff> GetStaffs();
+        IEnumerable<Staff> GetStaff();
         Staff GetStaffbyID(int id);
         UserManagerReponse DeleteStaff(string userName, string deletedBy);
-        Staff UpdateStaffn(Staff model);
+        Staff UpdateStaffAsync(Staff model);
     }
 }

@@ -30,6 +30,12 @@ namespace FieldMgt.Core.DomainModels
             Ref18Navigation = new HashSet<Order>();
             Ref19Navigation = new HashSet<Order>();
             Ref20Navigation = new HashSet<Order>();
+            Ref21Navigation = new HashSet<Quotation>();
+            Ref22Navigation = new HashSet<Quotation>();
+            Ref23Navigation = new HashSet<LeadRequirement>();
+            Ref24Navigation = new HashSet<LeadRequirement>();
+            Ref25Navigation = new HashSet<Estimation>();
+            Ref26Navigation = new HashSet<Estimation>();
         }                    
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
@@ -61,5 +67,11 @@ namespace FieldMgt.Core.DomainModels
         public ICollection<Order> Ref18Navigation { get; set; }
         public ICollection<Order> Ref19Navigation { get; set; }
         public ICollection<Order> Ref20Navigation { get; set; }
+        public ICollection<Quotation> Ref21Navigation { get; set; }
+        public ICollection<Quotation> Ref22Navigation { get; set; }
+        public ICollection<LeadRequirement> Ref23Navigation { get; set; }
+        public ICollection<LeadRequirement> Ref24Navigation { get; set; }
+        public ICollection<Estimation> Ref25Navigation { get; set; }
+        public ICollection<Estimation> Ref26Navigation { get; set; }
     }
 }

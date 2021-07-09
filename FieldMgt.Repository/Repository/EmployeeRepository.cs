@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace FieldMgt.Repository.Repository
 {
-    public class StaffRepository: GenericRepository<Staff>, IEmployeeRepository
+    public class EmployeeRepository: GenericRepository<Staff>, IEmployeeRepository
     {
         private readonly ApplicationDbContext _dbContext;
         //private readonly IUnitofWork _uow;
-        public StaffRepository(ApplicationDbContext dbContext):base(dbContext)
+        public EmployeeRepository(ApplicationDbContext dbContext):base(dbContext)
         {
             _dbContext = dbContext;
         }
@@ -24,7 +24,7 @@ namespace FieldMgt.Repository.Repository
         {
             return GetById(id);
         }
-        public IEnumerable<Staff> GetStaffs()
+        public IEnumerable<Staff> GetStaff()
         {
             var emp = _dbContext.Staff.Where(a => a.IsDeleted == true).ToList();
             return emp;
@@ -50,7 +50,7 @@ namespace FieldMgt.Repository.Repository
                 Message ="Staff Not Found"
             };
         }
-        public Staff UpdateStaffn(Staff model)
+        public Staff UpdateStaffAsync(Staff model)
         {
             return Update(model);
         }

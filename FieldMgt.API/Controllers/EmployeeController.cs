@@ -25,15 +25,15 @@ namespace FieldMgt.API.Controllers
         
         [Route("~/api/Employee/List")]
         [HttpGet]
-        public IEnumerable<Employee> GetEmployees()
+        public IEnumerable<Staff> GetStaff()
         {
-            return  _uow.EmployeeRepositories.GetEmployees();
+            return  _uow.EmployeeRepositories.GetStaff();
         }
         [Route("~/api/Employee/ById/{id}")]
         [HttpGet]
-        public IActionResult GetEmployeebyID(int id)
+        public IActionResult GetStaffbyID(int id)
         {
-            var result = _uow.EmployeeRepositories.GetEmployeebyID(id);
+            var result = _uow.EmployeeRepositories.GetStaffbyID(id);
             if (result == null)
             {
                 return BadRequest("Lead Contact doesnt exist");
@@ -42,9 +42,9 @@ namespace FieldMgt.API.Controllers
         }    
         [Route("~/api/Employee/Update")]
         [HttpPatch]
-        public async Task<IActionResult> UpdateEmployeeAsync(Employee model)
+        public async Task<IActionResult> UpdateStaffAsync(Staff model)
         {
-            var updated= _uow.EmployeeRepositories.UpdateEmployeen(model);
+            var updated= _uow.EmployeeRepositories.UpdateStaffAsync(model);
             var result = await _uow.SaveAsync1();
             if (result.Equals(1))
             {

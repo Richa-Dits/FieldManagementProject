@@ -10,7 +10,7 @@ namespace FieldMgt
         {
             CreateMap<CreateLeadDTO, Lead>().ReverseMap();
             CreateMap<CreateLeadContactDTO, LeadContact>().ReverseMap();
-            CreateMap<RegistrationDTO, Employee>().ReverseMap();
+            CreateMap<RegistrationDTO, Staff>().ReverseMap();
         }
     }
 }

@@ -32,6 +32,8 @@ namespace FieldMgt.Core.DomainModels
         public int? LeadStage { get; set; }
         public bool? IsActive { get; set; }
         [Column(TypeName = "nvarchar(255)")]
+        public string Proposal { get; set; }
+        [Column(TypeName = "nvarchar(255)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
         [Column(TypeName = "nvarchar(255)")]
