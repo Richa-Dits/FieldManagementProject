@@ -10,10 +10,10 @@ namespace FieldMgt.Core.DomainModels
     {
         public ApplicationUser()
         {
-            Ref1Navigation = new HashSet<Employee>();
-            Ref2Navigation = new HashSet<Employee>();
-            Ref3Navigation = new HashSet<Employee>();
-            Ref4Navigation = new HashSet<Employee>();
+            Ref1Navigation = new HashSet<Staff>();
+            Ref2Navigation = new HashSet<Staff>();
+            Ref3Navigation = new HashSet<Staff>();
+            Ref4Navigation = new HashSet<Staff>();
             Ref5Navigation = new HashSet<Lead>();
             Ref6Navigation = new HashSet<Lead>();
             Ref7Navigation = new HashSet<Lead>();

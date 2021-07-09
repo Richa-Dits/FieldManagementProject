@@ -21,7 +21,7 @@ namespace FieldMgt.Core.DomainModels
         [Column(TypeName = "varchar(14)")]
         [Phone]
         public string Phone { get; set; }        
-        public int StakeholderId { get; set; }
-        public Stakeholder Stakeholder { get; set; }
+        public int ServiceProviderId { get; set; }
+        public ServiceProvider ServicePRovider { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace FieldMgt.Core.DomainModels
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
         public bool? IsActive { get; set; }
-        public bool? IsDelete { get; set; }
+        public bool? IsDeleted { get; set; }
         [Column(TypeName = "nvarchar(50)")]
         public string TotalCost { get; set; }
         public int ProductId { get; set; }

@@ -55,8 +55,8 @@ namespace FieldMgt.Controllers
                     modelDTO.Designation = model.Designation;
                     modelDTO.CreatedOn = System.DateTime.Now;
                     modelDTO.CreatedBy = _currentUserService.GetUserID();
-                    Employee payload = _mapper.Map<RegistrationDTO, Employee>(modelDTO);                    
-                    await _uow.EmployeeRepositories.CreateEmployeeAsync(payload);
+                    Staff payload = _mapper.Map<RegistrationDTO, Staff>(modelDTO);                    
+                    await _uow.EmployeeRepositories.CreateStaffAsync(payload);
                     var result1 = await _uow.SaveAsync1();
                     if (result1.Equals(1))
                     {
@@ -64,11 +64,11 @@ namespace FieldMgt.Controllers
                     }
                     else
                     {
-<<<<<<< HEAD
-                        return BadRequest("Unable to create Employee");
-=======
-                        return BadRequest("Unable to create employee");
->>>>>>> e0ac7c682822291ab8c57ef692523e0c6b6b7099
+
+                        return BadRequest("Unable to create Staff");
+
+                        return BadRequest("Unable to create Staff");
+
                     }
                 }
                 else
@@ -100,7 +100,7 @@ namespace FieldMgt.Controllers
             var resultUser=await _userService.DeleteUser(userName,deletedBy);
             if (resultUser.Equals(1))
             {
-                var updated = _uow.EmployeeRepositories.DeleteEmployee(userName, deletedBy);
+                var updated = _uow.EmployeeRepositories.DeleteStaff(userName, deletedBy);
                 var result = await _uow.SaveAsync1();
                 if (result.Equals(1))
                 {

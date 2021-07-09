@@ -8,32 +8,32 @@ using System.Threading.Tasks;
 
 namespace FieldMgt.Repository.Repository
 {
-    public class EmployeeRepository: GenericRepository<Employee>, IEmployeeRepository
+    public class StaffRepository: GenericRepository<Staff>, IEmployeeRepository
     {
         private readonly ApplicationDbContext _dbContext;
         //private readonly IUnitofWork _uow;
-        public EmployeeRepository(ApplicationDbContext dbContext):base(dbContext)
+        public StaffRepository(ApplicationDbContext dbContext):base(dbContext)
         {
             _dbContext = dbContext;
         }
-        public async Task CreateEmployeeAsync(Employee model)
+        public async Task CreateStaffAsync(Staff model)
         {
              await InsertAsync(model);
         }
-        public Employee GetEmployeebyID(int id)
+        public Staff GetStaffbyID(int id)
         {
             return GetById(id);
         }
-        public IEnumerable<Employee> GetEmployees()
+        public IEnumerable<Staff> GetStaffs()
         {
-            var emp = _dbContext.Employee.Where(a => a.IsDeleted == true).ToList();
+            var emp = _dbContext.Staff.Where(a => a.IsDeleted == true).ToList();
             return emp;
         }
-        public UserManagerReponse DeleteEmployee(string userName, string deletedBy)
+        public UserManagerReponse DeleteStaff(string userName, string deletedBy)
         {
-            var emp = _dbContext.Employee.FirstOrDefault();
+            var emp = _dbContext.Staff.FirstOrDefault();
             //commented to create the db
-            //var emp = _dbContext.Employee.Where(a => a.Email == userName).Single();
+            //var emp = _dbContext.Staff.Where(a => a.Email == userName).Single();
             if(!(emp==null|| emp.IsDeleted==true))
             {
                 emp.IsDeleted = true;
@@ -42,15 +42,15 @@ namespace FieldMgt.Repository.Repository
                 var emp1= Update(emp);              
                 return new UserManagerReponse
                 {
-                    Message = "Employee has been deleted"
+                    Message = "Staff has been deleted"
                 };
             }
             return new UserManagerReponse 
             { 
-                Message ="Employee Not Found"
+                Message ="Staff Not Found"
             };
         }
-        public Employee UpdateEmployeen(Employee model)
+        public Staff UpdateStaffn(Staff model)
         {
             return Update(model);
         }

@@ -7,10 +7,10 @@ namespace FieldMgt.Core.Interfaces
 {
     public interface IEmployeeRepository
     {
-        Task CreateEmployeeAsync(Employee model);
-        IEnumerable<Employee> GetEmployees();
-        Employee GetEmployeebyID(int id);
-        UserManagerReponse DeleteEmployee(string userName, string deletedBy);
-        Employee UpdateEmployeen(Employee model);
+        Task CreateStaffAsync(Staff model);
+        IEnumerable<Staff> GetStaffs();
+        Staff GetStaffbyID(int id);
+        UserManagerReponse DeleteStaff(string userName, string deletedBy);
+        Staff UpdateStaffn(Staff model);
     }
 }

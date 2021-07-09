@@ -30,7 +30,10 @@ namespace FieldMgt.Core.DomainModels
         public DbSet<UserAddress> UserAddress { get; set; }
         public DbSet<UserContact> UserContact { get; set; }
         public DbSet<ProductMaster> ProductMaster { get; set; }
-
+        public DbSet<Maintenance> Maintenances { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Procurement> Procurement { get; set; }
+        public DbSet<ProcurementItems> ProcurementItems { get; set; }
         protected virtual void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
         {
             OnModelCreating(modelBuilder);
