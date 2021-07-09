@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="DomainModels\ServiceProvider.cs" />
-    <Compile Remove="DomainModels\Vendor.cs" />
+    <Compile Remove="DomainModels\Stakeholder.cs" />
   </ItemGroup>
 
   <ItemGroup>

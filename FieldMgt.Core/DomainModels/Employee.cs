@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FieldMgt.Core.DomainModels
 {
-    public class Employee
+    public class Staff
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int EmployeeID { get; set; }
+        public int StaffID { get; set; }
         [Column(TypeName = "varchar(30)")]
         public string FirstName { get; set; }
         [Column(TypeName = "varchar(30)")]
@@ -28,10 +28,10 @@ namespace FieldMgt.Core.DomainModels
         [Column(TypeName = "nvarchar(255)")]
         public string DeletedBy { get; set; }
         public DateTime? DeletedOn { get; set; }
-        public Reference EmpDesignation { get; set; }
-        public ApplicationUser EmpUserID { get; set; }
-        public ApplicationUser EmpCreatedBy { get; set; }
-        public ApplicationUser EmpModifiedBy { get; set; }
-        public ApplicationUser EmpDeletedBy { get; set; }
+        public Reference StaffDesignation { get; set; }
+        public ApplicationUser StaffUserID { get; set; }
+        public ApplicationUser StaffCreatedBy { get; set; }
+        public ApplicationUser StaffModifiedBy { get; set; }
+        public ApplicationUser StaffDeletedBy { get; set; }
     }    
 }

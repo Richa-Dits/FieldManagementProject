@@ -12,7 +12,7 @@ namespace FieldMgt.Core.DomainModels
         {
 
         }
-        public DbSet<Employee> Employee { get; set; }
+        public DbSet<Staff> Staff { get; set; }
         public DbSet<Lead> Lead { get; set; }
         public DbSet<LeadContact> LeadContact { get; set; }
         public DbSet<Reference> Reference { get; set; }
@@ -23,13 +23,12 @@ namespace FieldMgt.Core.DomainModels
         public DbSet<LeadCall> LeadCall { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<Product> Product { get; set; }
-        //public DbSet<ServiceProvider> ServiceProvider { get; set; }
+        public DbSet<ServiceProvider> ServiceProvider { get; set; }
         public DbSet<SPLocation> SPLocation { get; set; }
         public DbSet<StockIssue> StockIssue { get; set; }
-        //public DbSet<Vendor> Vendor { get; set; }
+        public DbSet<Vendor> Vendor { get; set; }
         public DbSet<UserAddress> UserAddress { get; set; }
         public DbSet<UserContact> UserContact { get; set; }
-        public DbSet<Stakeholder> Stakeholder { get; set; }
         public DbSet<ProductMaster> ProductMaster { get; set; }
 
         protected virtual void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
@@ -44,7 +43,7 @@ namespace FieldMgt.Core.DomainModels
 
             modelBuilder.Entity<Lead>().Property(s => s.LeadId).HasDatabaseGeneratedOption
 (DatabaseGeneratedOption.Identity); ;
-            modelBuilder.Entity<Employee>().Property(s => s.EmployeeID).HasDatabaseGeneratedOption
+            modelBuilder.Entity<Staff>().Property(s => s.StaffID).HasDatabaseGeneratedOption
 (DatabaseGeneratedOption.Identity); ;
             modelBuilder.Entity<LeadContact>().Property(s =>  s.LeadContactID ).HasDatabaseGeneratedOption
                 (DatabaseGeneratedOption.Identity); ;
@@ -53,7 +52,7 @@ namespace FieldMgt.Core.DomainModels
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Employee>(act =>
+            modelBuilder.Entity<Staff>(act =>
             {
                 //act.HasOne(field => field.EmpCity)
                 //.WithMany(fk => fk.Ref1Navigation)
@@ -70,22 +69,22 @@ namespace FieldMgt.Core.DomainModels
                 //.HasForeignKey(fk => fk.Country)
                 //.HasConstraintName("Country_FK");
 
-                act.HasOne(field => field.EmpUserID)
+                act.HasOne(field => field.StaffUserID)
                 .WithMany(fk => fk.Ref1Navigation)
                 .HasForeignKey(fk => fk.UserId)
                 .HasConstraintName("UserId_FK");
 
-                act.HasOne(field => field.EmpCreatedBy)
+                act.HasOne(field => field.StaffCreatedBy)
                .WithMany(fk => fk.Ref2Navigation)
                .HasForeignKey(fk => fk.CreatedBy)
                .HasConstraintName("Created_FK");
 
-                act.HasOne(field => field.EmpModifiedBy)
+                act.HasOne(field => field.StaffModifiedBy)
                 .WithMany(fk => fk.Ref3Navigation)
                 .HasForeignKey(fk => fk.ModifiedBy)
                 .HasConstraintName("Modified_FK");
 
-                act.HasOne(field => field.EmpDeletedBy)
+                act.HasOne(field => field.StaffDeletedBy)
                 .WithMany(fk => fk.Ref4Navigation)
                 .HasForeignKey(fk => fk.DeletedBy)
                 .HasConstraintName("Deleted_FK");
