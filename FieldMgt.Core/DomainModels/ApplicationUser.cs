@@ -41,10 +41,10 @@ namespace FieldMgt.Core.DomainModels
         public string CreatedBy { get; set; }
         public ApplicationUser RefCreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
-        public ICollection<Employee> Ref1Navigation { get; set; }
-        public ICollection<Employee> Ref2Navigation { get; set; }
-        public ICollection<Employee> Ref3Navigation { get; set; }
-        public ICollection<Employee> Ref4Navigation { get; set; }
+        public ICollection<Staff> Ref1Navigation { get; set; }
+        public ICollection<Staff> Ref2Navigation { get; set; }
+        public ICollection<Staff> Ref3Navigation { get; set; }
+        public ICollection<Staff> Ref4Navigation { get; set; }
         public ICollection<Lead> Ref5Navigation { get; set; }
         public ICollection<Lead> Ref6Navigation { get; set; }
         public ICollection<Lead> Ref7Navigation { get; set; }

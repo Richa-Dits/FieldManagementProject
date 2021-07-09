@@ -14,9 +14,9 @@ namespace FieldMgt.Core.DomainModels
         public int Status { get; set; }
         public int LeadId { get; set; }
         [Column(TypeName = "nvarchar(255)")]
-        public string CreatedBy { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
         public string AssignedTo { get; set; }
+        [Column(TypeName = "nvarchar(255)")]
+        public string CreatedBy { get; set; }        
         public DateTime? CreatedOn { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string ModifiedBy { get; set; }        

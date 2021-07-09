@@ -9,7 +9,7 @@ namespace FieldMgt.Core.DomainModels
     {
         public Reference()
         {
-            Ref1Navigation = new HashSet<Employee>();
+            Ref1Navigation = new HashSet<Staff>();
             //Ref2Navigation = new HashSet<Employee>();
             //Ref3Navigation = new HashSet<Employee>();
             Lead1Navigation = new HashSet<Lead>();
@@ -35,7 +35,7 @@ namespace FieldMgt.Core.DomainModels
         public string ReferenceName { get; set; }
         [Column(TypeName = "varchar(20)")]
         public string ReferenceCategory { get; set; }        
-        public ICollection<Employee> Ref1Navigation { get; set; }
+        public ICollection<Staff> Ref1Navigation { get; set; }
         //public ICollection<Employee> Ref2Navigation { get; set; }
         //public ICollection<Employee> Ref3Navigation { get; set; }
         public ICollection<Lead> Lead1Navigation { get; set; }
