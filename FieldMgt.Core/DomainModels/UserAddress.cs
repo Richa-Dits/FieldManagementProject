@@ -25,9 +25,11 @@ namespace FieldMgt.Core.DomainModels
         public int AddressType { get; set; }
         public Reference Reference { get; set; }
         public int? EmployeeId { get; set; }
-        public Employee Employee { get; set; }
-        public int? StakeholderId { get; set; }
-        public Stakeholder Stakeholder { get; set; }
+        public Staff Staff { get; set; }
+        public int? VendorID { get; set; }
+        public Vendor Vendor { get; set; }
+        public int? ServiceProviderID { get; set; }
+        public ServiceProvider ServiceProvider { get; set; }
         public int? LeadId { get; set; }
         public Lead Lead { get; set; }
         public int? SPLocationId { get; set; }
