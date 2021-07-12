@@ -484,8 +484,14 @@ namespace FieldMgt.Core.Migrations
                     b.Property<DateTime?>("ActualCompletionDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<decimal>("AmountPaid")
+                        .HasColumnType("decimal(16,2)");
+
                     b.Property<string>("AssignedTo")
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<decimal>("BalanceAmount")
+                        .HasColumnType("decimal(16,2)");
 
                     b.Property<string>("CompletionCertifcate")
                         .HasColumnType("nvarchar(255)");
@@ -520,13 +526,16 @@ namespace FieldMgt.Core.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<float>("OrderAmount")
-                        .HasColumnType("real");
+                    b.Property<decimal>("OrderAmount")
+                        .HasColumnType("decimal(16,2)");
 
                     b.Property<string>("OrderDescription")
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("OrderStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PaymentStatus")
                         .HasColumnType("int");
 
                     b.Property<string>("PocContact")
@@ -555,6 +564,8 @@ namespace FieldMgt.Core.Migrations
                     b.HasIndex("LeadId");
 
                     b.HasIndex("ModifiedBy");
+
+                    b.HasIndex("PaymentStatus");
 
                     b.HasIndex("ReferenceId");
 
@@ -586,6 +597,56 @@ namespace FieldMgt.Core.Migrations
                     b.HasIndex("ProductMasterId");
 
                     b.ToTable("OrderProduct");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.OrderTransaction", b =>
+                {
+                    b.Property<int>("OrderTransactiontId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("AmountPaid")
+                        .HasColumnType("decimal(16,2)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IsDeleted")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PaymentMethod")
+                        .HasColumnType("decimal(16,2)");
+
+                    b.HasKey("OrderTransactiontId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("DeletedBy");
+
+                    b.HasIndex("ModifiedBy");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderTransaction");
                 });
 
             modelBuilder.Entity("FieldMgt.Core.DomainModels.Procurement", b =>
@@ -1697,6 +1758,13 @@ namespace FieldMgt.Core.Migrations
                         .HasForeignKey("ModifiedBy")
                         .HasConstraintName("OrderModifiedBy_FK");
 
+                    b.HasOne("FieldMgt.Core.DomainModels.Reference", "OrderPaymentStatus")
+                        .WithMany("OPStatus")
+                        .HasForeignKey("PaymentStatus")
+                        .HasConstraintName("OrderPaymentStatus_FK")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("FieldMgt.Core.DomainModels.Reference", "Reference")
                         .WithMany()
                         .HasForeignKey("ReferenceId");
@@ -1716,6 +1784,8 @@ namespace FieldMgt.Core.Migrations
                     b.Navigation("OrderDeletedBy");
 
                     b.Navigation("OrderModifiedBy");
+
+                    b.Navigation("OrderPaymentStatus");
 
                     b.Navigation("Reference");
 
@@ -1739,6 +1809,38 @@ namespace FieldMgt.Core.Migrations
                     b.Navigation("Lead");
 
                     b.Navigation("ProductMaster");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.OrderTransaction", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "OrderTransactionCreatedBy")
+                        .WithMany("Ref27Navigation")
+                        .HasForeignKey("CreatedBy")
+                        .HasConstraintName("OrderTransactionCreatedBy_FK");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "OrderTransactionDeletedBy")
+                        .WithMany("Ref29Navigation")
+                        .HasForeignKey("DeletedBy")
+                        .HasConstraintName("OrderTransactionDeletedBy_FK");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "OrderTransactionModifiedBy")
+                        .WithMany("Ref28Navigation")
+                        .HasForeignKey("ModifiedBy")
+                        .HasConstraintName("OrderTransactionModifiedBy_FK");
+
+                    b.HasOne("FieldMgt.Core.DomainModels.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("OrderTransactionCreatedBy");
+
+                    b.Navigation("OrderTransactionDeletedBy");
+
+                    b.Navigation("OrderTransactionModifiedBy");
                 });
 
             modelBuilder.Entity("FieldMgt.Core.DomainModels.Procurement", b =>
@@ -2126,6 +2228,8 @@ namespace FieldMgt.Core.Migrations
 
                     b.Navigation("LeadContact1Navigation");
 
+                    b.Navigation("OPStatus");
+
                     b.Navigation("Staff1Navigation");
                 });
 
@@ -2166,6 +2270,12 @@ namespace FieldMgt.Core.Migrations
                     b.Navigation("Ref25Navigation");
 
                     b.Navigation("Ref26Navigation");
+
+                    b.Navigation("Ref27Navigation");
+
+                    b.Navigation("Ref28Navigation");
+
+                    b.Navigation("Ref29Navigation");
 
                     b.Navigation("Ref2Navigation");
 

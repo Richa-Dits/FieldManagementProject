@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FieldMgt.Core.Migrations
 {
-    public partial class fieldmgtcorewgfwek02301 : Migration
+    public partial class fieldmgtcore1211 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -847,9 +847,12 @@ namespace FieldMgt.Core.Migrations
                     TeamLead = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     PocContact = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    OrderAmount = table.Column<float>(type: "real", nullable: false),
                     ActualCompletionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     AssignedTo = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    OrderAmount = table.Column<decimal>(type: "decimal(16,2)", nullable: false),
+                    AmountPaid = table.Column<decimal>(type: "decimal(16,2)", nullable: false),
+                    BalanceAmount = table.Column<decimal>(type: "decimal(16,2)", nullable: false),
+                    PaymentStatus = table.Column<int>(type: "int", nullable: false),
                     CompletionCertifcate = table.Column<string>(type: "nvarchar(255)", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -904,6 +907,12 @@ namespace FieldMgt.Core.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "OrderPaymentStatus_FK",
+                        column: x => x.PaymentStatus,
+                        principalTable: "Reference",
+                        principalColumn: "ReferenceId",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -1163,6 +1172,52 @@ namespace FieldMgt.Core.Migrations
                         principalTable: "Product",
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderTransaction",
+                columns: table => new
+                {
+                    OrderTransactiontId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    AmountPaid = table.Column<decimal>(type: "decimal(16,2)", nullable: false),
+                    PaymentMethod = table.Column<decimal>(type: "decimal(16,2)", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    DeletedBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderTransaction", x => x.OrderTransactiontId);
+                    table.ForeignKey(
+                        name: "FK_OrderTransaction_Order_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Order",
+                        principalColumn: "OrderId",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "OrderTransactionCreatedBy_FK",
+                        column: x => x.CreatedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "OrderTransactionDeletedBy_FK",
+                        column: x => x.DeletedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "OrderTransactionModifiedBy_FK",
+                        column: x => x.ModifiedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -1444,6 +1499,11 @@ namespace FieldMgt.Core.Migrations
                 column: "ModifiedBy");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Order_PaymentStatus",
+                table: "Order",
+                column: "PaymentStatus");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Order_ReferenceId",
                 table: "Order",
                 column: "ReferenceId");
@@ -1462,6 +1522,26 @@ namespace FieldMgt.Core.Migrations
                 name: "IX_OrderProduct_ProductMasterId",
                 table: "OrderProduct",
                 column: "ProductMasterId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderTransaction_CreatedBy",
+                table: "OrderTransaction",
+                column: "CreatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderTransaction_DeletedBy",
+                table: "OrderTransaction",
+                column: "DeletedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderTransaction_ModifiedBy",
+                table: "OrderTransaction",
+                column: "ModifiedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderTransaction_OrderId",
+                table: "OrderTransaction",
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Procurement_ApplicationUserId",
@@ -1694,6 +1774,9 @@ namespace FieldMgt.Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrderProduct");
+
+            migrationBuilder.DropTable(
+                name: "OrderTransaction");
 
             migrationBuilder.DropTable(
                 name: "Procurement");

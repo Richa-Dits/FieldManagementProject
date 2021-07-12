@@ -15,11 +15,9 @@ namespace FieldMgt.Core.DomainModels
         public Lead Lead { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string OrderDescription { get; set; }
-        //[ForeignKey("RefId")]
         public int OrderStatus { get; set; }
         public Reference Reference { get; set; }
         public bool? IsActive { get; set; }
-        //[ForeignKey("ServiceProviderId")]
         public int SPLocationId { get; set; }
         public SPLocation SPLocation { get; set; }
         [Column(TypeName = "nvarchar(50)")]
@@ -27,11 +25,17 @@ namespace FieldMgt.Core.DomainModels
         [Column(TypeName = "nvarchar(50)")]
         public string TeamLead { get; set; }
         public string PocContact { get; set; }
-        public DateTime? DueDate { get; set; }
-        public float OrderAmount { get; set; }
+        public DateTime? DueDate { get; set; }        
         public DateTime? ActualCompletionDate { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string AssignedTo { get; set; }
+        [Column(TypeName = "decimal(16,2)")]
+        public decimal OrderAmount { get; set; }
+        [Column(TypeName = "decimal(16,2)")]
+        public decimal AmountPaid { get; set; }
+        [Column(TypeName = "decimal(16,2)")]
+        public decimal BalanceAmount { get; set; }
+        public int PaymentStatus { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CompletionCertifcate { get; set; }
         [Column(TypeName = "nvarchar(255)")]
@@ -48,5 +52,6 @@ namespace FieldMgt.Core.DomainModels
         public ApplicationUser OrderCreatedBy { get; set; }
         public ApplicationUser OrderModifiedBy { get; set; }
         public ApplicationUser OrderDeletedBy { get; set; }
+        public Reference OrderPaymentStatus { get; set; }
     }
 }

@@ -39,6 +39,7 @@ namespace FieldMgt.Core.DomainModels
         public DbSet<LeadRequirement> LeadRequirement { get; set; }
         public DbSet<EstimationProduct> EstimationProduct { get; set; }
         public DbSet<Quotation> Quotation { get; set; }
+        public DbSet<OrderTransaction> OrderTransaction { get; set; }
 
         protected virtual void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
         {
@@ -219,6 +220,11 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.Ref20Navigation)
                 .HasForeignKey(fk => fk.AssignedTo)
                 .HasConstraintName("OrderAssignedTo_FK");
+
+                act.HasOne(field => field.OrderPaymentStatus)
+                .WithMany(fk => fk.OPStatus)
+                .HasForeignKey(fk => fk.PaymentStatus)
+                .HasConstraintName("OrderPaymentStatus_FK");
             });
 
             modelBuilder.Entity<Quotation>(act =>
@@ -256,6 +262,24 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.Ref26Navigation)
                 .HasForeignKey(fk => fk.ModifiedBy)
                 .HasConstraintName("EstimationModifiedBy_FK");
+            });
+
+            modelBuilder.Entity<OrderTransaction>(act =>
+            {
+                act.HasOne(field => field.OrderTransactionCreatedBy)
+                .WithMany(fk => fk.Ref27Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("OrderTransactionCreatedBy_FK");
+
+                act.HasOne(field => field.OrderTransactionModifiedBy)
+                .WithMany(fk => fk.Ref28Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("OrderTransactionModifiedBy_FK");
+
+                act.HasOne(field => field.OrderTransactionDeletedBy)
+                .WithMany(fk => fk.Ref29Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("OrderTransactionDeletedBy_FK");
             });
             base.OnModelCreating(modelBuilder);
         }

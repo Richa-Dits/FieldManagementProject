@@ -36,6 +36,9 @@ namespace FieldMgt.Core.DomainModels
             Ref24Navigation = new HashSet<LeadRequirement>();
             Ref25Navigation = new HashSet<Estimation>();
             Ref26Navigation = new HashSet<Estimation>();
+            Ref27Navigation = new HashSet<OrderTransaction>();
+            Ref28Navigation = new HashSet<OrderTransaction>();
+            Ref29Navigation = new HashSet<OrderTransaction>();
         }                    
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
@@ -73,5 +76,8 @@ namespace FieldMgt.Core.DomainModels
         public ICollection<LeadRequirement> Ref24Navigation { get; set; }
         public ICollection<Estimation> Ref25Navigation { get; set; }
         public ICollection<Estimation> Ref26Navigation { get; set; }
+        public ICollection<OrderTransaction> Ref27Navigation { get; set; }
+        public ICollection<OrderTransaction> Ref28Navigation { get; set; }
+        public ICollection<OrderTransaction> Ref29Navigation { get; set; }
     }
 }
