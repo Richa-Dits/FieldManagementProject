@@ -33,8 +33,8 @@ namespace FieldMgt.Core.DomainModels
             Ref20Navigation = new HashSet<Order>();
             Ref21Navigation = new HashSet<Quotation>();
             Ref22Navigation = new HashSet<Quotation>();
-            Ref23Navigation = new HashSet<LeadRequirement>();
-            Ref24Navigation = new HashSet<LeadRequirement>();
+            Ref23Navigation = new HashSet<JobOrderRequirement>();
+            Ref24Navigation = new HashSet<JobOrderRequirement>();
             Ref25Navigation = new HashSet<Estimation>();
             Ref26Navigation = new HashSet<Estimation>();
             Ref36Navigation = new HashSet<Estimation>();
@@ -57,7 +57,7 @@ namespace FieldMgt.Core.DomainModels
             Ref44Navigation = new HashSet<Maintenance>();
             Ref45Navigation = new HashSet<Maintenance>();
             Ref46Navigation = new HashSet<Quotation>();
-            Ref47Navigation = new HashSet<LeadRequirement>();
+            Ref47Navigation = new HashSet<JobOrderRequirement>();
             Ref48Navigation = new HashSet<OrderProduct>();
             Ref49Navigation = new HashSet<OrderProduct>();
             Ref50Navigation = new HashSet<OrderProduct>();
@@ -108,8 +108,8 @@ namespace FieldMgt.Core.DomainModels
         public ICollection<Order> Ref20Navigation { get; set; }
         public ICollection<Quotation> Ref21Navigation { get; set; }
         public ICollection<Quotation> Ref22Navigation { get; set; }
-        public ICollection<LeadRequirement> Ref23Navigation { get; set; }
-        public ICollection<LeadRequirement> Ref24Navigation { get; set; }
+        public ICollection<JobOrderRequirement> Ref23Navigation { get; set; }
+        public ICollection<JobOrderRequirement> Ref24Navigation { get; set; }
         public ICollection<Estimation> Ref25Navigation { get; set; }
         public ICollection<Estimation> Ref26Navigation { get; set; }
         public ICollection<OrderTransaction> Ref27Navigation { get; set; }
@@ -132,7 +132,7 @@ namespace FieldMgt.Core.DomainModels
         public ICollection<Maintenance> Ref44Navigation { get; set; }
         public ICollection<Maintenance> Ref45Navigation { get; set; }
         public ICollection<Quotation> Ref46Navigation { get; set; }
-        public ICollection<LeadRequirement> Ref47Navigation { get; set; }
+        public ICollection<JobOrderRequirement> Ref47Navigation { get; set; }
         public ICollection<OrderProduct> Ref48Navigation { get; set; }
         public ICollection<OrderProduct> Ref49Navigation { get; set; }
         public ICollection<OrderProduct> Ref50Navigation { get; set; }

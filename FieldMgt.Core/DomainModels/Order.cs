@@ -12,8 +12,8 @@ namespace FieldMgt.Core.DomainModels
         public int OrderId { get; set; }
         [Required]
         //[ForeignKey("LeadId")]
-        public int LeadId { get; set; }
-        public Lead Lead { get; set; }
+        public int ClientId { get; set; }
+        //public Client Client { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string OrderDescription { get; set; }
         public int OrderStatus { get; set; }

@@ -28,9 +28,9 @@ namespace FieldMgt.Core.DomainModels
         [DefaultValue(false)]
         public bool? IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
-        public int LeadId { get; set; }
-        [ForeignKey("LeadId")]
-        public Lead Lead { get; set; }
+        public int OrderId { get; set; }
+        [ForeignKey("OrderID")]
+        public Order Order { get; set; }
         public ApplicationUser FeedBackCreatedBy { get; set; }
         public ApplicationUser FeedBackModifiedBy { get; set; }
         public ApplicationUser FeedBackDeletedBy { get; set; }
