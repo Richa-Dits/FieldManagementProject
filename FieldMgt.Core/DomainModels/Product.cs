@@ -10,7 +10,7 @@ namespace FieldMgt.Core.DomainModels
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProductId { get; set; }
-        public int IssueThreshold { get; set; }
+        public int ThresholdLimit { get; set; }
         [Column(TypeName = "decimal(8,2)")]
         public decimal? QuantityinStock { get; set; }
         [Column(TypeName = "decimal(8,2)")]

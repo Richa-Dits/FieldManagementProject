@@ -9,7 +9,7 @@ namespace FieldMgt.Core.DTOs.Request
     public class CreateEmployeeDTO:BaseEmployeeModel
     {
         [Required]
-        [StringLength(50)]
+        [StringLength(100)]
         public string Email { get; set; }
         [Required]
         [StringLength(50, MinimumLength = 5)]

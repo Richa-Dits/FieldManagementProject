@@ -23,8 +23,8 @@ namespace FieldMgt.Core.DomainModels
         [DefaultValue(false)]
         public bool? IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
-        public int LeadId { get; set; }
-        public Lead Lead { get; set; }
+        public int JobOrderID { get; set; }
+        public JobOrder JobOrder { get; set; }
         public ApplicationUser EstimationCreatedBy { get; set; }
         public ApplicationUser EstimationModifiedBy { get; set; }
         public ApplicationUser EstimationDeletedBy { get; set; }

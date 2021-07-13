@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FieldMgt.Core.DomainModels
 {
-    public class OrderProduct
+    public class OrderDetail
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -14,8 +14,10 @@ namespace FieldMgt.Core.DomainModels
         public ProductMaster ProductMaster { get; set; }
         [Column(TypeName = "decimal(8,2)")]
         public decimal? QuantityRequired { get; set; }
-        public int LeadId { get; set; }
-        public Lead Lead { get; set; }
+        public int? JobOrderId { get; set; }
+        public JobOrder JobOrder { get; set; }
+        public int? OrderId { get; set; }
+        public Order Order { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }

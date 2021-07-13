@@ -7,7 +7,7 @@ namespace FieldMgt.Core.DTOs.Request
 {
     public class RegistrationDTO:BaseRegistration
     {
-        [StringLength(50)]
+        [StringLength(100)]
         [EmailAddress]
         public string Email { get; set; }
         [StringLength(30, MinimumLength = 1)]

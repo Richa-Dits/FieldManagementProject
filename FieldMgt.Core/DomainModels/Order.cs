@@ -12,12 +12,12 @@ namespace FieldMgt.Core.DomainModels
         public int OrderId { get; set; }
         [Required]
         //[ForeignKey("LeadId")]
-        public int LeadId { get; set; }
-        public Lead Lead { get; set; }
+        public int ClientId { get; set; }
+        //public Client Client { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string OrderDescription { get; set; }
         public int OrderStatus { get; set; }
-        public Reference Reference { get; set; }
+        //set reference to notes
         public int ContactDetailId { get; set; }
         [ForeignKey("ContactDetailId")]
         public ContactDetail ContactDetail { get; set; }
@@ -25,13 +25,8 @@ namespace FieldMgt.Core.DomainModels
         public int BillingAddressId { get; set; }
         [DefaultValue(true)]
         public bool? IsActive { get; set; }
-        public int SPLocationId { get; set; }
-        public ServiceProviderLocation SPLocation { get; set; }
-        [Column(TypeName = "nvarchar(50)")]
-        public string PocName { get; set; }
-        [Column(TypeName = "nvarchar(50)")]
-        public string TeamLead { get; set; }
-        public string PocContact { get; set; }
+        [DefaultValue(false)]
+        public bool? IsComplete { get; set; }        
         public DateTime? DueDate { get; set; }        
         public DateTime? ActualCompletionDate { get; set; }
         [Column(TypeName = "nvarchar(255)")]

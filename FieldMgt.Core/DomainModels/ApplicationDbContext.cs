@@ -24,7 +24,7 @@ namespace FieldMgt.Core.DomainModels
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ServiceProvider> ServiceProviders { get; set; }
-        public DbSet<ServiceProviderLocation> SPLocations { get; set; }
+        public DbSet<ServiceProviderLocation> ServiceProviderLocations { get; set; }
         public DbSet<ProductsIssued> ProductsIssued { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<AddressDetail> AddressDetails { get; set; }
@@ -35,8 +35,8 @@ namespace FieldMgt.Core.DomainModels
         public DbSet<Procurement> Procurements { get; set; }
         public DbSet<ProcurementItems> ProcurementItems { get; set; }
         public DbSet<Estimation> Estimations { get; set; }
-        public DbSet<OrderProduct> OrderProducts { get; set; }
-        public DbSet<LeadRequirement> LeadRequirements { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<JobOrderRequirement> LeadRequirements { get; set; }
         public DbSet<EstimationProduct> EstimationProducts { get; set; }
         public DbSet<Quotation> Quotations { get; set; }
         public DbSet<OrderTransaction> OrderTransactions { get; set; }
@@ -107,11 +107,6 @@ namespace FieldMgt.Core.DomainModels
                .WithMany(fk => fk.Lead2Navigation)
                .HasForeignKey(fk => fk.LeadSource)
                .HasConstraintName("LeadSource_FK");
-
-                act.HasOne(field => field.RefGender)
-                .WithMany(fk => fk.Lead3Navigation)
-                .HasForeignKey(fk => fk.Gender)
-                .HasConstraintName("LGender_FK");
 
                 act.HasOne(field => field.RefStatus)
                .WithMany(fk => fk.Lead8Navigation)
@@ -268,7 +263,7 @@ namespace FieldMgt.Core.DomainModels
                 .HasForeignKey(fk => fk.DeletedBy)
                 .HasConstraintName("QuotationDeletedBy_FK");
             });
-            modelBuilder.Entity<LeadRequirement>(act =>
+            modelBuilder.Entity<JobOrderRequirement>(act =>
             {
                 act.HasOne(field => field.RequirementCreatedBy)
                 .WithMany(fk => fk.Ref23Navigation)
@@ -357,7 +352,7 @@ namespace FieldMgt.Core.DomainModels
                 .HasForeignKey(fk => fk.DeletedBy)
                 .HasConstraintName("FeedbackDeletedBy_FK");
             });
-            modelBuilder.Entity<OrderProduct>(act =>
+            modelBuilder.Entity<OrderDetail>(act =>
             {
                 act.HasOne(field => field.OrderProductCreatedBy)
                 .WithMany(fk => fk.Ref48Navigation)
