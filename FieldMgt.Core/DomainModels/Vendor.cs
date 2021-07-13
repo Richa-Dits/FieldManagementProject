@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -30,7 +31,8 @@ namespace FieldMgt.Core.DomainModels
         public int ContactDetailId { get; set; }
         [ForeignKey("ContactDetailId")]
         public ContactDetail ContactDetail { get; set; }
-        public bool IsActive { get; set; }
+        [DefaultValue(true)]
+        public bool? IsActive { get; set; }
         public int NotesId { get; set; }
         public Notes Notes { get; set; }
         [Column(TypeName = "nvarchar(255)")]
@@ -39,6 +41,7 @@ namespace FieldMgt.Core.DomainModels
         [Column(TypeName = "nvarchar(255)")]
         public string ModifiedBy { get; set; }
         public DateTime? ModifiedOn { get; set; }
+        [DefaultValue(false)]
         public bool? IsDeleted { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string DeletedBy { get; set; }

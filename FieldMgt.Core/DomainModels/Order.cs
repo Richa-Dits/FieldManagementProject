@@ -37,11 +37,11 @@ namespace FieldMgt.Core.DomainModels
         [Column(TypeName = "nvarchar(255)")]
         public string AssignedTo { get; set; }
         [Column(TypeName = "decimal(16,2)")]
-        public decimal OrderAmount { get; set; }
+        public decimal? OrderAmount { get; set; }
         [Column(TypeName = "decimal(16,2)")]
-        public decimal AmountPaid { get; set; }
+        public decimal? AmountPaid { get; set; }
         [Column(TypeName = "decimal(16,2)")]
-        public decimal BalanceAmount { get; set; }
+        public decimal? BalanceAmount { get; set; }
         public int PaymentStatus { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CompletionCertifcate { get; set; }

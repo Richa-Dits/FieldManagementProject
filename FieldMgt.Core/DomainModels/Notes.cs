@@ -9,19 +9,22 @@ namespace FieldMgt.Core.DomainModels
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int NotesId { get; set; }
+        public int NoteId { get; set; }
         [Column(TypeName = "nvarchar(255)")]
-        public string NotesDescription { get; set; }
+        public string NoteDescription { get; set; }
+        public int NoteTypeId { get; set; }
+        [DefaultValue(true)]
+        public bool? IsActive { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string ModifiedBy { get; set; }
         public DateTime? ModifiedOn { get; set; }
-        [DefaultValue(false)]
-        public bool? IsDeleted { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string DeletedBy { get; set; }
+        [DefaultValue(false)]
+        public bool? IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
         public ApplicationUser NotesCreatedBy { get; set; }
         public ApplicationUser NotesModifiedBy { get; set; }

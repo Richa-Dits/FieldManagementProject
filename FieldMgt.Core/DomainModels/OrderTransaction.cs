@@ -13,7 +13,7 @@ namespace FieldMgt.Core.DomainModels
         public int OrderId { get; set; }
         public Order Order { get; set; }
         [Column(TypeName = "decimal(16,2)")]
-        public decimal AmountPaid { get; set; }
+        public decimal? AmountPaid { get; set; }
         public int PaymentMethod { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CreatedBy { get; set; }

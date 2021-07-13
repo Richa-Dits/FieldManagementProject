@@ -26,12 +26,12 @@ namespace FieldMgt.Repository.Repository
         }
         public IEnumerable<Staff> GetStaff()
         {
-            var emp = _dbContext.Staff.Where(a => a.IsDeleted == true).ToList();
+            var emp = _dbContext.Staffs.Where(a => a.IsDeleted == true).ToList();
             return emp;
         }
         public UserManagerReponse DeleteStaff(string userName, string deletedBy)
         {
-            var emp = _dbContext.Staff.FirstOrDefault();
+            var emp = _dbContext.Staffs.FirstOrDefault();
             //commented to create the db
             //var emp = _dbContext.Staff.Where(a => a.Email == userName).Single();
             if(!(emp==null|| emp.IsDeleted==true))

@@ -19,6 +19,11 @@ namespace FieldMgt.Core.DomainModels
         public Lead Lead { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string RequirementGatheredBy { get; set; }
+        [DefaultValue(true)]
+        public bool? IsActive { get; set; }
+        [Column(TypeName = "nvarchar(255)")]
+        public string CreatedBy { get; set; }
+        public DateTime? CreatedOn { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string ModifiedBy { get; set; }
         public DateTime? ModifiedOn { get; set; }

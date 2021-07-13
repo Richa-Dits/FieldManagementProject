@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -39,6 +40,10 @@ namespace FieldMgt.Core.DomainModels
         [Column(TypeName = "nvarchar(255)")]
         public string DeletedBy { get; set; }
         public DateTime? DeletedOn { get; set; }
+        [DefaultValue(true)]
+        public bool? IsActive { get; set; }        
+        [DefaultValue(false)]
+        public bool? IsDeleted { get; set; }
         public Reference RefGender { get; set; }
         public ApplicationUser LeadContactCreatedBy { get; set; }
         public ApplicationUser LeadContactModifiedBy { get; set; }

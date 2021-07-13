@@ -10,7 +10,6 @@ namespace FieldMgt.Core.DomainModels
     {
         public Lead()
         {
-            //Ref1LeadId = new HashSet<LeadActivity>();
             Ref2LeadId = new HashSet<LeadCall>();
         }
         [Key]
@@ -22,7 +21,7 @@ namespace FieldMgt.Core.DomainModels
         [Column(TypeName = "nvarchar(30)")]
         public string LastName { get; set; }
         [Column(TypeName = "nvarchar(15)")]
-        public string LeadContact { get; set; }
+        public string ContactNumber { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string LeadDescription { get; set; }        
         public int LeadSource { get; set; }  
@@ -55,8 +54,6 @@ namespace FieldMgt.Core.DomainModels
         public bool? IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
         public Reference RefStatus { get; set; }
-        //public Reference RefPCity { get; set; }
-        //public Reference RefPCountry { get; set; }
         public Reference RefGender { get; set; }
         public Reference RefSource { get; set; }
         public Reference RefStage { get; set; }
@@ -65,7 +62,6 @@ namespace FieldMgt.Core.DomainModels
         public ApplicationUser LeadDeletedBy { get; set; }
         public AddressDetail LeadAddress { get; set; }
         public AddressDetail LeadBillingAddress { get; set; }
-        //public ICollection<LeadActivity> Ref1LeadId { get; set; }
         public ICollection<LeadCall> Ref2LeadId { get; set; }
     }
 }

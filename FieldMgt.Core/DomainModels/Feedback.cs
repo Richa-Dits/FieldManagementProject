@@ -13,8 +13,9 @@ namespace FieldMgt.Core.DomainModels
         [Column(TypeName = "nvarchar(255)")]
         public string Description { get; set; }
         [Column(TypeName = "nvarchar(255)")]
-        public DateTime CreatedDate { get; set; }
-        public DateTime ModifiedDate { get; set; }
+        public string ActionTaken { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
         [DefaultValue(true)]
         public bool? IsActive { get; set; }
         [Column(TypeName = "nvarchar(255)")]
@@ -28,9 +29,12 @@ namespace FieldMgt.Core.DomainModels
         [DefaultValue(false)]
         public bool? IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
-        public int LeadId { get; set; }
-        [ForeignKey("LeadId")]
-        public Lead Lead { get; set; }
+        public int OrderId { get; set; }
+        [ForeignKey("OrderId")]
+        public Order Order { get; set; }
+        public int NoteId { get; set; }
+        [ForeignKey("NoteId")]
+        public Notes Notes { get; set; }
         public ApplicationUser FeedBackCreatedBy { get; set; }
         public ApplicationUser FeedBackModifiedBy { get; set; }
         public ApplicationUser FeedBackDeletedBy { get; set; }
