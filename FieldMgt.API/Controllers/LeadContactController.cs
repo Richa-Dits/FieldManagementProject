@@ -65,7 +65,7 @@ namespace FieldMgt.API.Controllers
         [HttpGet]
         public IActionResult GetLeadByIdAsync(int id)
         {
-            var result = _uow.LeadContactRepositories.GetLeadContactbyIDAsync(id);
+            var result = _uow.LeadContactRepositories.GetLeadContactbyIdAsync(id);
             if(result == null)
             {
                 return BadRequest("Lead Contact doesnt exist");

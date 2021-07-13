@@ -8,18 +8,18 @@ namespace FieldMgt.Core.DomainModels
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int LeadContactID { get; set; }
-        [Column(TypeName = "varchar(30)")]
+        public int LeadContactId { get; set; }
+        [Column(TypeName = "nvarchar(30)")]
         public string FirstName { get; set; }
-        [Column(TypeName = "varchar(30)")]
+        [Column(TypeName = "nvarchar(30)")]
         public string LastName { get; set; }
-        [Column(TypeName = "varchar(14)")]
+        [Column(TypeName = "nvarchar(14)")]
         [Phone]
         public string Phone { get; set; }
-        [Column(TypeName = "varchar(50)")]
+        [Column(TypeName = "nvarchar(50)")]
         public string Email { get; set; }
         public int Gender { get; set; }
-        [Column(TypeName = "varchar(150)")]
+        [Column(TypeName = "nvarchar(150)")]
         public string Address { get; set; }
         public int CityId { get; set; }
         public City City { get; set; }
@@ -39,10 +39,6 @@ namespace FieldMgt.Core.DomainModels
         [Column(TypeName = "nvarchar(255)")]
         public string DeletedBy { get; set; }
         public DateTime? DeletedOn { get; set; }
-        //public Reference RefPCity { get; set; }
-        //public Reference RefPCountry { get; set; }
-        //public Reference RefCCity { get; set; }
-        //public Reference RefCCountry { get; set; }
         public Reference RefGender { get; set; }
         public ApplicationUser LeadContactCreatedBy { get; set; }
         public ApplicationUser LeadContactModifiedBy { get; set; }

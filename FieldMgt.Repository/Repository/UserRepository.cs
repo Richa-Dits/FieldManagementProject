@@ -29,7 +29,7 @@ namespace FieldMgt.Repository.Repository
             _configuration = configuration;
             _dbcontext = dbcontext;            
         }
-        public async Task<UserManagerReponse> RegisterUserAsync(RegisterViewDTO model)
+        public async Task<UserManagerReponse> RegisterUserAsync(RegisterUserDTO model)
         {
             if (model == null)
             {

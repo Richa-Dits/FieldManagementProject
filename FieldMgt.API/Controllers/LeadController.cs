@@ -44,7 +44,7 @@ namespace FieldMgt.Controllers
             modelDTO.Email = model.Email;
             modelDTO.LeadStage = model.LeadStage;
             modelDTO.IsActive = true;
-            modelDTO.CreatedBy = _currentUserService.GetUserID();
+            modelDTO.CreatedBy = _currentUserService.GetUserId();
             modelDTO.CreatedOn = System.DateTime.Now;
             Lead payload = _mapper.Map<CreateLeadDTO, Lead>(modelDTO);
             await _uow.LeadServices.CreateLeadAsync(payload);
@@ -68,7 +68,7 @@ namespace FieldMgt.Controllers
         [HttpGet]
         public IActionResult GetLeadByIdAsync(int id)
         {
-            var result= _uow.LeadServices.GetLeadbyIDAsync(id);
+            var result= _uow.LeadServices.GetLeadbyIdAsync(id);
             if (result == null)
             {
                 return BadRequest("Lead Contact doesnt exist");

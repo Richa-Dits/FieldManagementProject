@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace FieldMgt.Core.DomainModels
@@ -9,6 +10,7 @@ namespace FieldMgt.Core.DomainModels
         public int VendorProductsId { get; set; }
         public int ProductId { get; set; }
         public ProductMaster ProductMaster { get; set; }
-        public float ProductPrice { get; set; }
+        [Column(TypeName = "decimal(8,2)")]
+        public decimal ProductPrice { get; set; }
     }
 }

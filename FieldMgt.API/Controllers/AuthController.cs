@@ -29,11 +29,11 @@ namespace FieldMgt.Controllers
         [Route("api/auth/Register")]
         public async Task<IActionResult> RegisterAsync([FromBody]CreateEmployeeDTO model)
         {
-            RegisterViewDTO registerDTO = new RegisterViewDTO();
+            RegisterUserDTO registerDTO = new RegisterUserDTO();
             registerDTO.Email = model.Email;
             registerDTO.Password = model.Password;
             registerDTO.ConfirmPassword = model.ConfirmPassword;
-            registerDTO.CreatedBy = _currentUserService.GetUserID();
+            registerDTO.CreatedBy = _currentUserService.GetUserId();
             registerDTO.CreatedOn = System.DateTime.Now;
             if (ModelState.IsValid)
             {
@@ -42,21 +42,29 @@ namespace FieldMgt.Controllers
                 {
                     RegistrationDTO modelDTO = new RegistrationDTO();
                     modelDTO.EmployeeId = null;
-                    modelDTO.Address = model.Address;
-                    modelDTO.City = model.City;
-                    modelDTO.State = model.State;
-                    modelDTO.Country = model.Country;
                     modelDTO.Email = model.Email;
                     modelDTO.FirstName = model.FirstName;
                     modelDTO.LastName = model.LastName;
-                    modelDTO.Status = 22644;
+                    modelDTO.IsActive = true;
                     modelDTO.UserId = result.Id;
                     modelDTO.Phone = model.Phone;
                     modelDTO.Designation = model.Designation;
                     modelDTO.CreatedOn = System.DateTime.Now;
-                    modelDTO.CreatedBy = _currentUserService.GetUserID();
+                    modelDTO.CreatedBy = _currentUserService.GetUserId();
                     Staff payload = _mapper.Map<RegistrationDTO, Staff>(modelDTO);                    
                     await _uow.EmployeeRepositories.CreateStaffAsync(payload);
+                    CreateAddressDTO permanentAddressModelDTO = new CreateAddressDTO();
+                    permanentAddressModelDTO.Address = model.PermanentAddress;
+                    permanentAddressModelDTO.City = model.PermanentCity;
+                    permanentAddressModelDTO.State = model.PermanentState;
+                    permanentAddressModelDTO.Country = model.PermanentCountry;
+                    permanentAddressModelDTO.ZipCode = model.PermanentZipCode;
+                    CreateAddressDTO correspondenceAddressModelDTO = new CreateAddressDTO();
+                    correspondenceAddressModelDTO.Address = model.CorrespondenceAddress;
+                    correspondenceAddressModelDTO.City = model.CorrespondenceCity;
+                    correspondenceAddressModelDTO.State = model.CorrespondenceState;
+                    correspondenceAddressModelDTO.Country = model.CorrespondenceCountry;
+                    correspondenceAddressModelDTO.ZipCode = model.CorrespondenceZipCode;
                     var result1 = await _uow.SaveAsync1();
                     if (result1.Equals(1))
                     {
@@ -96,7 +104,7 @@ namespace FieldMgt.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteUser(string userName)
         {
-            var deletedBy = _currentUserService.GetUserID();
+            var deletedBy = _currentUserService.GetUserId();
             var resultUser=await _userService.DeleteUser(userName,deletedBy);
             if (resultUser.Equals(1))
             {

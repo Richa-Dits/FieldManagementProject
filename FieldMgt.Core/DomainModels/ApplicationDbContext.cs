@@ -12,34 +12,34 @@ namespace FieldMgt.Core.DomainModels
         {
 
         }
-        public DbSet<Staff> Staff { get; set; }
-        public DbSet<Lead> Lead { get; set; }
-        public DbSet<LeadContact> LeadContact { get; set; }
-        public DbSet<Reference> Reference { get; set; }
+        public DbSet<Staff> Staffs { get; set; }
+        public DbSet<Lead> Leads { get; set; }
+        public DbSet<LeadContact> LeadContacts { get; set; }
+        public DbSet<Reference> References { get; set; }
         public DbSet<City> City { get; set; }
         public DbSet<Country> Country { get; set; }
         public DbSet<State> State { get; set; }
-        public DbSet<LeadActivity> LeadActivity { get; set; }
-        public DbSet<LeadCall> LeadCall { get; set; }
-        public DbSet<Order> Order { get; set; }
-        public DbSet<Product> Product { get; set; }
-        public DbSet<ServiceProvider> ServiceProvider { get; set; }
-        public DbSet<SPLocation> SPLocation { get; set; }
-        public DbSet<StockIssue> StockIssue { get; set; }
-        public DbSet<Vendor> Vendor { get; set; }
-        public DbSet<UserAddress> UserAddress { get; set; }
-        public DbSet<UserContact> UserContact { get; set; }
-        public DbSet<ProductMaster> ProductMaster { get; set; }
+        public DbSet<Notes> Notes { get; set; }
+        public DbSet<LeadCall> LeadCalls { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ServiceProvider> ServiceProviders { get; set; }
+        public DbSet<ServiceProviderLocation> SPLocations { get; set; }
+        public DbSet<ProductsIssued> ProductsIssued { get; set; }
+        public DbSet<Vendor> Vendors { get; set; }
+        public DbSet<AddressDetail> AddressDetails { get; set; }
+        public DbSet<ContactDetail> ContactDetails { get; set; }
+        public DbSet<ProductMaster> ProductsMaster { get; set; }
         public DbSet<Maintenance> Maintenance { get; set; }
         public DbSet<Feedback> Feedback { get; set; }
-        public DbSet<Procurement> Procurement { get; set; }
+        public DbSet<Procurement> Procurements { get; set; }
         public DbSet<ProcurementItems> ProcurementItems { get; set; }
-        public DbSet<Estimation> Estimation { get; set; }
-        public DbSet<OrderProduct> OrderProduct { get; set; }
-        public DbSet<LeadRequirement> LeadRequirement { get; set; }
-        public DbSet<EstimationProduct> EstimationProduct { get; set; }
-        public DbSet<Quotation> Quotation { get; set; }
-        public DbSet<OrderTransaction> OrderTransaction { get; set; }
+        public DbSet<Estimation> Estimations { get; set; }
+        public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<LeadRequirement> LeadRequirements { get; set; }
+        public DbSet<EstimationProduct> EstimationProducts { get; set; }
+        public DbSet<Quotation> Quotations { get; set; }
+        public DbSet<OrderTransaction> OrderTransactions { get; set; }
 
         protected virtual void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
         {
@@ -48,9 +48,9 @@ namespace FieldMgt.Core.DomainModels
             modelBuilder.Entity<ApplicationUser>().HasKey(m => m.Id);
             modelBuilder.Entity<Lead>().Property(s => s.LeadId).HasDatabaseGeneratedOption
 (DatabaseGeneratedOption.Identity); ;
-            modelBuilder.Entity<Staff>().Property(s => s.StaffID).HasDatabaseGeneratedOption
+            modelBuilder.Entity<Staff>().Property(s => s.StaffId).HasDatabaseGeneratedOption
 (DatabaseGeneratedOption.Identity); ;
-            modelBuilder.Entity<LeadContact>().Property(s =>  s.LeadContactID ).HasDatabaseGeneratedOption
+            modelBuilder.Entity<LeadContact>().Property(s =>  s.LeadContactId ).HasDatabaseGeneratedOption
                 (DatabaseGeneratedOption.Identity); ;
             modelBuilder.Entity<Reference>().Property(s => s.ReferenceId).HasDatabaseGeneratedOption
                 (DatabaseGeneratedOption.Identity); ;
@@ -64,7 +64,7 @@ namespace FieldMgt.Core.DomainModels
                .HasForeignKey(fk => fk.Designation)
                .HasConstraintName("Designation_FK");
 
-                act.HasOne(field => field.StaffUserID)
+                act.HasOne(field => field.StaffUserId)
                 .WithMany(fk => fk.Ref1Navigation)
                 .HasForeignKey(fk => fk.UserId)
                 .HasConstraintName("UserId_FK");
@@ -83,6 +83,17 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.Ref4Navigation)
                 .HasForeignKey(fk => fk.DeletedBy)
                 .HasConstraintName("Deleted_FK");
+
+
+                act.HasOne(field => field.StaffPermaAddress)
+                .WithMany(fk => fk.StaffAddress1Id)
+                .HasForeignKey(fk => fk.PermanentAddressId)
+                .HasConstraintName("PermanentAddress_FK");
+
+                act.HasOne(field => field.StaffCorresAddress)
+                .WithMany(fk => fk.StaffAddress2Id)
+                .HasForeignKey(fk => fk.CorrespondenceAddressId)
+                .HasConstraintName("CorrespondenceAddress_FK");
             });
             modelBuilder.Entity<Lead>(act =>
             {
@@ -120,6 +131,17 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.Ref7Navigation)
                 .HasForeignKey(fk => fk.DeletedBy)
                 .HasConstraintName("LDeletedBy_FK");
+
+
+                act.HasOne(field => field.LeadAddress)
+                .WithMany(fk => fk.LeadAddress1Id)
+                .HasForeignKey(fk => fk.PermanentAddressId)
+                .HasConstraintName("LPermaAddress_FK");
+
+                act.HasOne(field => field.LeadBillingAddress)
+                .WithMany(fk => fk.LeadAddress2Id)
+                .HasForeignKey(fk => fk.BillingAddressId)
+                .HasConstraintName("LBillingAddress_FK");
             });
             modelBuilder.Entity<LeadContact>(act =>
             {                
@@ -143,32 +165,22 @@ namespace FieldMgt.Core.DomainModels
                 .HasForeignKey(fk => fk.DeletedBy)
                 .HasConstraintName("LCDeletedBy_FK");
             });
-            modelBuilder.Entity<LeadActivity>(act =>
+            modelBuilder.Entity<Notes>(act =>
             {
-                act.HasOne(field => field.RefLeadActivityStatus)
-                .WithMany(fk => fk.LeadActivity1Navigation)
-                .HasForeignKey(fk => fk.Status)
-                .HasConstraintName("LAStatus_FK");
-
-                act.HasOne(field => field.LeadActivityCreatedBy)
+                act.HasOne(field => field.NotesCreatedBy)
                 .WithMany(fk => fk.Ref11Navigation)
                 .HasForeignKey(fk => fk.CreatedBy)
-                .HasConstraintName("LACreatedBy_FK");
+                .HasConstraintName("NotesCreatedBy_FK");
 
-                act.HasOne(field => field.LeadActivityModifiedBy)
+                act.HasOne(field => field.NotesModifiedBy)
                .WithMany(fk => fk.Ref12Navigation)
                .HasForeignKey(fk => fk.ModifiedBy)
-               .HasConstraintName("LAModifiedBy_FK");
+               .HasConstraintName("NotesModifiedBy_FK");
 
-                act.HasOne(field => field.LeadActivityAssignedTo)
+                act.HasOne(field => field.NotesDeletedBy)
                 .WithMany(fk => fk.Ref13Navigation)
-                .HasForeignKey(fk => fk.AssignedTo)
-                .HasConstraintName("LAAssignedTo_FK");
-
-                act.HasOne(field => field.RefLeadId)
-                .WithMany(fk => fk.Ref1LeadId)
-                .HasForeignKey(fk => fk.LeadId)
-                .HasConstraintName("LALeadId_FK");
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("NotesDeletedTo_FK");
             });
             modelBuilder.Entity<LeadCall>(act =>
             {
@@ -225,8 +237,18 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.OPStatus)
                 .HasForeignKey(fk => fk.PaymentStatus)
                 .HasConstraintName("OrderPaymentStatus_FK");
-            });
 
+
+                act.HasOne(field => field.OrderAddress)
+                .WithMany(fk => fk.OrderAddress1Id)
+                .HasForeignKey(fk => fk.PermanentAddressId)
+                .HasConstraintName("OrderPermaAddress_FK");
+
+                act.HasOne(field => field.OrderBillingAddress)
+                .WithMany(fk => fk.OrderAddress2Id)
+                .HasForeignKey(fk => fk.BillingAddressId)
+                .HasConstraintName("OrderBillingAddress_FK");
+            });
             modelBuilder.Entity<Quotation>(act =>
             {
                 act.HasOne(field => field.NegotitationCreatedBy)
@@ -238,6 +260,12 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.Ref22Navigation)
                 .HasForeignKey(fk => fk.ModifiedBy)
                 .HasConstraintName("QuotationModifiedBy_FK");
+
+
+                act.HasOne(field => field.NegotitationDeletedBy)
+                .WithMany(fk => fk.Ref46Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("QuotationDeletedBy_FK");
             });
             modelBuilder.Entity<LeadRequirement>(act =>
             {
@@ -250,6 +278,11 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.Ref24Navigation)
                 .HasForeignKey(fk => fk.ModifiedBy)
                 .HasConstraintName("RequirementModifiedBy_FK");
+
+                act.HasOne(field => field.RequirementDeletedBy)
+                .WithMany(fk => fk.Ref47Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("RequirementDeletedBy_FK");
             });
             modelBuilder.Entity<Estimation>(act =>
             {
@@ -262,8 +295,103 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.Ref26Navigation)
                 .HasForeignKey(fk => fk.ModifiedBy)
                 .HasConstraintName("EstimationModifiedBy_FK");
-            });
 
+
+                act.HasOne(field => field.EstimationDeletedBy)
+                .WithMany(fk => fk.Ref36Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("EstimationDeletedBy_FK");
+            });
+            modelBuilder.Entity<EstimationProduct>(act =>
+            {
+                act.HasOne(field => field.EstimationProductCreatedBy)
+                .WithMany(fk => fk.Ref37Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("EstimationProductCreatedBy_FK");
+
+                act.HasOne(field => field.EstimationProductModifiedBy)
+                .WithMany(fk => fk.Ref38Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("EstimationProductModifiedBy_FK");
+
+
+                act.HasOne(field => field.EstimationProductDeletedBy)
+                .WithMany(fk => fk.Ref39Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("EstimationProductDeletedBy_FK");
+            });
+            modelBuilder.Entity<Maintenance>(act =>
+            {
+                act.HasOne(field => field.MaintenanceCreatedBy)
+                .WithMany(fk => fk.Ref43Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("MaintenanceCreatedBy_FK");
+
+                act.HasOne(field => field.MaintenanceModifiedBy)
+                .WithMany(fk => fk.Ref44Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("MaintenanceModifiedBy_FK");
+
+
+                act.HasOne(field => field.MaintenanceDeletedBy)
+                .WithMany(fk => fk.Ref45Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("MaintenanceDeletedBy_FK");
+            });
+            modelBuilder.Entity<Feedback>(act =>
+            {
+                act.HasOne(field => field.FeedBackCreatedBy)
+                .WithMany(fk => fk.Ref40Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("FeedbackCreatedBy_FK");
+
+                act.HasOne(field => field.FeedBackModifiedBy)
+                .WithMany(fk => fk.Ref41Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("FeedbackModifiedBy_FK");
+
+
+                act.HasOne(field => field.FeedBackDeletedBy)
+                .WithMany(fk => fk.Ref42Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("FeedbackDeletedBy_FK");
+            });
+            modelBuilder.Entity<OrderProduct>(act =>
+            {
+                act.HasOne(field => field.OrderProductCreatedBy)
+                .WithMany(fk => fk.Ref48Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("OPCreatedBy_FK");
+
+                act.HasOne(field => field.OrderProductModifiedBy)
+                .WithMany(fk => fk.Ref49Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("OPModifiedBy_FK");
+
+
+                act.HasOne(field => field.OrderProductDeletedBy)
+                .WithMany(fk => fk.Ref50Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("OPDeletedBy_FK");
+            });
+            modelBuilder.Entity<Procurement>(act =>
+            {
+                act.HasOne(field => field.ProcurementCreatedBy)
+                .WithMany(fk => fk.Ref51Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("ProcurementCreatedBy_FK");
+
+                act.HasOne(field => field.ProcurementModifiedBy)
+                .WithMany(fk => fk.Ref52Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("ProcurementModifiedBy_FK");
+
+
+                act.HasOne(field => field.ProcurementDeletedBy)
+                .WithMany(fk => fk.Ref53Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("ProcurementDeletedBy_FK");
+            });
             modelBuilder.Entity<OrderTransaction>(act =>
             {
                 act.HasOne(field => field.OrderTransactionCreatedBy)
@@ -280,6 +408,124 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.Ref29Navigation)
                 .HasForeignKey(fk => fk.DeletedBy)
                 .HasConstraintName("OrderTransactionDeletedBy_FK");
+            });
+            modelBuilder.Entity<Vendor>(act =>
+            {
+                act.HasOne(field => field.VendorCreatedBy)
+                .WithMany(fk => fk.Ref30Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("VendorCreatedBy_FK");
+
+                act.HasOne(field => field.VendorModifiedBy)
+                .WithMany(fk => fk.Ref31Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("VendorModifiedBy_FK");
+
+                act.HasOne(field => field.VendorDeletedBy)
+                .WithMany(fk => fk.Ref32Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("VendorDeletedBy_FK");
+
+                act.HasOne(field => field.VendorAddress)
+                .WithMany(fk => fk.VendorAddress1Id)
+                .HasForeignKey(fk => fk.PermanentAddressId)
+                .HasConstraintName("VendorPermaAddress_FK");
+
+                act.HasOne(field => field.VendorBillingAddress)
+                .WithMany(fk => fk.VendorAddress2Id)
+                .HasForeignKey(fk => fk.BillingAddressId)
+                .HasConstraintName("VendorBillingAddress_FK");
+            });
+            modelBuilder.Entity<ProductsIssued>(act =>
+            {
+                act.HasOne(field => field.ProductIssuedBy)
+                .WithMany(fk => fk.Ref33Navigation)
+                .HasForeignKey(fk => fk.IssuedBy)
+                .HasConstraintName("ProductIssuedBy_FK");
+
+                act.HasOne(field => field.PIModifiedBy)
+                .WithMany(fk => fk.Ref34Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("PIModifiedBy_FK");
+
+                act.HasOne(field => field.PIDeletedBy)
+                .WithMany(fk => fk.Ref35Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("PIdeletedBy_FK");
+            });
+            modelBuilder.Entity<ServiceProvider>(act =>
+            {
+                act.HasOne(field => field.ServiceProviderAddress)
+                .WithMany(fk => fk.ServiceProviderAddress1Id)
+                .HasForeignKey(fk => fk.PermanentAddressId)
+                .HasConstraintName("SPPermaAddress_FK");
+
+                act.HasOne(field => field.ServiceProviderBillingAddress)
+                .WithMany(fk => fk.ServiceProviderAddress2Id)
+                .HasForeignKey(fk => fk.BillingAddressId)
+                .HasConstraintName("SPBillingAddress_FK");
+            });
+            modelBuilder.Entity<ServiceProviderLocation>(act =>
+            {
+                act.HasOne(field => field.ServiceProviderLocationAddress)
+                .WithMany(fk => fk.ServiceProviderLocationAddress1Id)
+                .HasForeignKey(fk => fk.PermanentAddressId)
+                .HasConstraintName("SPLocationPermaAddress_FK");
+
+                act.HasOne(field => field.ServiceProviderLocationBillingAddress)
+                .WithMany(fk => fk.ServiceProviderLocationAddress2Id)
+                .HasForeignKey(fk => fk.BillingAddressId)
+                .HasConstraintName("SPLocationBillingAddress_FK");
+
+                act.HasOne(field => field.SPLCreatedBy)
+                .WithMany(fk => fk.Ref60Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("SPLCreatedBy_FK");
+
+                act.HasOne(field => field.SPLModifiedBy)
+                .WithMany(fk => fk.Ref61Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("SPLModifiedBy_FK");
+
+                act.HasOne(field => field.SPLDeletedBy)
+                .WithMany(fk => fk.Ref62Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("SPLDeleted_FK");            
+        });
+            modelBuilder.Entity<Product>(act =>
+            {
+                act.HasOne(field => field.ProductCreatedBy)
+                .WithMany(fk => fk.Ref54Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("ProductCreatedBy_FK");
+
+                act.HasOne(field => field.ProductModifiedBy)
+                .WithMany(fk => fk.Ref55Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("ProductModifiedBy_FK");
+
+
+                act.HasOne(field => field.ProductDeletedBy)
+                .WithMany(fk => fk.Ref56Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("ProductDeletedBy_FK");
+            });
+            modelBuilder.Entity<ProductMaster>(act =>
+            {
+                act.HasOne(field => field.ProductMasterCreatedBy)
+                .WithMany(fk => fk.Ref57Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("PMCreatedBy_FK");
+
+                act.HasOne(field => field.ProductMasterModifiedBy)
+                .WithMany(fk => fk.Ref58Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("PMModifiedBy_FK");
+
+                act.HasOne(field => field.ProductMasterDeletedBy)
+                .WithMany(fk => fk.Ref59Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("PMDeleted_FK");
             });
             base.OnModelCreating(modelBuilder);
         }

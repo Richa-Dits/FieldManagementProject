@@ -7,8 +7,8 @@ namespace FieldMgt.Core.DomainModels
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int StateID { get; set; }
-		[Column(TypeName = "varchar(40)")]
+        public int StateId { get; set; }
+		[Column(TypeName = "nvarchar(40)")]
         public string StateName { get; set; }
         public int CountryId { get; set; }
         public Country Country { get; set; }        

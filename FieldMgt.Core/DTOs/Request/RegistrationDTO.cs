@@ -6,16 +6,15 @@ using System.Text;
 namespace FieldMgt.Core.DTOs.Request
 {
     public class RegistrationDTO:BaseRegistration
-    {       
+    {
+        [StringLength(50)]
+        [EmailAddress]
         public string Email { get; set; }
+        [StringLength(30, MinimumLength = 1)]
         public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Address { get; set; }
-        public int City { get; set; }
-        public int State { get; set; }
-        public int Country { get; set; }
-        public string ZipCode { get; set; }
-        public int Status { get; set; }
+        [StringLength(30, MinimumLength = 1)]
+        public string LastName { get; set; }        
+        public bool IsActive { get; set; }
         public string UserId { get; set; }
         [Phone]
         public string Phone { get; set; }
