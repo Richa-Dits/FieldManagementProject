@@ -17,8 +17,10 @@ namespace FieldMgt.Core.DomainModels
         public decimal LastQuotedPrice { get; set; }
         [Column(TypeName = "decimal(8,2)")]
         public decimal MinPossiblePrice { get; set; }
-        public int LeadId { get; set; }
-        public Lead Lead { get; set; }
+        public int? JobOrderId { get; set; }
+        public JobOrder JobOrder { get; set; }
+        public int? OrderId { get; set; }
+        public Order Order { get; set; }
         public bool? IsActive { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CreatedBy { get; set; }

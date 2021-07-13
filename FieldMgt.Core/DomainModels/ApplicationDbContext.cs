@@ -36,7 +36,7 @@ namespace FieldMgt.Core.DomainModels
         public DbSet<ProcurementItems> ProcurementItems { get; set; }
         public DbSet<Estimation> Estimations { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
-        public DbSet<LeadRequirement> LeadRequirements { get; set; }
+        public DbSet<JobOrderRequirement> LeadRequirements { get; set; }
         public DbSet<EstimationProduct> EstimationProducts { get; set; }
         public DbSet<Quotation> Quotations { get; set; }
         public DbSet<OrderTransaction> OrderTransactions { get; set; }
@@ -267,7 +267,7 @@ namespace FieldMgt.Core.DomainModels
                 .HasForeignKey(fk => fk.DeletedBy)
                 .HasConstraintName("QuotationDeletedBy_FK");
             });
-            modelBuilder.Entity<LeadRequirement>(act =>
+            modelBuilder.Entity<JobOrderRequirement>(act =>
             {
                 act.HasOne(field => field.RequirementCreatedBy)
                 .WithMany(fk => fk.Ref23Navigation)
