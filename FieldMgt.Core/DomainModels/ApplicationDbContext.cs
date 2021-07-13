@@ -107,11 +107,6 @@ namespace FieldMgt.Core.DomainModels
                .HasForeignKey(fk => fk.LeadSource)
                .HasConstraintName("LeadSource_FK");
 
-                act.HasOne(field => field.RefGender)
-                .WithMany(fk => fk.Lead3Navigation)
-                .HasForeignKey(fk => fk.Gender)
-                .HasConstraintName("LGender_FK");
-
                 act.HasOne(field => field.RefStatus)
                .WithMany(fk => fk.Lead8Navigation)
                .HasForeignKey(fk => fk.LeadStage)
