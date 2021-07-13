@@ -8,7 +8,7 @@ namespace FieldMgt.Core.DTOs.Request
     public class LoginViewDTO
     { 
         [Required]
-        [StringLength(50)]
+        [StringLength(100)]
         [EmailAddress]
         public string Email { get; set; }
         [Required]

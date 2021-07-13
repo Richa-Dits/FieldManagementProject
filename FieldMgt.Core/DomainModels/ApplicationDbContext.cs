@@ -24,7 +24,7 @@ namespace FieldMgt.Core.DomainModels
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ServiceProvider> ServiceProviders { get; set; }
-        public DbSet<ServiceProviderLocation> SPLocations { get; set; }
+        public DbSet<ServiceProviderLocation> ServiceProviderLocations { get; set; }
         public DbSet<ProductsIssued> ProductsIssued { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<AddressDetail> AddressDetails { get; set; }
@@ -35,7 +35,7 @@ namespace FieldMgt.Core.DomainModels
         public DbSet<Procurement> Procurements { get; set; }
         public DbSet<ProcurementItems> ProcurementItems { get; set; }
         public DbSet<Estimation> Estimations { get; set; }
-        public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<JobOrderRequirement> LeadRequirements { get; set; }
         public DbSet<EstimationProduct> EstimationProducts { get; set; }
         public DbSet<Quotation> Quotations { get; set; }
@@ -356,7 +356,7 @@ namespace FieldMgt.Core.DomainModels
                 .HasForeignKey(fk => fk.DeletedBy)
                 .HasConstraintName("FeedbackDeletedBy_FK");
             });
-            modelBuilder.Entity<OrderProduct>(act =>
+            modelBuilder.Entity<OrderDetail>(act =>
             {
                 act.HasOne(field => field.OrderProductCreatedBy)
                 .WithMany(fk => fk.Ref48Navigation)

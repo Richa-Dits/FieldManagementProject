@@ -16,7 +16,7 @@ namespace FieldMgt.Core.DomainModels
         [Column(TypeName = "nvarchar(14)")]
         [Phone]
         public string Phone { get; set; }
-        [Column(TypeName = "nvarchar(50)")]
+        [Column(TypeName = "nvarchar(100)")]
         public string Email { get; set; }
         public int Gender { get; set; }
         [Column(TypeName = "nvarchar(150)")]
