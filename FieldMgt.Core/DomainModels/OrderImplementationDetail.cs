@@ -25,5 +25,7 @@ namespace FieldMgt.Core.DomainModels
         public int? NumberofDayRequired { get; set; }
         public DateTime? ProposedCompletionDate { get; set; }
         public DateTime? ConfirmedCompletionDate { get; set; }
+        [DefaultValue(false)]
+        public bool? IsComplete { get; set; }
     }
 }

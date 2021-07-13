@@ -15,6 +15,7 @@ namespace FieldMgt.Core.DomainModels
         [Column(TypeName = "decimal(16,2)")]
         public decimal? AmountPaid { get; set; }
         public int PaymentMethod { get; set; }
+        public string PaymentReferenceNumber { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }

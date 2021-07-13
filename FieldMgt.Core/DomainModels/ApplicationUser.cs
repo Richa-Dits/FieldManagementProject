@@ -47,9 +47,9 @@ namespace FieldMgt.Core.DomainModels
             Ref33Navigation = new HashSet<ProductsIssued>();
             Ref34Navigation = new HashSet<ProductsIssued>();
             Ref35Navigation = new HashSet<ProductsIssued>();
-            Ref37Navigation = new HashSet<EstimationProduct>();
-            Ref38Navigation = new HashSet<EstimationProduct>();
-            Ref39Navigation = new HashSet<EstimationProduct>();
+            Ref37Navigation = new HashSet<EstimationDetail>();
+            Ref38Navigation = new HashSet<EstimationDetail>();
+            Ref39Navigation = new HashSet<EstimationDetail>();
             Ref40Navigation = new HashSet<Feedback>();
             Ref41Navigation = new HashSet<Feedback>();
             Ref42Navigation = new HashSet<Feedback>();
@@ -140,9 +140,9 @@ namespace FieldMgt.Core.DomainModels
         public ICollection<ProductsIssued> Ref34Navigation { get; set; }
         public ICollection<ProductsIssued> Ref35Navigation { get; set; }
         public ICollection<Estimation> Ref36Navigation { get; set; }
-        public ICollection<EstimationProduct> Ref37Navigation { get; set; }
-        public ICollection<EstimationProduct> Ref38Navigation { get; set; }
-        public ICollection<EstimationProduct> Ref39Navigation { get; set; }
+        public ICollection<EstimationDetail> Ref37Navigation { get; set; }
+        public ICollection<EstimationDetail> Ref38Navigation { get; set; }
+        public ICollection<EstimationDetail> Ref39Navigation { get; set; }
         public ICollection<Feedback> Ref40Navigation { get; set; }
         public ICollection<Feedback> Ref41Navigation { get; set; }
         public ICollection<Feedback> Ref42Navigation { get; set; }

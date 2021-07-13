@@ -11,7 +11,7 @@ namespace FieldMgt.Core.DomainModels
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int StockIssueId { get; set; }
+        public int ProductIssuedId { get; set; }
         [Column(TypeName = "decimal(8,2)")]
         public decimal? QuantityIssued { get; set; }
         [Column(TypeName = "nvarchar(255)")]
