@@ -17,7 +17,7 @@ namespace FieldMgt.Repository.Repository
         {
             InsertAsync(model);            
         }
-        public LeadContact GetLeadContactbyIDAsync(int id)
+        public LeadContact GetLeadContactbyIdAsync(int id)
         {
             var leadContact=GetById(id);
             return leadContact;           

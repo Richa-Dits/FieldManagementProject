@@ -8,7 +8,7 @@ namespace FieldMgt.Core.Interfaces
     {
         Task CreateLeadAsync(Lead model);
         IEnumerable<Lead> GetLeadsAsync();
-        Lead GetLeadbyIDAsync(int id);
+        Lead GetLeadbyIdAsync(int id);
         Lead UpdateLeadStatusAsync(Lead lead);
     }
 }

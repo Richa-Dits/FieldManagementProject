@@ -20,7 +20,7 @@ namespace FieldMgt.Repository.Repository
         {
              await InsertAsync(model);
         }
-        public Staff GetStaffbyID(int id)
+        public Staff GetStaffbyId(int id)
         {
             return GetById(id);
         }

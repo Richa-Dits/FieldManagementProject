@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace FieldMgt.Core.DTOs.Request
 {
@@ -23,6 +24,7 @@ namespace FieldMgt.Core.DTOs.Request
         //public int CoresCity { get; set; }
         //public int CoresCountry { get; set; } 
         public int LeadStage { get; set; }
+        [DefaultValue(true)]
         public bool IsActive { get; set; }     
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }

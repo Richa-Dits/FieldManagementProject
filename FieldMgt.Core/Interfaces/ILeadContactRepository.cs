@@ -10,7 +10,7 @@ namespace FieldMgt.Core.Interfaces
     {
         void CreateLeadContactAsync(LeadContact model);
         IEnumerable<LeadContact> GetLeadsAsync();
-        LeadContact GetLeadContactbyIDAsync(int id);
+        LeadContact GetLeadContactbyIdAsync(int id);
         LeadContact UpdateLeadContactStatusAsync(LeadContact lead);
     }
 }

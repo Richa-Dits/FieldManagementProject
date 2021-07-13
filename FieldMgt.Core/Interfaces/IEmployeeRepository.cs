@@ -9,7 +9,7 @@ namespace FieldMgt.Core.Interfaces
     {
         Task CreateStaffAsync(Staff model);
         IEnumerable<Staff> GetStaff();
-        Staff GetStaffbyID(int id);
+        Staff GetStaffbyId(int id);
         UserManagerReponse DeleteStaff(string userName, string deletedBy);
         Staff UpdateStaffAsync(Staff model);
     }

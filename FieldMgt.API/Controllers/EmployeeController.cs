@@ -31,9 +31,9 @@ namespace FieldMgt.API.Controllers
         }
         [Route("~/api/Employee/ById/{id}")]
         [HttpGet]
-        public IActionResult GetStaffbyID(int id)
+        public IActionResult GetStaffbyId(int id)
         {
-            var result = _uow.EmployeeRepositories.GetStaffbyID(id);
+            var result = _uow.EmployeeRepositories.GetStaffbyId(id);
             if (result == null)
             {
                 return BadRequest("Lead Contact doesnt exist");

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FieldMgt.Core.DTOs.Request
 {
-    public class RegisterViewDTO
+    public class RegisterUserDTO
     {
         [Required]
         [StringLength(50)]

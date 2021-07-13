@@ -23,7 +23,7 @@ namespace FieldMgt.Repository.Repository
             return GetAll();
             //return  _dbcontext.Leads.ToList();
         }
-        public Lead GetLeadbyIDAsync(int id)
+        public Lead GetLeadbyIdAsync(int id)
         {
             var result= _dbcontext.Lead.FirstOrDefault(l =>l.LeadId == id);            
             return result;

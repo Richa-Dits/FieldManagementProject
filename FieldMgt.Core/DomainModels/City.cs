@@ -7,10 +7,9 @@ namespace FieldMgt.Core.DomainModels
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CityID { get; set; }
-		[Column(TypeName = "varchar(40)")]
+        public int CityId { get; set; }
+		[Column(TypeName = "nvarchar(40)")]
         public string CityName { get; set; }
-        //[ForeignKey("StateId")]
         public int StateId { get; set; }
         public State State { get; set; }
     }

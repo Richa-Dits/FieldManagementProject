@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace FieldMgt.Core.DTOs.Request
 {
@@ -15,14 +17,22 @@ namespace FieldMgt.Core.DTOs.Request
         [Required]
         [StringLength(50, MinimumLength = 5)]
         public string ConfirmPassword { get; set; }
-        public string FirstName { get; set; }
+        public string FirstName { get; set; }        
         public string LastName { get; set; }
-        public string Address { get; set; }
-        public int City { get; set; }
-        public int State { get; set; }
-        public int Country { get; set; }
-        public string ZipCode { get; set; }
-        public int Status { get; set; }
+        [StringLength(100, MinimumLength = 5)]
+        public string PermanentAddress { get; set; }
+        public int PermanentCity { get; set; }
+        public int PermanentState { get; set; }
+        public int PermanentCountry { get; set; }
+        public string PermanentZipCode { get; set; }
+        [StringLength(100, MinimumLength = 5)]
+        public string CorrespondenceAddress { get; set; }
+        public int CorrespondenceCity { get; set; }
+        public int CorrespondenceState { get; set; }
+        public int CorrespondenceCountry { get; set; }
+        public string CorrespondenceZipCode { get; set; }
+        [DefaultValue(true)]
+        public bool IsActive { get; set; }
         public string UserId { get; set; }   
         [Phone]
         public string Phone { get; set; }

@@ -10,7 +10,7 @@ namespace FieldMgt.API.Infrastructure.Services
         {
             _httpContext = httpContext;
         }
-        public string GetUserID()
+        public string GetUserId()
         {
             return _httpContext.HttpContext.User?.FindFirstValue(ClaimTypes.NameIdentifier);
         }

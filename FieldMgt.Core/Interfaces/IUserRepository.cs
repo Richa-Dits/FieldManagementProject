@@ -5,7 +5,7 @@ namespace FieldMgt.Core.Interfaces
 {
     public interface IUserRepository
     {
-        Task<UserManagerReponse> RegisterUserAsync(RegisterViewDTO model);
+        Task<UserManagerReponse> RegisterUserAsync(RegisterUserDTO model);
         Task<LoginManagerResponse> LoginUserAsync(LoginViewDTO model);
         Task<int> DeleteUser(string userName, string deletedBY);
     }

@@ -5,16 +5,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FieldMgt.Core.DomainModels
 {
-    public class OrderTransaction
+    public class Notes
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int OrderTransactiontId { get; set; }
-        public int OrderId { get; set; }
-        public Order Order { get; set; }
-        [Column(TypeName = "decimal(16,2)")]
-        public decimal AmountPaid { get; set; }
-        public int PaymentMethod { get; set; }
+        public int NotesId { get; set; }
+        [Column(TypeName = "nvarchar(255)")]
+        public string NotesDescription { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
@@ -23,10 +20,12 @@ namespace FieldMgt.Core.DomainModels
         public DateTime? ModifiedOn { get; set; }
         [DefaultValue(false)]
         public bool? IsDeleted { get; set; }
+        [Column(TypeName = "nvarchar(255)")]
         public string DeletedBy { get; set; }
         public DateTime? DeletedOn { get; set; }
-        public ApplicationUser OrderTransactionCreatedBy { get; set; }
-        public ApplicationUser OrderTransactionModifiedBy { get; set; }
-        public ApplicationUser OrderTransactionDeletedBy { get; set; }
+        public ApplicationUser NotesCreatedBy { get; set; }
+        public ApplicationUser NotesModifiedBy { get; set; }
+        public ApplicationUser NotesDeletedBy { get; set; }
+
     }
 }

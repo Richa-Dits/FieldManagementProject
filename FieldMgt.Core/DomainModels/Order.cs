@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,16 +11,22 @@ namespace FieldMgt.Core.DomainModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderId { get; set; }
         [Required]
-        //[ForeignKey("LeadID")]
+        //[ForeignKey("LeadId")]
         public int LeadId { get; set; }
         public Lead Lead { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string OrderDescription { get; set; }
         public int OrderStatus { get; set; }
         public Reference Reference { get; set; }
+        public int ContactDetailId { get; set; }
+        [ForeignKey("ContactDetailId")]
+        public ContactDetail ContactDetail { get; set; }
+        public int PermanentAddressId { get; set; }
+        public int BillingAddressId { get; set; }
+        [DefaultValue(true)]
         public bool? IsActive { get; set; }
         public int SPLocationId { get; set; }
-        public SPLocation SPLocation { get; set; }
+        public ServiceProviderLocation SPLocation { get; set; }
         [Column(TypeName = "nvarchar(50)")]
         public string PocName { get; set; }
         [Column(TypeName = "nvarchar(50)")]
@@ -38,6 +45,8 @@ namespace FieldMgt.Core.DomainModels
         public int PaymentStatus { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CompletionCertifcate { get; set; }
+        public int NotesId { get; set; }
+        public Notes Notes { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
@@ -46,6 +55,7 @@ namespace FieldMgt.Core.DomainModels
         public DateTime? ModifiedOn { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string DeletedBy { get; set; }
+        [DefaultValue(false)]
         public bool? IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
         public ApplicationUser OrderAssignedTo { get; set; }
@@ -53,5 +63,7 @@ namespace FieldMgt.Core.DomainModels
         public ApplicationUser OrderModifiedBy { get; set; }
         public ApplicationUser OrderDeletedBy { get; set; }
         public Reference OrderPaymentStatus { get; set; }
+        public AddressDetail OrderAddress { get; set; }
+        public AddressDetail OrderBillingAddress { get; set; }
     }
 }

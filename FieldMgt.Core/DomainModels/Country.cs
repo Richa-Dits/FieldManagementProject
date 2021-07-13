@@ -7,10 +7,10 @@ namespace FieldMgt.Core.DomainModels
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CountryID { get; set; }
+        public int CountryId { get; set; }
 		[Column(TypeName = "nvarchar(40)")]
         public string Name { get; set; }
-		[Column(TypeName = "varchar(10)")]
+		[Column(TypeName = "nvarchar(10)")]
         public int CountryCode { get; set; }
     }
 }

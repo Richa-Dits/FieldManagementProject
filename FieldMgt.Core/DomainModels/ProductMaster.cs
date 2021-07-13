@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FieldMgt.Core.DomainModels
@@ -11,14 +12,23 @@ namespace FieldMgt.Core.DomainModels
         [Required]
         [Column(TypeName = "nvarchar(40)")]
         public string ProductName { get; set; }
-        [Column(TypeName = "varchar(150)")]
+        [Column(TypeName = "nvarchar(150)")]
         public string ProductDescription { get; set; }
         public int Category { get; set; }
         public Reference Reference{get;set;}
-        
         [Column(TypeName = "nvarchar(255)")]
-        public string ProductCreatedBy { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
-        
+        public string CreatedBy { get; set; }
+        public DateTime? CreatedOn { get; set; }
+        [Column(TypeName = "nvarchar(255)")]
+        public string ModifiedBy { get; set; }
+        public DateTime? ModifiedOn { get; set; }
+        [Column(TypeName = "nvarchar(255)")]
+        public string DeletedBy { get; set; }
+        public bool? IsDeleted { get; set; }
+        public DateTime? DeletedOn { get; set; }
+        public ApplicationUser ProductMasterCreatedBy { get; set; }
+        public ApplicationUser ProductMasterModifiedBy { get; set; }
+        public ApplicationUser ProductMasterDeletedBy { get; set; }
+
     }
 }

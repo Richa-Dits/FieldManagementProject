@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FieldMgt.Core.DomainModels
@@ -9,8 +10,26 @@ namespace FieldMgt.Core.DomainModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProductId { get; set; }
         public int IssueThreshold { get; set; }
-        public float QuantityAvailable { get; set; }
+        [Column(TypeName = "decimal(8,2)")]
+        public decimal QuantityinStock { get; set; }
+        [Column(TypeName = "decimal(8,2)")]
+        public decimal QuantityonOrder { get; set; }
+        public int NotesId { get; set; }
+        public Notes Notes { get; set; }
         public int ProductMasterId { get; set; }
         public ProductMaster ProductMaster { get; set; }
+        [Column(TypeName = "nvarchar(255)")]
+        public string CreatedBy { get; set; }
+        public DateTime? CreatedOn { get; set; }
+        [Column(TypeName = "nvarchar(255)")]
+        public string ModifiedBy { get; set; }
+        public DateTime? ModifiedOn { get; set; }
+        [Column(TypeName = "nvarchar(255)")]
+        public string DeletedBy { get; set; }
+        public bool? IsDeleted { get; set; }
+        public DateTime? DeletedOn { get; set; }
+        public ApplicationUser ProductCreatedBy { get; set; }
+        public ApplicationUser ProductModifiedBy { get; set; }
+        public ApplicationUser ProductDeletedBy { get; set; }
     }
 }

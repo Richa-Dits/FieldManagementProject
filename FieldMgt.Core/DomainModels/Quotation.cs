@@ -8,13 +8,16 @@ namespace FieldMgt.Core.DomainModels
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int QuotationId { get; set; }
-        [Required]
-        public float BuyerDesiredPrice { get; set; }
-        public float InitialQuotedPrice { get; set; }
-        public float LastQuotedPrice { get; set; }
-        public float MinPossiblePrice { get; set; }
-        public int LeadID { get; set; }
+        public int QuotationId { get; set; }        
+        [Column(TypeName = "decimal(8,2)")]
+        public decimal BuyerDesiredPrice { get; set; }
+        [Column(TypeName = "decimal(8,2)")]
+        public decimal InitialQuotedPrice { get; set; }
+        [Column(TypeName = "decimal(8,2)")]
+        public decimal LastQuotedPrice { get; set; }
+        [Column(TypeName = "decimal(8,2)")]
+        public decimal MinPossiblePrice { get; set; }
+        public int LeadId { get; set; }
         public Lead Lead { get; set; }
         public bool? IsActive { get; set; }
         [Column(TypeName = "nvarchar(255)")]
@@ -23,7 +26,12 @@ namespace FieldMgt.Core.DomainModels
         [Column(TypeName = "nvarchar(255)")]
         public string ModifiedBy { get; set; }
         public DateTime? ModifiedOn { get; set; }
+        [Column(TypeName = "nvarchar(255)")]
+        public string DeletedBy { get; set; }
+        public bool? IsDeleted { get; set; }
+        public DateTime? DeletedOn { get; set; }
         public ApplicationUser NegotitationCreatedBy { get; set; }
         public ApplicationUser NegotitationModifiedBy { get; set; }
+        public ApplicationUser NegotitationDeletedBy { get; set; }
     }
 }
