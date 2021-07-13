@@ -5,11 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FieldMgt.Core.DomainModels
 {
-    public class EstimationProduct
+    public class EstimationDetail
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int EstimationProductId { get; set; }
+        public int EstimationDetailId { get; set; }
         public int ProductMasterId { get; set; }
         public ProductMaster ProductMaster { get; set; }
         [Column(TypeName = "decimal(16,2)")]
@@ -29,8 +29,8 @@ namespace FieldMgt.Core.DomainModels
         public DateTime? DeletedOn { get; set; }
         public int EstimationId { get; set; }
         public Estimation Estimation { get; set; }
-        public ApplicationUser EstimationProductCreatedBy { get; set; }
-        public ApplicationUser EstimationProductModifiedBy { get; set; }
-        public ApplicationUser EstimationProductDeletedBy { get; set; }
+        public ApplicationUser EstimationDetailCreatedBy { get; set; }
+        public ApplicationUser EstimationDetailModifiedBy { get; set; }
+        public ApplicationUser EstimationDetailDeletedBy { get; set; }
     }
 }

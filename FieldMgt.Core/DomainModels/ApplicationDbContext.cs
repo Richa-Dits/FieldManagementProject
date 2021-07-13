@@ -37,7 +37,7 @@ namespace FieldMgt.Core.DomainModels
         public DbSet<Estimation> Estimations { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<JobOrderRequirement> LeadRequirements { get; set; }
-        public DbSet<EstimationProduct> EstimationProducts { get; set; }
+        public DbSet<EstimationDetail> EstimationDetails { get; set; }
         public DbSet<Quotation> Quotations { get; set; }
         public DbSet<OrderTransaction> OrderTransactions { get; set; }
 
@@ -297,23 +297,23 @@ namespace FieldMgt.Core.DomainModels
                 .HasForeignKey(fk => fk.DeletedBy)
                 .HasConstraintName("EstimationDeletedBy_FK");
             });
-            modelBuilder.Entity<EstimationProduct>(act =>
+            modelBuilder.Entity<EstimationDetail>(act =>
             {
-                act.HasOne(field => field.EstimationProductCreatedBy)
+                act.HasOne(field => field.EstimationDetailCreatedBy)
                 .WithMany(fk => fk.Ref37Navigation)
                 .HasForeignKey(fk => fk.CreatedBy)
-                .HasConstraintName("EstimationProductCreatedBy_FK");
+                .HasConstraintName("EstimationDetailCreatedBy_FK");
 
-                act.HasOne(field => field.EstimationProductModifiedBy)
+                act.HasOne(field => field.EstimationDetailModifiedBy)
                 .WithMany(fk => fk.Ref38Navigation)
                 .HasForeignKey(fk => fk.ModifiedBy)
-                .HasConstraintName("EstimationProductModifiedBy_FK");
+                .HasConstraintName("EstimationDetailModifiedBy_FK");
 
 
-                act.HasOne(field => field.EstimationProductDeletedBy)
+                act.HasOne(field => field.EstimationDetailDeletedBy)
                 .WithMany(fk => fk.Ref39Navigation)
                 .HasForeignKey(fk => fk.DeletedBy)
-                .HasConstraintName("EstimationProductDeletedBy_FK");
+                .HasConstraintName("EstimationDetailDeletedBy_FK");
             });
             modelBuilder.Entity<Maintenance>(act =>
             {
