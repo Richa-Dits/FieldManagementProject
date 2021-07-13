@@ -17,8 +17,6 @@ namespace FieldMgt.Core.DomainModels
         public int NoteTypeId { get; set; }
         [DefaultValue(true)]
         public bool? IsActive { get; set; }
-        [DefaultValue(true)]
-        public bool? IsActive { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
