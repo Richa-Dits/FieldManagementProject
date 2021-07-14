@@ -16,6 +16,6 @@ namespace FieldMgt.Core.DomainModels
         public int? LeadId { get; set; }
         public Lead Lead { get; set; }
         public int? ClientId { get; set; }
-        //public Client Client { get; set; }
+        public Client Client { get; set; }
     }
 }
