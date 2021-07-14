@@ -16,6 +16,7 @@ namespace FieldMgt.Core.DomainModels
         public decimal? ProductUnitPrice { get; set; }
         [Column(TypeName = "decimal(16,2)")]
         public decimal? QuantityRequired { get; set; }
+        public int EstimationId { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
@@ -26,8 +27,7 @@ namespace FieldMgt.Core.DomainModels
         public string DeletedBy { get; set; }
         [DefaultValue(false)]
         public bool? IsDeleted { get; set; }
-        public DateTime? DeletedOn { get; set; }
-        public int EstimationId { get; set; }
+        public DateTime? DeletedOn { get; set; }        
         public Estimation Estimation { get; set; }
         public ApplicationUser EstimationDetailCreatedBy { get; set; }
         public ApplicationUser EstimationDetailModifiedBy { get; set; }

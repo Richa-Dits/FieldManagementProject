@@ -11,16 +11,16 @@ namespace FieldMgt.Core.DomainModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderId { get; set; }
         [Required]
-        public int ClientId { get; set; }
+        public int? ClientId { get; set; }
         public Client Client { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string OrderDescription { get; set; }
-        public int OrderStatus { get; set; }        
-        public int ContactDetailId { get; set; }
+        public int? OrderStatus { get; set; }        
+        public int? ContactDetailId { get; set; }
         [ForeignKey("ContactDetailId")]
         public ContactDetail ContactDetail { get; set; }
-        public int PermanentAddressId { get; set; }
-        public int BillingAddressId { get; set; }
+        public int? PermanentAddressId { get; set; }
+        public int? BillingAddressId { get; set; }
         [DefaultValue(true)]
         public bool? IsActive { get; set; }
         [DefaultValue(false)]
@@ -35,11 +35,9 @@ namespace FieldMgt.Core.DomainModels
         public decimal? AmountPaid { get; set; }
         [Column(TypeName = "decimal(16,2)")]
         public decimal? BalanceAmount { get; set; }
-        public int PaymentStatus { get; set; }
+        public int? PaymentStatus { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CompletionCertifcate { get; set; }
-        public int NotesId { get; set; }
-        public Notes Notes { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }

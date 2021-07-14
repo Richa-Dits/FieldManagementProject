@@ -16,6 +16,7 @@ namespace FieldMgt.Core.DomainModels
         public DbSet<Lead> Leads { get; set; }
         public DbSet<LeadContact> LeadContacts { get; set; }
         public DbSet<City> City { get; set; }
+        public DbSet<Client> Clients { get; set; }
         public DbSet<Country> Country { get; set; }
         public DbSet<State> State { get; set; }
         public DbSet<Notes> Notes { get; set; }
@@ -32,10 +33,10 @@ namespace FieldMgt.Core.DomainModels
         public DbSet<Maintenance> Maintenance { get; set; }
         public DbSet<Feedback> Feedback { get; set; }
         public DbSet<Procurement> Procurements { get; set; }
-        public DbSet<ProcurementItems> ProcurementItems { get; set; }
+        public DbSet<ProcurementProduct> ProcurementProducts { get; set; }
         public DbSet<Estimation> Estimations { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
-        public DbSet<JobOrderRequirement> LeadRequirements { get; set; }
+        public DbSet<JobOrderRequirement> JobOrderRequirements { get; set; }
         public DbSet<EstimationDetail> EstimationDetails { get; set; }
         public DbSet<Quotation> Quotations { get; set; }
         public DbSet<OrderTransaction> OrderTransactions { get; set; }
@@ -63,6 +64,11 @@ namespace FieldMgt.Core.DomainModels
                .WithMany(fk => fk.Staff1Navigation)
                .HasForeignKey(fk => fk.Designation)
                .HasConstraintName("Designation_FK");
+
+                act.HasOne(field => field.StaffGender)
+               .WithMany(fk => fk.Staff2Navigation)
+               .HasForeignKey(fk => fk.Gender)
+               .HasConstraintName("StaffGender_FK");
 
                 act.HasOne(field => field.StaffUserId)
                 .WithMany(fk => fk.Ref1Navigation)
@@ -510,6 +516,11 @@ namespace FieldMgt.Core.DomainModels
             });
             modelBuilder.Entity<ProductMaster>(act =>
             {
+                act.HasOne(field => field.Category)
+                .WithMany(fk => fk.ProductCategoryRef)
+                .HasForeignKey(fk => fk.ProductCategory)
+                .HasConstraintName("PMCategory_FK");
+
                 act.HasOne(field => field.ProductMasterCreatedBy)
                 .WithMany(fk => fk.Ref57Navigation)
                 .HasForeignKey(fk => fk.CreatedBy)
@@ -643,6 +654,13 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.AddressTypeRef)
                 .HasForeignKey(fk => fk.AddressType)
                 .HasConstraintName("AddressTypeRef_FK");
+            });
+            modelBuilder.Entity<Notes>(act =>
+            {
+                act.HasOne(field => field.NoteType)
+                .WithMany(fk => fk.NotesTypeRef)
+                .HasForeignKey(fk => fk.NoteTypeId)
+                .HasConstraintName("NoteTypeRef_FK");
             });
             base.OnModelCreating(modelBuilder);
         }

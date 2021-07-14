@@ -11,7 +11,7 @@ namespace FieldMgt.Core.DomainModels
         public int LeadCallId { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string Description { get; set; }
-        public int CallStatus { get; set; }
+        public int? CallStatus { get; set; }
         public int LeadId { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CalledBy { get; set; }

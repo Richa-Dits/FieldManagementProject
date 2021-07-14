@@ -4,14 +4,16 @@ using FieldMgt.Core.DomainModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FieldMgt.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210714054126_FIELDMGT.CORE.DYDY")]
+    partial class FIELDMGTCOREDYDY
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,7 +118,7 @@ namespace FieldMgt.Core.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BillingAddressId")
+                    b.Property<int>("BillingAddressId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ClientAddressAddressDetailId")
@@ -125,14 +127,14 @@ namespace FieldMgt.Core.Migrations
                     b.Property<string>("ClientDescription")
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("ClientSource")
+                    b.Property<int>("ClientSource")
                         .HasColumnType("int");
 
                     b.Property<string>("ClienyCompanyName")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("ContactDetailId")
+                    b.Property<int>("ContactDetailId")
                         .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
@@ -159,7 +161,7 @@ namespace FieldMgt.Core.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("PermanentAddressId")
+                    b.Property<int>("PermanentAddressId")
                         .HasColumnType("int");
 
                     b.HasKey("ClientId");
@@ -2138,11 +2140,15 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("FieldMgt.Core.DomainModels.GlobalCode", "RefSource")
                         .WithMany("ClientSourceRef")
                         .HasForeignKey("ClientSource")
-                        .HasConstraintName("ClientSource_FK");
+                        .HasConstraintName("ClientSource_FK")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.ContactDetail", "ContactDetail")
                         .WithMany()
-                        .HasForeignKey("ContactDetailId");
+                        .HasForeignKey("ContactDetailId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "ClientCreatedBy")
                         .WithMany("Ref69Navigation")

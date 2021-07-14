@@ -14,11 +14,12 @@ namespace FieldMgt.Core.DomainModels
         public string FirstName { get; set; }
         [Column(TypeName = "nvarchar(30)")]
         public string LastName { get; set; }
+        public int? Gender { get; set; }
         public DateTime? DOB { get; set; }                   
-        public int Designation { get; set; }
-        public int PermanentAddressId { get; set; }
-        public int CorrespondenceAddressId { get; set; }
-        public int ContactDetailId { get; set; }
+        public int? Designation { get; set; }
+        public int? PermanentAddressId { get; set; }
+        public int? CorrespondenceAddressId { get; set; }
+        public int? ContactDetailId { get; set; }
         [ForeignKey("ContactDetailId")]
         public ContactDetail ContactDetail { get; set; }
         [DefaultValue(true)]
@@ -37,6 +38,7 @@ namespace FieldMgt.Core.DomainModels
         public string DeletedBy { get; set; }
         public DateTime? DeletedOn { get; set; }
         public GlobalCode StaffDesignation { get; set; }
+        public GlobalCode StaffGender{ get; set; }
         public ApplicationUser StaffUserId { get; set; }
         public ApplicationUser StaffCreatedBy { get; set; }
         public ApplicationUser StaffModifiedBy { get; set; }

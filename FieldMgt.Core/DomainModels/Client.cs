@@ -11,18 +11,18 @@ namespace FieldMgt.Core.DomainModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ClientId { get; set; }
         [Required]
-        [Column(TypeName = "nvarchar(50)")]
+        [Column(TypeName = "nvarchar(100)")]
         public string ClienyCompanyName { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string ClientDescription { get; set; }
-        public int ClientSource { get; set; }
+        public int? ClientSource { get; set; }
         [DefaultValue(true)]
         public bool? IsActive { get; set; }
-        public int ContactDetailId { get; set; }
+        public int? ContactDetailId { get; set; }
         [ForeignKey("ContactDetailId")]
         public ContactDetail ContactDetail { get; set; }
-        public int PermanentAddressId { get; set; }
-        public int BillingAddressId { get; set; }
+        public int? PermanentAddressId { get; set; }
+        public int? BillingAddressId { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }

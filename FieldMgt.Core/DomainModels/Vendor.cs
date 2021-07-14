@@ -10,7 +10,7 @@ namespace FieldMgt.Core.DomainModels
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int VendorId { get; set; }
-        [Column(TypeName = "nvarchar(50)")]
+        [Column(TypeName = "nvarchar(100)")]
         public string VendorCompanyName { get; set; }
         [Column(TypeName = "nvarchar(30)")]
         public string VendorOwnerorMD { get; set; }
@@ -26,15 +26,13 @@ namespace FieldMgt.Core.DomainModels
         public string VendorBankName { get; set; }
         [Column(TypeName = "nvarchar(20)")]
         public string VendorBankBranch { get; set; }
-        public int PermanentAddressId { get; set; }
-        public int BillingAddressId { get; set; }
-        public int ContactDetailId { get; set; }
+        public int? PermanentAddressId { get; set; }
+        public int? BillingAddressId { get; set; }
+        public int? ContactDetailId { get; set; }
         [ForeignKey("ContactDetailId")]
         public ContactDetail ContactDetail { get; set; }
         [DefaultValue(true)]
         public bool? IsActive { get; set; }
-        public int NotesId { get; set; }
-        public Notes Notes { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }

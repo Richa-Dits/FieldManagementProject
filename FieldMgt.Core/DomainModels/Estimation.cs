@@ -12,6 +12,8 @@ namespace FieldMgt.Core.DomainModels
         public int EstimationId { get; set; }
         [Column(TypeName = "decimal(16,2)")]
         public decimal? EstimationAmount { get; set; }
+        public int JobOrderID { get; set; }
+        public JobOrder JobOrder { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
@@ -22,9 +24,7 @@ namespace FieldMgt.Core.DomainModels
         public string DeletedBy { get; set; }
         [DefaultValue(false)]
         public bool? IsDeleted { get; set; }
-        public DateTime? DeletedOn { get; set; }
-        public int JobOrderID { get; set; }
-        public JobOrder JobOrder { get; set; }
+        public DateTime? DeletedOn { get; set; }        
         public ApplicationUser EstimationCreatedBy { get; set; }
         public ApplicationUser EstimationModifiedBy { get; set; }
         public ApplicationUser EstimationDeletedBy { get; set; }

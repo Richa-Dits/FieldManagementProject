@@ -10,13 +10,11 @@ namespace FieldMgt.Core.DomainModels
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProductId { get; set; }
-        public int ThresholdLimit { get; set; }
+        public int? ThresholdLimit { get; set; }
         [Column(TypeName = "decimal(8,2)")]
         public decimal? QuantityinStock { get; set; }
         [Column(TypeName = "decimal(8,2)")]
         public decimal? QuantityonOrder { get; set; }
-        public int NotesId { get; set; }
-        public Notes Notes { get; set; }
         public int ProductMasterId { get; set; }
         public ProductMaster ProductMaster { get; set; }
         [Column(TypeName = "nvarchar(255)")]

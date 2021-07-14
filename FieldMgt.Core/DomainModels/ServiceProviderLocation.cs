@@ -17,13 +17,11 @@ namespace FieldMgt.Core.DomainModels
         [Column(TypeName = "nvarchar(30)")]
         [MaxLength(15)]
         public string ServiceProviderLocationIncharge { get; set; }
-        public int ContactDetailId { get; set; }
+        public int? ContactDetailId { get; set; }
         [ForeignKey("ContactDetailId")]
         public ContactDetail ContactDetail { get; set; }
-        public int PermanentAddressId { get; set; }
-        public int BillingAddressId { get; set; }
-        public int NotesId { get; set; }
-        public Notes Notes { get; set; }
+        public int? PermanentAddressId { get; set; }
+        public int? BillingAddressId { get; set; }
         public int ServiceProviderId { get; set; }
         public ServiceProvider ServiceProvider { get; set; }
         public AddressDetail ServiceProviderLocationAddress { get; set; }

@@ -10,8 +10,6 @@ namespace FieldMgt.Core.DomainModels
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int NoteId { get; set; }
-        //make foreign key with global codes
-        public int NotesTypeId { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string NoteDescription { get; set; }
         public int NoteTypeId { get; set; }
@@ -28,6 +26,7 @@ namespace FieldMgt.Core.DomainModels
         [DefaultValue(false)]
         public bool? IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
+        public GlobalCode NoteType { get; set; }
         public ApplicationUser NotesCreatedBy { get; set; }
         public ApplicationUser NotesModifiedBy { get; set; }
         public ApplicationUser NotesDeletedBy { get; set; }

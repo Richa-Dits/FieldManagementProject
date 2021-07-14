@@ -30,8 +30,6 @@ namespace FieldMgt.Core.DomainModels
         [DefaultValue(false)]
         public bool? IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
-        public int NotesId { get; set; }
-        public Notes Notes { get; set; }
         public int OrderId { get; set; }
         public Order Order { get; set; }
         public ApplicationUser ProductIssuedBy { get; set; }
