@@ -17,25 +17,14 @@ namespace FieldMgt.Core.DomainModels
         public int LeadId { get; set; }
         [Required]
         [Column(TypeName = "nvarchar(50)")]
-        public string LeadCompanyName { get; set; }
-        [Required]
-        [Column(TypeName = "nvarchar(30)")]
-        public string FirstName { get; set; }
-        [Column(TypeName = "nvarchar(30)")]
-        public string LastName { get; set; }
-        [Column(TypeName = "nvarchar(15)")]
-        public string ContactNumber { get; set; }
+        public string LeadCompanyName { get; set; }        
         [Column(TypeName = "nvarchar(255)")]
         public string LeadDescription { get; set; }        
         public int LeadSource { get; set; }  
         public int LeadStatus { get; set; }
-        [Column(TypeName = "nvarchar(100)")]
-        public string Email { get; set; }
         public int? LeadStage { get; set; }
         [DefaultValue(true)]
         public bool? IsActive { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
-        public string Proposal { get; set; }
         public int NotesId { get; set; }
         public Notes Notes { get; set; }
         public int ContactDetailId { get; set; }

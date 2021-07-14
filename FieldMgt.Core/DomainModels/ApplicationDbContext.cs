@@ -600,36 +600,36 @@ namespace FieldMgt.Core.DomainModels
                 act.HasOne(field => field.StateCreatedBy)
                 .WithMany(fk => fk.Ref75Navigation)
                 .HasForeignKey(fk => fk.CreatedBy)
-                .HasConstraintName("CityCreatedBy_FK");
+                .HasConstraintName("StateCreatedBy_FK");
 
                 act.HasOne(field => field.StateModifiedBy)
                 .WithMany(fk => fk.Ref76Navigation)
                 .HasForeignKey(fk => fk.ModifiedBy)
-                .HasConstraintName("CityModifiedBy_FK");
+                .HasConstraintName("StateModifiedBy_FK");
 
 
                 act.HasOne(field => field.StateDeletedBy)
                 .WithMany(fk => fk.Ref77Navigation)
                 .HasForeignKey(fk => fk.DeletedBy)
-                .HasConstraintName("CityDeletedBy_FK");
+                .HasConstraintName("StateDeletedBy_FK");
             });
             modelBuilder.Entity<Country>(act =>
             {
                 act.HasOne(field => field.CountryCreatedBy)
                 .WithMany(fk => fk.Ref78Navigation)
                 .HasForeignKey(fk => fk.CreatedBy)
-                .HasConstraintName("CityCreatedBy_FK");
+                .HasConstraintName("CountryCreatedBy_FK");
 
                 act.HasOne(field => field.CountryModifiedBy)
                 .WithMany(fk => fk.Ref79Navigation)
                 .HasForeignKey(fk => fk.ModifiedBy)
-                .HasConstraintName("CityModifiedBy_FK");
+                .HasConstraintName("CountryModifiedBy_FK");
 
 
                 act.HasOne(field => field.CountryDeletedBy)
                 .WithMany(fk => fk.Ref80Navigation)
                 .HasForeignKey(fk => fk.DeletedBy)
-                .HasConstraintName("CityDeletedBy_FK");
+                .HasConstraintName("CountryDeletedBy_FK");
             });
             base.OnModelCreating(modelBuilder);
         }

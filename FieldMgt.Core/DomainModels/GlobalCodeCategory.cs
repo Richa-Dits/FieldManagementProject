@@ -11,9 +11,9 @@ namespace FieldMgt.Core.DomainModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int GlobalCodeCategoryId { get; set; }
         [Column(TypeName = "nvarchar(255)")]
-        public string Description { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
         public string GlobalCodeCategoryName { get; set; }
+        [Column(TypeName = "nvarchar(255)")]
+        public string Description { get; set; }        
         [DefaultValue(true)]
         public bool? AllowAddDelete { get; set; }
         [DefaultValue(true)]
