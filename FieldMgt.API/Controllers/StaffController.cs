@@ -13,34 +13,34 @@ namespace FieldMgt.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeeController : ControllerBase
+    public class StaffController : ControllerBase
     {
         private readonly IUnitofWork _uow;
         private readonly IMapper _mapper;
-        public EmployeeController(IUnitofWork uow,IMapper mapper)
+        public StaffController(IUnitofWork uow,IMapper mapper)
         {
             _uow = uow;
             _mapper = mapper;
         }
         
-        [Route("~/api/Employee/List")]
+        [Route("~/api/Staff/List")]
         [HttpGet]
         public IEnumerable<Staff> GetStaff()
         {
             return  _uow.EmployeeRepositories.GetStaff();
         }
-        [Route("~/api/Employee/ById/{id}")]
+        [Route("~/api/Staff/ById/{id}")]
         [HttpGet]
         public IActionResult GetStaffbyId(int id)
         {
             var result = _uow.EmployeeRepositories.GetStaffbyId(id);
             if (result == null)
             {
-                return BadRequest("Lead Contact doesnt exist");
+                return BadRequest("Staff Member doesnt exist");
             }
             return Ok(result);//status code 200
         }    
-        [Route("~/api/Employee/Update")]
+        [Route("~/api/Staff/Update")]
         [HttpPatch]
         public async Task<IActionResult> UpdateStaffAsync(Staff model)
         {

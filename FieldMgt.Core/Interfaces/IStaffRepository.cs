@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FieldMgt.Core.Interfaces
 {
-    public interface IEmployeeRepository
+    public interface IStaffRepository
     {
         Task CreateStaffAsync(Staff model);
         IEnumerable<Staff> GetStaff();

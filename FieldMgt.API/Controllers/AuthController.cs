@@ -72,11 +72,7 @@ namespace FieldMgt.Controllers
                     }
                     else
                     {
-
                         return BadRequest("Unable to create Staff");
-
-                        return BadRequest("Unable to create Staff");
-
                     }
                 }
                 else
