@@ -41,6 +41,9 @@ namespace FieldMgt.Core.DomainModels
         public DbSet<OrderTransaction> OrderTransactions { get; set; }
         public DbSet<GlobalCode> GlobalCodes { get; set; }
         public DbSet<GlobalCodeCategory> GlobalCodeCategories { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<ClientContact> ClientContacts { get; set; }
+        public DbSet<JobOrder> JobOrders { get; set; }
         protected virtual void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
         {
             OnModelCreating(modelBuilder);
@@ -335,6 +338,11 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.Ref45Navigation)
                 .HasForeignKey(fk => fk.DeletedBy)
                 .HasConstraintName("MaintenanceDeletedBy_FK");
+
+                act.HasOne(field => field.RefMaintenanceType)
+                .WithMany(fk => fk.MaintenanceTypesRef)
+                .HasForeignKey(fk => fk.MaintenanceType)
+                .HasConstraintName("MaintenanceType_FK");
             });
             modelBuilder.Entity<Feedback>(act =>
             {
@@ -643,6 +651,63 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.AddressTypeRef)
                 .HasForeignKey(fk => fk.AddressType)
                 .HasConstraintName("AddressTypeRef_FK");
+            });
+            modelBuilder.Entity<ClientContact>(act =>
+            {
+                act.HasOne(field => field.ClientContactCreatedBy)
+                .WithMany(fk => fk.Ref81Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("ClientContactCreatedBy_FK");
+
+                act.HasOne(field => field.ClientContactModifiedBy)
+                .WithMany(fk => fk.Ref82Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("ClientContactModifiedBy_FK");
+
+
+                act.HasOne(field => field.ClientContactDeletedBy)
+                .WithMany(fk => fk.Ref83Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("ClientContactDeletedBy_FK");
+
+                act.HasOne(field => field.RefGender)
+                .WithMany(fk => fk.ClientContactSourceRef)
+                .HasForeignKey(fk => fk.Gender)
+                .HasConstraintName("Gender_FK");
+            });
+            modelBuilder.Entity<ContactDetail>(act =>
+            {
+                act.HasOne(field => field.ContactDetailsCreatedBy)
+                .WithMany(fk => fk.Ref84Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("ContactDetailCreatedBy_FK");
+
+                act.HasOne(field => field.ContactDetailsModifiedBy)
+                .WithMany(fk => fk.Ref85Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("ContactDetailModifiedBy_FK");
+
+                act.HasOne(field => field.ContactDetailsDeletedBy)
+                .WithMany(fk => fk.Ref86Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("ContactDetailDeletedBy_FK");
+            });
+            modelBuilder.Entity<JobOrder>(act =>
+            {
+                act.HasOne(field => field.JobOrderCreatedBy)
+                .WithMany(fk => fk.Ref87Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("JobOrderCreatedBy_FK");
+
+                act.HasOne(field => field.JobOrderModifiedBy)
+                .WithMany(fk => fk.Ref88Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("JobOrderModifiedBy_FK");
+
+                act.HasOne(field => field.JobOrderDeletedBy)
+                .WithMany(fk => fk.Ref89Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("JobOrderDeletedBy_FK");
             });
             base.OnModelCreating(modelBuilder);
         }
