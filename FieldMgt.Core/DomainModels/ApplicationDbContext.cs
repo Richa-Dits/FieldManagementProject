@@ -42,7 +42,6 @@ namespace FieldMgt.Core.DomainModels
         public DbSet<OrderTransaction> OrderTransactions { get; set; }
         public DbSet<GlobalCode> GlobalCodes { get; set; }
         public DbSet<GlobalCodeCategory> GlobalCodeCategories { get; set; }
-        public DbSet<Client> Clients { get; set; }
         public DbSet<ClientContact> ClientContacts { get; set; }
         public DbSet<JobOrder> JobOrders { get; set; }
         protected virtual void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
@@ -663,7 +662,6 @@ namespace FieldMgt.Core.DomainModels
                 .HasForeignKey(fk => fk.AddressType)
                 .HasConstraintName("AddressTypeRef_FK");
             });
-<<<<<<< HEAD
             modelBuilder.Entity<ClientContact>(act =>
             {
                 act.HasOne(field => field.ClientContactCreatedBy)
@@ -720,14 +718,13 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.Ref89Navigation)
                 .HasForeignKey(fk => fk.DeletedBy)
                 .HasConstraintName("JobOrderDeletedBy_FK");
-=======
+            });
             modelBuilder.Entity<Notes>(act =>
             {
                 act.HasOne(field => field.NoteType)
                 .WithMany(fk => fk.NotesTypeRef)
                 .HasForeignKey(fk => fk.NoteTypeId)
                 .HasConstraintName("NoteTypeRef_FK");
->>>>>>> fm-boilerplate
             });
             base.OnModelCreating(modelBuilder);
         }
