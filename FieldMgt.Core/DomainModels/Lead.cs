@@ -53,5 +53,8 @@ namespace FieldMgt.Core.DomainModels
         public AddressDetail LeadAddress { get; set; }
         public AddressDetail LeadBillingAddress { get; set; }
         public ICollection<LeadCall> Ref2LeadId { get; set; }
+        public int ClientId { get; set; }
+        [ForeignKey("ClientId")]
+        public Client Client { get; set; }
     }
 }
