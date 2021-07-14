@@ -100,6 +100,9 @@ namespace FieldMgt.Core.DomainModels
             Ref87Navigation = new HashSet<JobOrder>();
             Ref88Navigation = new HashSet<JobOrder>();
             Ref89Navigation = new HashSet<JobOrder>();
+            Ref90Navigation = new HashSet<VendorProducts>();
+            Ref91Navigation = new HashSet<VendorProducts>();
+            Ref92Navigation = new HashSet<VendorProducts>();
         }
         [DefaultValue(true)]
         public bool IsActive { get; set; }
@@ -202,5 +205,8 @@ namespace FieldMgt.Core.DomainModels
         public ICollection<JobOrder> Ref87Navigation { get; set; }
         public ICollection<JobOrder> Ref88Navigation { get; set; }
         public ICollection<JobOrder> Ref89Navigation { get; set; }
+        public ICollection<VendorProducts> Ref90Navigation { get; set; }
+        public ICollection<VendorProducts> Ref91Navigation { get; set; }
+        public ICollection<VendorProducts> Ref92Navigation { get; set; }
     }
 }

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Compile Remove="DomainModels\LeadActivity.cs" />
+    <Compile Remove="DomainModels\Reference.cs" />
     <Compile Remove="DomainModels\Stakeholder.cs" />
   </ItemGroup>
 

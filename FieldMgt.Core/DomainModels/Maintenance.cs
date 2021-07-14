@@ -12,13 +12,12 @@ namespace FieldMgt.Core.DomainModels
         public int MaintenanceId { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string Description { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
-        public int MaintenanceType { get; set; }
+        public int? MaintenanceType { get; set; }
         [DefaultValue(true)]
         public bool? IsActive { get; set; }
         [Column(TypeName = "decimal(16,2)")]
-        public decimal TotalCost { get; set; }
-        public int OrderId { get; set; }
+        public decimal? TotalCost { get; set; }
+        public int? OrderId { get; set; }
         [ForeignKey("OrderId")]
         public Order Order { get; set; }
         [Column(TypeName = "nvarchar(255)")]

@@ -44,6 +44,8 @@ namespace FieldMgt.Core.DomainModels
         public DbSet<GlobalCodeCategory> GlobalCodeCategories { get; set; }
         public DbSet<ClientContact> ClientContacts { get; set; }
         public DbSet<JobOrder> JobOrders { get; set; }
+        public DbSet<OrderImplementationDetail> OrderImplementationDetails { get; set; }
+        public DbSet<VendorProducts> VendorProducts { get; set; }
         protected virtual void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
         {
             OnModelCreating(modelBuilder);
@@ -718,6 +720,23 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.Ref89Navigation)
                 .HasForeignKey(fk => fk.DeletedBy)
                 .HasConstraintName("JobOrderDeletedBy_FK");
+            });
+            modelBuilder.Entity<VendorProducts>(act =>
+            {
+                act.HasOne(field => field.VPCreatedBy)
+                .WithMany(fk => fk.Ref90Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("VPCreatedBy_FK");
+
+                act.HasOne(field => field.VPModifiedBy)
+                .WithMany(fk => fk.Ref91Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("VPModifiedBy_FK");
+
+                act.HasOne(field => field.VPDeletedBy)
+                .WithMany(fk => fk.Ref92Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("VPDeletedBy_FK");
             });
             modelBuilder.Entity<Notes>(act =>
             {
