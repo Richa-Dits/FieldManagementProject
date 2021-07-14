@@ -36,7 +36,7 @@ namespace FieldMgt.Core.DomainModels
         [Column(TypeName = "nvarchar(255)")]
         public string DeletedBy { get; set; }
         public DateTime? DeletedOn { get; set; }
-        public Reference StaffDesignation { get; set; }
+        public GlobalCode StaffDesignation { get; set; }
         public ApplicationUser StaffUserId { get; set; }
         public ApplicationUser StaffCreatedBy { get; set; }
         public ApplicationUser StaffModifiedBy { get; set; }

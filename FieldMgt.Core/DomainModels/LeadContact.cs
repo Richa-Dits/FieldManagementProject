@@ -37,7 +37,7 @@ namespace FieldMgt.Core.DomainModels
         public bool? IsActive { get; set; }        
         [DefaultValue(false)]
         public bool? IsDeleted { get; set; }
-        public Reference RefGender { get; set; }
+        public GlobalCode RefGender { get; set; }
         public ApplicationUser LeadContactCreatedBy { get; set; }
         public ApplicationUser LeadContactModifiedBy { get; set; }
         public ApplicationUser LeadContactDeletedBy { get; set; }

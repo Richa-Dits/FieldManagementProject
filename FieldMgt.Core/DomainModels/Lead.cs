@@ -44,10 +44,9 @@ namespace FieldMgt.Core.DomainModels
         [DefaultValue(false)]
         public bool? IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
-        public Reference RefStatus { get; set; }
-        public Reference RefGender { get; set; }
-        public Reference RefSource { get; set; }
-        public Reference RefStage { get; set; }
+        public GlobalCode RefStatus { get; set; }
+        public GlobalCode RefSource { get; set; }
+        public GlobalCode RefStage { get; set; }
         public ApplicationUser LeadCreatedBy { get; set; }
         public ApplicationUser LeadModifiedBy { get; set; }
         public ApplicationUser LeadDeletedBy { get; set; }

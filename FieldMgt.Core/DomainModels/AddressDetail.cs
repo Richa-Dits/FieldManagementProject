@@ -40,7 +40,7 @@ namespace FieldMgt.Core.DomainModels
         [MaxLength(10)]
         public string ZipCode { get; set; }
         public int AddressType { get; set; }
-        public Reference Reference { get; set; }
+        public GlobalCode AddressCode { get; set; }
         public ICollection<Lead> LeadAddress1Id { get; set; }
         public ICollection<Lead> LeadAddress2Id { get; set; }
         public ICollection<Order> OrderAddress1Id { get; set; }

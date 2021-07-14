@@ -11,13 +11,11 @@ namespace FieldMgt.Core.DomainModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderId { get; set; }
         [Required]
-        //[ForeignKey("LeadId")]
         public int ClientId { get; set; }
-        //public Client Client { get; set; }
+        public Client Client { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string OrderDescription { get; set; }
-        public int OrderStatus { get; set; }
-        //set reference to notes
+        public int OrderStatus { get; set; }        
         public int ContactDetailId { get; set; }
         [ForeignKey("ContactDetailId")]
         public ContactDetail ContactDetail { get; set; }
@@ -57,7 +55,8 @@ namespace FieldMgt.Core.DomainModels
         public ApplicationUser OrderCreatedBy { get; set; }
         public ApplicationUser OrderModifiedBy { get; set; }
         public ApplicationUser OrderDeletedBy { get; set; }
-        public Reference OrderPaymentStatus { get; set; }
+        public GlobalCode OrderPaymentStatus { get; set; }
+        public GlobalCode OrderCompletionStatus { get; set; }
         public AddressDetail OrderAddress { get; set; }
         public AddressDetail OrderBillingAddress { get; set; }
     }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,7 +13,6 @@ namespace FieldMgt.Core.DomainModels
         [Required]
         [Column(TypeName = "nvarchar(50)")]
         public string ClienyCompanyName { get; set; }
-
         [Column(TypeName = "nvarchar(255)")]
         public string ClientDescription { get; set; }
         public int ClientSource { get; set; }
@@ -25,7 +23,6 @@ namespace FieldMgt.Core.DomainModels
         public ContactDetail ContactDetail { get; set; }
         public int PermanentAddressId { get; set; }
         public int BillingAddressId { get; set; }
-
         [Column(TypeName = "nvarchar(255)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
@@ -37,8 +34,7 @@ namespace FieldMgt.Core.DomainModels
         [DefaultValue(false)]
         public bool? IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
-        public Reference RefStatus { get; set; }
-        public Reference RefGender { get; set; }
+        public GlobalCode RefSource { get; set; }
         public ApplicationUser ClientCreatedBy { get; set; }
         public ApplicationUser ClientModifiedBy { get; set; }
         public ApplicationUser ClientDeletedBy { get; set; }

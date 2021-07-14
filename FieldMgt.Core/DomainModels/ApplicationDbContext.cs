@@ -15,7 +15,6 @@ namespace FieldMgt.Core.DomainModels
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Lead> Leads { get; set; }
         public DbSet<LeadContact> LeadContacts { get; set; }
-        public DbSet<Reference> References { get; set; }
         public DbSet<City> City { get; set; }
         public DbSet<Country> Country { get; set; }
         public DbSet<State> State { get; set; }
@@ -53,7 +52,7 @@ namespace FieldMgt.Core.DomainModels
 (DatabaseGeneratedOption.Identity); ;
             modelBuilder.Entity<LeadContact>().Property(s =>  s.LeadContactId ).HasDatabaseGeneratedOption
                 (DatabaseGeneratedOption.Identity); ;
-            modelBuilder.Entity<Reference>().Property(s => s.ReferenceId).HasDatabaseGeneratedOption
+            modelBuilder.Entity<GlobalCode>().Property(s => s.GlobalCodeId).HasDatabaseGeneratedOption
                 (DatabaseGeneratedOption.Identity); ;
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -109,7 +108,7 @@ namespace FieldMgt.Core.DomainModels
                .HasConstraintName("LeadSource_FK");
 
                 act.HasOne(field => field.RefStatus)
-               .WithMany(fk => fk.Lead8Navigation)
+               .WithMany(fk => fk.Lead3Navigation)
                .HasForeignKey(fk => fk.LeadStage)
                .HasConstraintName("LeadStage_FK");
 
@@ -187,7 +186,7 @@ namespace FieldMgt.Core.DomainModels
 
                 act.HasOne(field => field.RefLeadCallStatus)
                .WithMany(fk => fk.LeadCall1Navigation)
-               .HasForeignKey(fk => fk.Status)
+               .HasForeignKey(fk => fk.CallStatus)
                .HasConstraintName("LCStatus_FK");
 
                 act.HasOne(field => field.RefCallLeadId)
@@ -234,6 +233,10 @@ namespace FieldMgt.Core.DomainModels
                 .HasForeignKey(fk => fk.PaymentStatus)
                 .HasConstraintName("OrderPaymentStatus_FK");
 
+                act.HasOne(field => field.OrderCompletionStatus)
+                .WithMany(fk => fk.OrdersStatus)
+                .HasForeignKey(fk => fk.OrderStatus)
+                .HasConstraintName("OrderStatus_FK");
 
                 act.HasOne(field => field.OrderAddress)
                 .WithMany(fk => fk.OrderAddress1Id)
@@ -256,7 +259,6 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.Ref22Navigation)
                 .HasForeignKey(fk => fk.ModifiedBy)
                 .HasConstraintName("QuotationModifiedBy_FK");
-
 
                 act.HasOne(field => field.NegotitationDeletedBy)
                 .WithMany(fk => fk.Ref46Navigation)
@@ -571,11 +573,15 @@ namespace FieldMgt.Core.DomainModels
                 .HasForeignKey(fk => fk.ModifiedBy)
                 .HasConstraintName("ClientModifiedBy_FK");
 
-
                 act.HasOne(field => field.ClientDeletedBy)
                 .WithMany(fk => fk.Ref71Navigation)
                 .HasForeignKey(fk => fk.DeletedBy)
                 .HasConstraintName("ClientDeletedBy_FK");
+
+                act.HasOne(field => field.RefSource)
+                .WithMany(fk => fk.ClientSourceRef)
+                .HasForeignKey(fk => fk.ClientSource)
+                .HasConstraintName("ClientSource_FK");
             });
             modelBuilder.Entity<City>(act =>
             {
@@ -630,6 +636,13 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.Ref80Navigation)
                 .HasForeignKey(fk => fk.DeletedBy)
                 .HasConstraintName("CountryDeletedBy_FK");
+            });
+            modelBuilder.Entity<AddressDetail>(act =>
+            { 
+                act.HasOne(field => field.AddressCode)
+                .WithMany(fk => fk.AddressTypeRef)
+                .HasForeignKey(fk => fk.AddressType)
+                .HasConstraintName("AddressTypeRef_FK");
             });
             base.OnModelCreating(modelBuilder);
         }

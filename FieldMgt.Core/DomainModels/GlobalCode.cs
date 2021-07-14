@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,6 +8,19 @@ namespace FieldMgt.Core.DomainModels
 {
     public class GlobalCode
     {
+        public GlobalCode()
+        {
+            Staff1Navigation = new HashSet<Staff>();
+            Lead1Navigation = new HashSet<Lead>();
+            Lead2Navigation = new HashSet<Lead>();
+            Lead3Navigation = new HashSet<Lead>();
+            LeadContact1Navigation = new HashSet<LeadContact>();
+            LeadCall1Navigation = new HashSet<LeadCall>();
+            OPStatus = new HashSet<Order>();
+            OrdersStatus = new HashSet<Order>();
+            AddressTypeRef = new HashSet<AddressDetail>();
+            ClientSourceRef = new HashSet<Client>();            
+        }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int GlobalCodeId { get; set; }
@@ -33,5 +47,15 @@ namespace FieldMgt.Core.DomainModels
         public ApplicationUser GlobalCodeCreatedBy { get; set; }
         public ApplicationUser GlobalCodeModifiedBy { get; set; }
         public ApplicationUser GlobalCodeDeletedBy { get; set; }
+        public ICollection<Staff> Staff1Navigation { get; set; }
+        public ICollection<Lead> Lead1Navigation { get; set; }
+        public ICollection<Lead> Lead2Navigation { get; set; }
+        public ICollection<Lead> Lead3Navigation { get; set; }
+        public ICollection<LeadContact> LeadContact1Navigation { get; set; }
+        public ICollection<LeadCall> LeadCall1Navigation { get; set; }
+        public ICollection<Order> OPStatus { get; set; }
+        public ICollection<Order> OrdersStatus { get; set; }
+        public ICollection<AddressDetail> AddressTypeRef { get; set; }
+        public ICollection<Client> ClientSourceRef { get; set; }
     }
 }
