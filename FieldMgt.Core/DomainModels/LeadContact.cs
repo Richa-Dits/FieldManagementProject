@@ -14,11 +14,11 @@ namespace FieldMgt.Core.DomainModels
         public string FirstName { get; set; }
         [Column(TypeName = "nvarchar(30)")]
         public string LastName { get; set; }                
-        public int Gender { get; set; }
-        public int AddressDetailId { get; set; }
+        public int? Gender { get; set; }
+        public int? AddressDetailId { get; set; }
         [ForeignKey("AddressDetailId")]
         public AddressDetail AddressDetail { get; set; }
-        public int ContactDetailId { get; set; }
+        public int? ContactDetailId { get; set; }
         [ForeignKey("ContactDetailId")]
         public ContactDetail ContactDetail { get; set; }
         public int LeadId { get; set; }

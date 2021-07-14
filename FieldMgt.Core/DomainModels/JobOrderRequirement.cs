@@ -12,8 +12,6 @@ namespace FieldMgt.Core.DomainModels
         public int JobOrderRequirementId { get; set; }
         [Column(TypeName = "nvarchar(455)")]
         public string RequirementDescription { get; set; }
-        public int NotesId { get; set; }
-        public Notes Notes { get; set; }
         public DateTime? RequirementGatheredOn { get; set; }
         public int JobOrderId { get; set; }
         public JobOrder JobOrder { get; set; }

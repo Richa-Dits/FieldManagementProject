@@ -15,8 +15,8 @@ namespace FieldMgt.Core.DomainModels
         public string ProductName { get; set; }
         [Column(TypeName = "nvarchar(150)")]
         public string ProductDescription { get; set; }
-        public int Category { get; set; }
-        public Reference Reference{get;set;}
+        public int ProductCategory { get; set; }
+        public GlobalCode Category {get;set;}
         [Column(TypeName = "nvarchar(255)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }

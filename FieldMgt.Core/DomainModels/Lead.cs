@@ -16,7 +16,7 @@ namespace FieldMgt.Core.DomainModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int LeadId { get; set; }
         [Required]
-        [Column(TypeName = "nvarchar(50)")]
+        [Column(TypeName = "nvarchar(100)")]
         public string LeadCompanyName { get; set; }        
         [Column(TypeName = "nvarchar(255)")]
         public string LeadDescription { get; set; }        
@@ -25,8 +25,6 @@ namespace FieldMgt.Core.DomainModels
         public int? LeadStage { get; set; }
         [DefaultValue(true)]
         public bool? IsActive { get; set; }
-        public int NotesId { get; set; }
-        public Notes Notes { get; set; }
         public int ContactDetailId { get; set; }
         [ForeignKey("ContactDetailId")]
         public ContactDetail ContactDetail { get; set; }

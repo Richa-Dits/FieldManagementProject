@@ -11,6 +11,7 @@ namespace FieldMgt.Core.DomainModels
         public GlobalCode()
         {
             Staff1Navigation = new HashSet<Staff>();
+            Staff2Navigation = new HashSet<Staff>();
             Lead1Navigation = new HashSet<Lead>();
             Lead2Navigation = new HashSet<Lead>();
             Lead3Navigation = new HashSet<Lead>();
@@ -19,9 +20,15 @@ namespace FieldMgt.Core.DomainModels
             OPStatus = new HashSet<Order>();
             OrdersStatus = new HashSet<Order>();
             AddressTypeRef = new HashSet<AddressDetail>();
+<<<<<<< HEAD
             ClientSourceRef = new HashSet<Client>();            
             ClientContactSourceRef = new HashSet<ClientContact>();
             MaintenanceTypesRef = new HashSet<Maintenance>();
+=======
+            ClientSourceRef = new HashSet<Client>();
+            ProductCategoryRef = new HashSet<ProductMaster>();
+            NotesTypeRef = new HashSet<Notes>();
+>>>>>>> fm-boilerplate
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -30,6 +37,9 @@ namespace FieldMgt.Core.DomainModels
         public string GlobalCodeName { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string Description { get; set; }
+        public int GlobalCodeCategoryId { get; set; }
+        [ForeignKey("GlobalCodeCategoryId")]
+        public GlobalCodeCategory GlobalCodeCategory { get; set; }
         [DefaultValue(true)]
         public bool? IsActive { get; set; }
         [Column(TypeName = "nvarchar(255)")]
@@ -43,9 +53,6 @@ namespace FieldMgt.Core.DomainModels
         [DefaultValue(false)]
         public bool? IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
-        public int GlobalCodeCategoryId { get; set; }
-        [ForeignKey("GlobalCodeCategoryId")]
-        public GlobalCodeCategory GlobalCodeCategory { get; set; }
         public ApplicationUser GlobalCodeCreatedBy { get; set; }
         public ApplicationUser GlobalCodeModifiedBy { get; set; }
         public ApplicationUser GlobalCodeDeletedBy { get; set; }
@@ -59,7 +66,13 @@ namespace FieldMgt.Core.DomainModels
         public ICollection<Order> OrdersStatus { get; set; }
         public ICollection<AddressDetail> AddressTypeRef { get; set; }
         public ICollection<Client> ClientSourceRef { get; set; }
+<<<<<<< HEAD
         public ICollection<ClientContact> ClientContactSourceRef { get; set; }
         public ICollection<Maintenance> MaintenanceTypesRef { get; set; }
+=======
+        public ICollection<ProductMaster> ProductCategoryRef { get; set; }
+        public ICollection<Notes> NotesTypeRef { get; set; }
+        public ICollection<Staff> Staff2Navigation { get; set; }
+>>>>>>> fm-boilerplate
     }
 }

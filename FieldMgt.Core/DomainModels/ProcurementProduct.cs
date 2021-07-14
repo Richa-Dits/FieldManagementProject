@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FieldMgt.Core.DomainModels
 {
-    public class ProcurementItems
+    public class ProcurementProduct
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

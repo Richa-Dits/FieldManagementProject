@@ -11,13 +11,13 @@ namespace FieldMgt.Core.DomainModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int QuotationId { get; set; }        
         [Column(TypeName = "decimal(8,2)")]
-        public decimal BuyerDesiredPrice { get; set; }
+        public decimal? BuyerDesiredPrice { get; set; }
         [Column(TypeName = "decimal(8,2)")]
-        public decimal InitialQuotedPrice { get; set; }
+        public decimal? InitialQuotedPrice { get; set; }
         [Column(TypeName = "decimal(8,2)")]
-        public decimal LastQuotedPrice { get; set; }
+        public decimal? LastQuotedPrice { get; set; }
         [Column(TypeName = "decimal(8,2)")]
-        public decimal MinPossiblePrice { get; set; }
+        public decimal? MinPossiblePrice { get; set; }
         public int? JobOrderId { get; set; }
         public JobOrder JobOrder { get; set; }
         public int? OrderId { get; set; }
