@@ -40,7 +40,8 @@ namespace FieldMgt.Core.DomainModels
         public DbSet<EstimationDetail> EstimationDetails { get; set; }
         public DbSet<Quotation> Quotations { get; set; }
         public DbSet<OrderTransaction> OrderTransactions { get; set; }
-
+        public DbSet<GlobalCode> GlobalCodes { get; set; }
+        public DbSet<GlobalCodeCategory> GlobalCodeCategories { get; set; }
         protected virtual void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
         {
             OnModelCreating(modelBuilder);
@@ -521,6 +522,114 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.Ref59Navigation)
                 .HasForeignKey(fk => fk.DeletedBy)
                 .HasConstraintName("PMDeleted_FK");
+            });
+            modelBuilder.Entity<GlobalCodeCategory>(act =>
+            {
+                act.HasOne(field => field.GlobalCodeCategoryCreatedBy)
+                .WithMany(fk => fk.Ref63Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("GlobalCodeCategoryCreatedBy_FK");
+
+                act.HasOne(field => field.GlobalCodeCategoryModifiedBy)
+                .WithMany(fk => fk.Ref64Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("GlobalCodeCategoryModifiedBy_FK");
+
+
+                act.HasOne(field => field.GlobalCodeCategoryDeletedBy)
+                .WithMany(fk => fk.Ref65Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("GlobalCodeCategoryDeletedBy_FK");
+            });
+            modelBuilder.Entity<GlobalCode>(act =>
+            {
+                act.HasOne(field => field.GlobalCodeCreatedBy)
+                .WithMany(fk => fk.Ref66Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("GlobalCodeCreatedBy_FK");
+
+                act.HasOne(field => field.GlobalCodeModifiedBy)
+                .WithMany(fk => fk.Ref67Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("GlobalCodeModifiedBy_FK");
+
+
+                act.HasOne(field => field.GlobalCodeDeletedBy)
+                .WithMany(fk => fk.Ref68Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("GlobalCodeDeletedBy_FK");
+            });
+            modelBuilder.Entity<Client>(act =>
+            {
+                act.HasOne(field => field.ClientCreatedBy)
+                .WithMany(fk => fk.Ref69Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("ClientCreatedBy_FK");
+
+                act.HasOne(field => field.ClientModifiedBy)
+                .WithMany(fk => fk.Ref70Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("ClientModifiedBy_FK");
+
+
+                act.HasOne(field => field.ClientDeletedBy)
+                .WithMany(fk => fk.Ref71Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("ClientDeletedBy_FK");
+            });
+            modelBuilder.Entity<City>(act =>
+            {
+                act.HasOne(field => field.CityCreatedBy)
+                .WithMany(fk => fk.Ref72Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("CityCreatedBy_FK");
+
+                act.HasOne(field => field.CityModifiedBy)
+                .WithMany(fk => fk.Ref73Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("CityModifiedBy_FK");
+
+
+                act.HasOne(field => field.CityDeletedBy)
+                .WithMany(fk => fk.Ref74Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("CityDeletedBy_FK");
+            });
+            modelBuilder.Entity<State>(act =>
+            {
+                act.HasOne(field => field.StateCreatedBy)
+                .WithMany(fk => fk.Ref75Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("StateCreatedBy_FK");
+
+                act.HasOne(field => field.StateModifiedBy)
+                .WithMany(fk => fk.Ref76Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("StateModifiedBy_FK");
+
+
+                act.HasOne(field => field.StateDeletedBy)
+                .WithMany(fk => fk.Ref77Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("StateDeletedBy_FK");
+            });
+            modelBuilder.Entity<Country>(act =>
+            {
+                act.HasOne(field => field.CountryCreatedBy)
+                .WithMany(fk => fk.Ref78Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("CountryCreatedBy_FK");
+
+                act.HasOne(field => field.CountryModifiedBy)
+                .WithMany(fk => fk.Ref79Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("CountryModifiedBy_FK");
+
+
+                act.HasOne(field => field.CountryDeletedBy)
+                .WithMany(fk => fk.Ref80Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("CountryDeletedBy_FK");
             });
             base.OnModelCreating(modelBuilder);
         }

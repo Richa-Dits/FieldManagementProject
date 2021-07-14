@@ -73,6 +73,24 @@ namespace FieldMgt.Core.DomainModels
             Ref60Navigation = new HashSet<ServiceProviderLocation>();
             Ref61Navigation = new HashSet<ServiceProviderLocation>();
             Ref62Navigation = new HashSet<ServiceProviderLocation>();
+            Ref63Navigation = new HashSet<GlobalCodeCategory>();
+            Ref64Navigation = new HashSet<GlobalCodeCategory>();
+            Ref65Navigation = new HashSet<GlobalCodeCategory>();
+            Ref66Navigation = new HashSet<GlobalCode>();
+            Ref67Navigation = new HashSet<GlobalCode>();
+            Ref68Navigation = new HashSet<GlobalCode>();
+            Ref69Navigation = new HashSet<Client>();
+            Ref70Navigation = new HashSet<Client>();
+            Ref71Navigation = new HashSet<Client>();
+            Ref72Navigation = new HashSet<City>();
+            Ref73Navigation = new HashSet<City>();
+            Ref74Navigation = new HashSet<City>();
+            Ref75Navigation = new HashSet<State>();
+            Ref76Navigation = new HashSet<State>();
+            Ref77Navigation = new HashSet<State>();
+            Ref78Navigation = new HashSet<Country>();
+            Ref79Navigation = new HashSet<Country>();
+            Ref80Navigation = new HashSet<Country>();
         }
         [DefaultValue(true)]
         public bool IsActive { get; set; }
@@ -148,5 +166,23 @@ namespace FieldMgt.Core.DomainModels
         public ICollection<ServiceProviderLocation> Ref60Navigation { get; set; }
         public ICollection<ServiceProviderLocation> Ref61Navigation { get; set; }
         public ICollection<ServiceProviderLocation> Ref62Navigation { get; set; }
+        public ICollection<GlobalCodeCategory> Ref63Navigation { get; set; }
+        public ICollection<GlobalCodeCategory> Ref64Navigation { get; set; }
+        public ICollection<GlobalCodeCategory> Ref65Navigation { get; set; }
+        public ICollection<GlobalCode> Ref66Navigation { get; set; }
+        public ICollection<GlobalCode> Ref67Navigation { get; set; }
+        public ICollection<GlobalCode> Ref68Navigation { get; set; }
+        public ICollection<Client> Ref69Navigation { get; set; }
+        public ICollection<Client> Ref70Navigation { get; set; }
+        public ICollection<Client> Ref71Navigation { get; set; }
+        public ICollection<City> Ref72Navigation { get; set; }
+        public ICollection<City> Ref73Navigation { get; set; }
+        public ICollection<City> Ref74Navigation { get; set; }
+        public ICollection<State> Ref75Navigation { get; set; }
+        public ICollection<State> Ref76Navigation { get; set; }
+        public ICollection<State> Ref77Navigation { get; set; }
+        public ICollection<Country> Ref78Navigation { get; set; }
+        public ICollection<Country> Ref79Navigation { get; set; }
+        public ICollection<Country> Ref80Navigation { get; set; }
     }
 }

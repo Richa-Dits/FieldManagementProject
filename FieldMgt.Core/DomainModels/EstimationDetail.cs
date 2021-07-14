@@ -13,9 +13,9 @@ namespace FieldMgt.Core.DomainModels
         public int ProductMasterId { get; set; }
         public ProductMaster ProductMaster { get; set; }
         [Column(TypeName = "decimal(16,2)")]
-        public decimal ProductUnitPrice { get; set; }
+        public decimal? ProductUnitPrice { get; set; }
         [Column(TypeName = "decimal(16,2)")]
-        public decimal QuantityRequired { get; set; }
+        public decimal? QuantityRequired { get; set; }
         [Column(TypeName = "nvarchar(255)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }

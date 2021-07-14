@@ -13,7 +13,7 @@ namespace FieldMgt.Core.DomainModels
         public int ProductMasterId { get; set; }
         public ProductMaster ProductMaster { get; set; }
         [Column(TypeName = "decimal(8,2)")]
-        public decimal QuantityRequired { get; set; }
+        public decimal? QuantityRequired { get; set; }
         public int? JobOrderId { get; set; }
         public JobOrder JobOrder { get; set; }
         public int? OrderId { get; set; }
