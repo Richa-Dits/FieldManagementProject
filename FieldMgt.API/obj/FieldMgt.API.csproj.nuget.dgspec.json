@@ -60,6 +60,14 @@
               "target": "Package",
               "version": "[6.4.4, )"
             },
+            "Excepticon": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "Excepticon.AspNetCore": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
             "FluentValidation.WebApi": {
               "target": "Package",
               "version": "[8.6.1, )"
@@ -101,6 +109,10 @@
             "Salience.FluentApi": {
               "target": "Package",
               "version": "[1.11.0, )"
+            },
+            "Shyjus.BrowserDetector": {
+              "target": "Package",
+              "version": "[2.0.0, )"
             },
             "Swashbuckle": {
               "target": "Package",
