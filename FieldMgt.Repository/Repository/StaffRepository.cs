@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace FieldMgt.Repository.Repository
 {
-    public class EmployeeRepository: GenericRepository<Staff>, IEmployeeRepository
+    public class StaffRepository: GenericRepository<Staff>, IStaffRepository
     {
         private readonly ApplicationDbContext _dbContext;
         //private readonly IUnitofWork _uow;
-        public EmployeeRepository(ApplicationDbContext dbContext):base(dbContext)
+        public StaffRepository(ApplicationDbContext dbContext):base(dbContext)
         {
             _dbContext = dbContext;
         }

@@ -91,6 +91,18 @@ namespace FieldMgt.Core.DomainModels
             Ref78Navigation = new HashSet<Country>();
             Ref79Navigation = new HashSet<Country>();
             Ref80Navigation = new HashSet<Country>();
+            Ref81Navigation = new HashSet<ClientContact>();
+            Ref82Navigation = new HashSet<ClientContact>();
+            Ref83Navigation = new HashSet<ClientContact>();
+            Ref84Navigation = new HashSet<ContactDetail>();
+            Ref85Navigation = new HashSet<ContactDetail>();
+            Ref86Navigation = new HashSet<ContactDetail>();
+            Ref87Navigation = new HashSet<JobOrder>();
+            Ref88Navigation = new HashSet<JobOrder>();
+            Ref89Navigation = new HashSet<JobOrder>();
+            Ref90Navigation = new HashSet<VendorProducts>();
+            Ref91Navigation = new HashSet<VendorProducts>();
+            Ref92Navigation = new HashSet<VendorProducts>();
         }
         [DefaultValue(true)]
         public bool IsActive { get; set; }
@@ -184,5 +196,17 @@ namespace FieldMgt.Core.DomainModels
         public ICollection<Country> Ref78Navigation { get; set; }
         public ICollection<Country> Ref79Navigation { get; set; }
         public ICollection<Country> Ref80Navigation { get; set; }
+        public ICollection<ClientContact> Ref81Navigation { get; set; }
+        public ICollection<ClientContact> Ref82Navigation { get; set; }
+        public ICollection<ClientContact> Ref83Navigation { get; set; }
+        public ICollection<ContactDetail> Ref84Navigation { get; set; }
+        public ICollection<ContactDetail> Ref85Navigation { get; set; }
+        public ICollection<ContactDetail> Ref86Navigation { get; set; }
+        public ICollection<JobOrder> Ref87Navigation { get; set; }
+        public ICollection<JobOrder> Ref88Navigation { get; set; }
+        public ICollection<JobOrder> Ref89Navigation { get; set; }
+        public ICollection<VendorProducts> Ref90Navigation { get; set; }
+        public ICollection<VendorProducts> Ref91Navigation { get; set; }
+        public ICollection<VendorProducts> Ref92Navigation { get; set; }
     }
 }

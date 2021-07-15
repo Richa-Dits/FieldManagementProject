@@ -13,6 +13,10 @@ using Microsoft.AspNetCore.Authorization;
 using FieldMgt.Core.UOW;
 using Microsoft.OpenApi.Models;
 using FieldMgt.API.Infrastructure.Services;
+using FieldMgt.API.Infrastructure.MiddleWares.ErrorHandler;
+using FieldMgt.API.Infrastructure.Factories.PathProvider;
+using Excepticon.Extensions;
+using Excepticon.AspNetCore;
 
 namespace FieldMgt
 {
@@ -38,6 +42,9 @@ namespace FieldMgt
                 });
             });
             services.AddIdentity(Configuration);
+            services.AddExcepticon();
+            services.AddBrowserDetection();
+            services.AddSingleton<IPathProvider, PathProvider>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IRoleRepository, RoleRepository>();
             services.AddTransient<IUnitofWork, UnitofWork>();
@@ -53,6 +60,8 @@ namespace FieldMgt
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+            app.UseExcepticon();
             app.UseRouting();            
             app.UseAuthentication();
             app.UseAuthorization();

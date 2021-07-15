@@ -6,6 +6,8 @@ using FieldMgt.Core.DomainModels;
 using FieldMgt.Core.UOW;
 using FieldMgt.API.Infrastructure.Services;
 using FieldMgt.Core.DTOs.Request;
+using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FieldMgt.Controllers
 {
@@ -24,67 +26,64 @@ namespace FieldMgt.Controllers
             _currentUserService = currentUserService;
             _uow = uow;
         }        
-        //[Authorize(Policy = "Admin")]
+        [Authorize(Policy = "Admin")]
         [HttpPost]
         [Route("api/auth/Register")]
         public async Task<IActionResult> RegisterAsync([FromBody]CreateEmployeeDTO model)
         {
-            RegisterUserDTO registerDTO = new RegisterUserDTO();
-            registerDTO.Email = model.Email;
-            registerDTO.Password = model.Password;
-            registerDTO.ConfirmPassword = model.ConfirmPassword;
-            registerDTO.CreatedBy = _currentUserService.GetUserId();
-            registerDTO.CreatedOn = System.DateTime.Now;
-            if (ModelState.IsValid)
+            throw new UnauthorizedAccessException();
+            try
             {
-                var result = await _userService.RegisterUserAsync(registerDTO);
-                if (result.IsSuccess)
-                {
-                    RegistrationDTO modelDTO = new RegistrationDTO();
-                    modelDTO.EmployeeId = null;
-                    modelDTO.Email = model.Email;
-                    modelDTO.FirstName = model.FirstName;
-                    modelDTO.LastName = model.LastName;
-                    modelDTO.IsActive = true;
-                    modelDTO.UserId = result.Id;
-                    modelDTO.Phone = model.Phone;
-                    modelDTO.Designation = model.Designation;
-                    modelDTO.CreatedOn = System.DateTime.Now;
-                    modelDTO.CreatedBy = _currentUserService.GetUserId();
-                    Staff payload = _mapper.Map<RegistrationDTO, Staff>(modelDTO);                    
-                    await _uow.EmployeeRepositories.CreateStaffAsync(payload);
-                    CreateAddressDTO permanentAddressModelDTO = new CreateAddressDTO();
-                    permanentAddressModelDTO.Address = model.PermanentAddress;
-                    permanentAddressModelDTO.City = model.PermanentCity;
-                    permanentAddressModelDTO.State = model.PermanentState;
-                    permanentAddressModelDTO.Country = model.PermanentCountry;
-                    permanentAddressModelDTO.ZipCode = model.PermanentZipCode;
-                    CreateAddressDTO correspondenceAddressModelDTO = new CreateAddressDTO();
-                    correspondenceAddressModelDTO.Address = model.CorrespondenceAddress;
-                    correspondenceAddressModelDTO.City = model.CorrespondenceCity;
-                    correspondenceAddressModelDTO.State = model.CorrespondenceState;
-                    correspondenceAddressModelDTO.Country = model.CorrespondenceCountry;
-                    correspondenceAddressModelDTO.ZipCode = model.CorrespondenceZipCode;
-                    var result1 = await _uow.SaveAsync1();
-                    if (result1.Equals(1))
+                RegisterUserDTO registerDTO = new RegisterUserDTO();
+                registerDTO.Email = model.Email;
+                registerDTO.Password = model.Password;
+                registerDTO.ConfirmPassword = model.ConfirmPassword;
+                registerDTO.CreatedBy = _currentUserService.GetUserId();
+                registerDTO.CreatedOn = System.DateTime.Now;
+                    var result = await _userService.RegisterUserAsync(registerDTO);
+                    if (result.IsSuccess)
                     {
-                        return Ok(result);//status code 200
-                    }
-                    else
-                    {
-
-                        return BadRequest("Unable to create Staff");
-
-                        return BadRequest("Unable to create Staff");
-
-                    }
+                        RegistrationDTO modelDTO = new RegistrationDTO();
+                        modelDTO.EmployeeId = null;
+                        modelDTO.Email = model.Email;
+                        modelDTO.FirstName = model.FirstName;
+                        modelDTO.LastName = model.LastName;
+                        modelDTO.IsActive = true;
+                        modelDTO.UserId = result.Id;
+                        modelDTO.Phone = model.Phone;
+                        modelDTO.Designation = model.Designation;
+                        modelDTO.CreatedOn = System.DateTime.Now;
+                        modelDTO.CreatedBy = _currentUserService.GetUserId();
+                        Staff payload = _mapper.Map<RegistrationDTO, Staff>(modelDTO);
+                        await _uow.EmployeeRepositories.CreateStaffAsync(payload);
+                        CreateAddressDTO permanentAddressModelDTO = new CreateAddressDTO();
+                        permanentAddressModelDTO.Address = model.PermanentAddress;
+                        permanentAddressModelDTO.City = model.PermanentCity;
+                        permanentAddressModelDTO.State = model.PermanentState;
+                        permanentAddressModelDTO.Country = model.PermanentCountry;
+                        permanentAddressModelDTO.ZipCode = model.PermanentZipCode;
+                        CreateAddressDTO correspondenceAddressModelDTO = new CreateAddressDTO();
+                        correspondenceAddressModelDTO.Address = model.CorrespondenceAddress;
+                        correspondenceAddressModelDTO.City = model.CorrespondenceCity;
+                        correspondenceAddressModelDTO.State = model.CorrespondenceState;
+                        correspondenceAddressModelDTO.Country = model.CorrespondenceCountry;
+                        correspondenceAddressModelDTO.ZipCode = model.CorrespondenceZipCode;
+                        var result1 = await _uow.SaveAsync1();
+                        if (result1.Equals(1))
+                        {
+                            return Ok(result);//status code 200
+                        }
+                        else
+                        {
+                            return BadRequest("Unable to create Staff");
+                        }
                 }
-                else
-                {
-                    return BadRequest("User cannot be created");
-                }
+                return BadRequest("Some Properties are not valid"); //status Code 400
             }
-            return BadRequest("Some Properties are not valid"); //status Code 400
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
         [HttpPost]
         [Route("Login")]

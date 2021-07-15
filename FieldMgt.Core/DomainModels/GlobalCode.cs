@@ -20,7 +20,9 @@ namespace FieldMgt.Core.DomainModels
             OPStatus = new HashSet<Order>();
             OrdersStatus = new HashSet<Order>();
             AddressTypeRef = new HashSet<AddressDetail>();
-            ClientSourceRef = new HashSet<Client>();
+            ClientSourceRef = new HashSet<Client>();            
+            ClientContactSourceRef = new HashSet<ClientContact>();
+            MaintenanceTypesRef = new HashSet<Maintenance>();
             ProductCategoryRef = new HashSet<ProductMaster>();
             NotesTypeRef = new HashSet<Notes>();
         }
@@ -60,6 +62,8 @@ namespace FieldMgt.Core.DomainModels
         public ICollection<Order> OrdersStatus { get; set; }
         public ICollection<AddressDetail> AddressTypeRef { get; set; }
         public ICollection<Client> ClientSourceRef { get; set; }
+        public ICollection<ClientContact> ClientContactSourceRef { get; set; }
+        public ICollection<Maintenance> MaintenanceTypesRef { get; set; }
         public ICollection<ProductMaster> ProductCategoryRef { get; set; }
         public ICollection<Notes> NotesTypeRef { get; set; }
         public ICollection<Staff> Staff2Navigation { get; set; }
