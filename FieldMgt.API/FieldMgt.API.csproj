@@ -8,6 +8,8 @@
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Excepticon" Version="1.1.0" />
+    <PackageReference Include="Excepticon.AspNetCore" Version="1.1.0" />
     <PackageReference Include="FluentValidation.WebApi" Version="8.6.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
@@ -21,6 +23,7 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Salience.FluentApi" Version="1.11.0" />
+    <PackageReference Include="Shyjus.BrowserDetector" Version="2.0.0" />
     <PackageReference Include="Swashbuckle" Version="5.6.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.1.4" />
@@ -30,5 +33,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FieldMgt.Repository\FieldMgt.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Logs\" />
   </ItemGroup>
 </Project>

@@ -200,3 +200,6 @@ C:\Users\ditsd\source\repos\FieldManage\FieldMgt.API\obj\Debug\netcoreapp3.1\sco
 C:\Users\ditsd\source\repos\FieldManage\FieldMgt.API\obj\Debug\netcoreapp3.1\FieldMgt.API.RazorTargetAssemblyInfo.cache
 C:\Users\ditsd\source\repos\FieldManage\FieldMgt.API\obj\Debug\netcoreapp3.1\FieldMgt.API.csproj.CopyComplete
 C:\Users\ditsd\source\repos\FieldManage\FieldMgt.API\obj\Debug\netcoreapp3.1\FieldMgt.API.genruntimeconfig.cache
+C:\Users\ditsd\source\repos\FieldManage\FieldMgt.API\bin\Debug\netcoreapp3.1\Shyjus.BrowserDetector.dll
+C:\Users\ditsd\source\repos\FieldManage\FieldMgt.API\bin\Debug\netcoreapp3.1\Excepticon.dll
+C:\Users\ditsd\source\repos\FieldManage\FieldMgt.API\bin\Debug\netcoreapp3.1\Excepticon.AspNetCore.dll
