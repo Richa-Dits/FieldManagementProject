@@ -17,12 +17,14 @@ namespace FieldMgt.Repository.UOW
             LeadServices = new LeadRepository(_dbcontext);
             LeadContactRepositories = new LeadContactRepository(_dbcontext);
             EmployeeRepositories = new StaffRepository(_dbcontext);
+            VendorRepositories = new VendorRepository(_dbcontext);
         }
         public ILeadRepository LeadServices { get; }
         public IUserRepository USerServices { get; }
         public IRoleRepository RoleServices { get; }
         public ILeadContactRepository LeadContactRepositories { get; }
         public IStaffRepository  EmployeeRepositories { get; }
+        public IVendorRepository VendorRepositories { get; }
         public async Task SaveAsync()
         {
             using (_dbcontext.Database.BeginTransaction())
