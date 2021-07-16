@@ -31,7 +31,6 @@ namespace FieldMgt.Controllers
         [Route("api/auth/Register")]
         public async Task<IActionResult> RegisterAsync([FromBody]CreateEmployeeDTO model)
         {
-            throw new UnauthorizedAccessException();
             try
             {
                 RegisterUserDTO registerDTO = new RegisterUserDTO();
