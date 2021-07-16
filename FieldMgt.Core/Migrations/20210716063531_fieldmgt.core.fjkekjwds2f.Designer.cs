@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FieldMgt.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210714075619_FIELDMGT.CORE.DYDY0")]
-    partial class FIELDMGTCOREDYDY0
+    [Migration("20210716063531_fieldmgt.core.fjkekjwds2f")]
+    partial class fieldmgtcorefjkekjwds2f
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -452,6 +452,44 @@ namespace FieldMgt.Core.Migrations
                     b.HasIndex("ProductMasterId");
 
                     b.ToTable("EstimationDetails");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.ExceptionLog", b =>
+                {
+                    b.Property<int>("ExceptionLogId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Browser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ErrorCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ErrorDetails")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ErrorMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExceptionBy")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("ExceptionId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ExceptionOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("ExceptionLogId");
+
+                    b.HasIndex("ID");
+
+                    b.ToTable("ExceptionLogs");
                 });
 
             modelBuilder.Entity("FieldMgt.Core.DomainModels.Feedback", b =>
@@ -1270,7 +1308,7 @@ namespace FieldMgt.Core.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeletedBy")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
@@ -1665,13 +1703,13 @@ namespace FieldMgt.Core.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SPCreatedById")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("SPDeletedById")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("SPModifiedById")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("ServiceProviderIncharge")
                         .HasMaxLength(15)
@@ -2025,7 +2063,7 @@ namespace FieldMgt.Core.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -2064,7 +2102,7 @@ namespace FieldMgt.Core.Migrations
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
@@ -2076,7 +2114,7 @@ namespace FieldMgt.Core.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -2159,7 +2197,7 @@ namespace FieldMgt.Core.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
@@ -2171,17 +2209,17 @@ namespace FieldMgt.Core.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -2193,10 +2231,10 @@ namespace FieldMgt.Core.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -2208,13 +2246,13 @@ namespace FieldMgt.Core.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -2259,25 +2297,25 @@ namespace FieldMgt.Core.Migrations
                         .WithMany("AddressTypeRef")
                         .HasForeignKey("AddressType")
                         .HasConstraintName("AddressTypeRef_FK")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.City", "City")
                         .WithMany()
                         .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.State", "State")
                         .WithMany()
                         .HasForeignKey("StateId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("AddressCode");
@@ -2309,7 +2347,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("FieldMgt.Core.DomainModels.State", "State")
                         .WithMany()
                         .HasForeignKey("StateId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("CityCreatedBy");
@@ -2476,7 +2514,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("FieldMgt.Core.DomainModels.JobOrder", "JobOrder")
                         .WithMany()
                         .HasForeignKey("JobOrderID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "EstimationModifiedBy")
@@ -2508,7 +2546,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("FieldMgt.Core.DomainModels.Estimation", "Estimation")
                         .WithMany()
                         .HasForeignKey("EstimationId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "EstimationDetailModifiedBy")
@@ -2519,7 +2557,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("FieldMgt.Core.DomainModels.ProductMaster", "ProductMaster")
                         .WithMany()
                         .HasForeignKey("ProductMasterId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Estimation");
@@ -2531,6 +2569,15 @@ namespace FieldMgt.Core.Migrations
                     b.Navigation("EstimationDetailModifiedBy");
 
                     b.Navigation("ProductMaster");
+                });
+
+            modelBuilder.Entity("FieldMgt.Core.DomainModels.ExceptionLog", b =>
+                {
+                    b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ID");
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("FieldMgt.Core.DomainModels.Feedback", b =>
@@ -2553,7 +2600,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("FieldMgt.Core.DomainModels.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("FeedBackCreatedBy");
@@ -2580,7 +2627,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("FieldMgt.Core.DomainModels.GlobalCodeCategory", "GlobalCodeCategory")
                         .WithMany()
                         .HasForeignKey("GlobalCodeCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "GlobalCodeModifiedBy")
@@ -2667,7 +2714,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("FieldMgt.Core.DomainModels.JobOrder", "JobOrder")
                         .WithMany()
                         .HasForeignKey("JobOrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "RequirementModifiedBy")
@@ -2695,19 +2742,19 @@ namespace FieldMgt.Core.Migrations
                         .WithMany("LeadAddress2Id")
                         .HasForeignKey("BillingAddressId")
                         .HasConstraintName("LBillingAddress_FK")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.Client", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.ContactDetail", "ContactDetail")
                         .WithMany()
                         .HasForeignKey("ContactDetailId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "LeadCreatedBy")
@@ -2724,7 +2771,7 @@ namespace FieldMgt.Core.Migrations
                         .WithMany("Lead2Navigation")
                         .HasForeignKey("LeadSource")
                         .HasConstraintName("LeadSource_FK")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.GlobalCode", "RefStatus")
@@ -2736,7 +2783,7 @@ namespace FieldMgt.Core.Migrations
                         .WithMany("Lead1Navigation")
                         .HasForeignKey("LeadStatus")
                         .HasConstraintName("LeadStatus_FK")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "LeadModifiedBy")
@@ -2748,7 +2795,7 @@ namespace FieldMgt.Core.Migrations
                         .WithMany("LeadAddress1Id")
                         .HasForeignKey("PermanentAddressId")
                         .HasConstraintName("LPermaAddress_FK")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Client");
@@ -2788,7 +2835,7 @@ namespace FieldMgt.Core.Migrations
                         .WithMany("Ref2LeadId")
                         .HasForeignKey("LeadId")
                         .HasConstraintName("LCLeadId_FK")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("LeadCalledBy");
@@ -2826,7 +2873,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("FieldMgt.Core.DomainModels.Lead", "Lead")
                         .WithMany()
                         .HasForeignKey("LeadId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "LeadContactModifiedBy")
@@ -2907,7 +2954,7 @@ namespace FieldMgt.Core.Migrations
                         .WithMany("NotesTypeRef")
                         .HasForeignKey("NoteTypeId")
                         .HasConstraintName("NoteTypeRef_FK")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("NotesCreatedBy");
@@ -2934,7 +2981,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("FieldMgt.Core.DomainModels.Client", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.ContactDetail", "ContactDetail")
@@ -3020,7 +3067,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("FieldMgt.Core.DomainModels.ProductMaster", "ProductMaster")
                         .WithMany()
                         .HasForeignKey("ProductMasterId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("JobOrder");
@@ -3041,13 +3088,13 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("FieldMgt.Core.DomainModels.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.ServiceProviderLocation", "ServiceProviderLocation")
                         .WithMany()
                         .HasForeignKey("ServiceProviderLocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Order");
@@ -3075,7 +3122,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("FieldMgt.Core.DomainModels.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Order");
@@ -3120,7 +3167,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("FieldMgt.Core.DomainModels.Vendor", "Vendor")
                         .WithMany()
                         .HasForeignKey("VendorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("ProductMaster");
@@ -3148,7 +3195,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("FieldMgt.Core.DomainModels.ProductMaster", "ProductMaster")
                         .WithMany()
                         .HasForeignKey("ProductMasterId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("ProductCreatedBy");
@@ -3181,7 +3228,7 @@ namespace FieldMgt.Core.Migrations
                         .WithMany("ProductCategoryRef")
                         .HasForeignKey("ProductCategory")
                         .HasConstraintName("PMCategory_FK")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Category");
@@ -3213,7 +3260,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("FieldMgt.Core.DomainModels.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Order");
@@ -3336,7 +3383,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("FieldMgt.Core.DomainModels.ServiceProvider", "ServiceProvider")
                         .WithMany()
                         .HasForeignKey("ServiceProviderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("ContactDetail");
@@ -3424,7 +3471,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("FieldMgt.Core.DomainModels.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FieldMgt.Core.DomainModels.ApplicationUser", "StateCreatedBy")
@@ -3530,7 +3577,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -3539,7 +3586,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -3548,7 +3595,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -3557,13 +3604,13 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -3572,7 +3619,7 @@ namespace FieldMgt.Core.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 

@@ -8,16 +8,17 @@ using System.Threading.Tasks;
 
 namespace FieldMgt.Repository.Repository.Exception
 {
-    public class ExceptionRepository : GenericRepository<ExceptionModel>,IExceptionInterface
+    public class ExceptionRepository : GenericRepository<ExceptionLog>,IExceptionInterface
     {
         private readonly ApplicationDbContext _dbcontext;
         public ExceptionRepository(ApplicationDbContext dbContext):base(dbContext)
         {
             _dbcontext = dbContext;
         }
-        public async Task SaveLogs(ExceptionModel model)
+        public async Task SaveLogs(ExceptionLog model)
         {
             await InsertAsync(model);
+            await _dbcontext.SaveChangesAsync();
         }
     }
 }

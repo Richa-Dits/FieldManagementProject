@@ -8,6 +8,8 @@ using FieldMgt.API.Infrastructure.Services;
 using FieldMgt.Core.DTOs.Request;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using FieldMgt.API.Infrastructure.MiddleWares.ErrorDetail;
+using FieldMgt.API.Infrastructure.MiddleWares.Exceptions;
 
 namespace FieldMgt.Controllers
 {
@@ -88,14 +90,15 @@ namespace FieldMgt.Controllers
         [Route("Login")]
         public async Task<IActionResult> LoginUserAsync([FromBody] LoginViewDTO model)
         {
-            if (ModelState.IsValid)
+            try
             {
                 var result = await _userService.LoginUserAsync(model);
-                if (result.IsSuccess)
-                    return Ok(result);//status code 200
-                return BadRequest(result);
+                return Ok(result);//status code 200
             }
-            return BadRequest("Some Properties are not valid"); //status Code 400
+            catch (Exception ex)
+            {
+                throw new BadRequestException(ex.Message);
+            }
         }
         //[Authorize(Policy = "Admin")]
         [Route("DeleteUser")]

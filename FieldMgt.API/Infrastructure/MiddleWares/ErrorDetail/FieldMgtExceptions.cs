@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Text.Json;
 
 namespace FieldMgt.API.Infrastructure.MiddleWares.ErrorDetail
@@ -33,11 +34,12 @@ namespace FieldMgt.API.Infrastructure.MiddleWares.ErrorDetail
         //public int LanguageId { get; set; }
         public override string ToString()
         {
-            var options = new JsonSerializerOptions()
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            };
-            return JsonSerializer.Serialize(this, options);
+            return JsonConvert.SerializeObject(this);
+            //var options = new JsonSerializerOptions()
+            //{
+            //    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            //};
+            //return JsonSerializer.Serialize(this, options);
         }
     }
 

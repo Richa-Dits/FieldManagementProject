@@ -13,6 +13,7 @@ namespace FieldMgt.Core.DomainModels
 
         }
         public DbSet<Staff> Staffs { get; set; }
+        public DbSet<ExceptionLog> ExceptionLogs { get; set; }
         public DbSet<Lead> Leads { get; set; }
         public DbSet<LeadContact> LeadContacts { get; set; }
         public DbSet<City> City { get; set; }

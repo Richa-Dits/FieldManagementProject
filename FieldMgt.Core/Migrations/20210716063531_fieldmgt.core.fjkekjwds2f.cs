@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FieldMgt.Core.Migrations
 {
-    public partial class FIELDMGTCOREDYDY0 : Migration
+    public partial class fieldmgtcorefjkekjwds2f : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -248,6 +248,32 @@ namespace FieldMgt.Core.Migrations
                     table.ForeignKey(
                         name: "CountryModifiedBy_FK",
                         column: x => x.ModifiedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExceptionLogs",
+                columns: table => new
+                {
+                    ExceptionLogId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Browser = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ErrorCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExceptionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ErrorMessage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ErrorDetails = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExceptionBy = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    ID = table.Column<string>(type: "nvarchar(255)", nullable: true),
+                    ExceptionOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExceptionLogs", x => x.ExceptionLogId);
+                    table.ForeignKey(
+                        name: "FK_ExceptionLogs_AspNetUsers_ID",
+                        column: x => x.ID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -2217,6 +2243,11 @@ namespace FieldMgt.Core.Migrations
                 column: "ModifiedBy");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ExceptionLogs_ID",
+                table: "ExceptionLogs",
+                column: "ID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Feedback_CreatedBy",
                 table: "Feedback",
                 column: "CreatedBy");
@@ -2884,6 +2915,9 @@ namespace FieldMgt.Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "EstimationDetails");
+
+            migrationBuilder.DropTable(
+                name: "ExceptionLogs");
 
             migrationBuilder.DropTable(
                 name: "Feedback");

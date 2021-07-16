@@ -13,6 +13,8 @@ using System.Text.Json;
 using Newtonsoft.Json;
 using FieldMgt.API.Infrastructure.MiddleWares.Exceptions;
 using FieldMgt.API.Infrastructure.Services;
+using FieldMgt.Core.Interfaces;
+using FieldMgt.Core.DomainModels;
 
 namespace FieldMgt.API.Infrastructure.MiddleWares.ErrorHandler
 {
@@ -24,7 +26,7 @@ namespace FieldMgt.API.Infrastructure.MiddleWares.ErrorHandler
         private readonly IPathProvider _pathProvider;
         private readonly ICurrentUserService _currentUser;
 
-        public ErrorHandlingMiddleware(RequestDelegate next,ILoggerFactory loggerFactory,IPathProvider pathProvider, ICurrentUserService currentUser)
+        public ErrorHandlingMiddleware(RequestDelegate next, ILoggerFactory loggerFactory, IPathProvider pathProvider, ICurrentUserService currentUser)
         {
             _next = next;
             _logger = loggerFactory.CreateLogger<ErrorHandlingMiddleware>();
@@ -32,18 +34,18 @@ namespace FieldMgt.API.Infrastructure.MiddleWares.ErrorHandler
             _currentUser = currentUser;
         }
 
-        public async Task Invoke(HttpContext httpContext, IWebHostEnvironment env, IBrowserDetector detector)
+        public async Task Invoke(HttpContext httpContext, IWebHostEnvironment env, IBrowserDetector detector, IExceptionInterface _exceptionService)
         {
             try
             {
                 await _next(httpContext);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                await HandleExceptionAsync(httpContext, ex, env, detector);
+                await HandleExceptionAsync(httpContext, ex, env, detector, _exceptionService);
             }
         }
-        private Task HandleExceptionAsync(HttpContext httpContext, Exception exception, IWebHostEnvironment env, IBrowserDetector detector)
+        private Task HandleExceptionAsync(HttpContext httpContext, Exception exception, IWebHostEnvironment env, IBrowserDetector detector, IExceptionInterface _exceptionService)
         {
             FieldMgtExceptions response;
             string CurrentUserId = _currentUser.GetUserId();
@@ -53,7 +55,7 @@ namespace FieldMgt.API.Infrastructure.MiddleWares.ErrorHandler
             long ExceptionId = DateTime.Now.Ticks;
             string Message = String.Empty;
             string BrowserName = "Firefox";
-          // string BrowserName = detector.Browser.Name;
+            // string BrowserName = detector.Browser.Name;
             string Log = String.Empty;
             Message = exception.Message;
 
@@ -86,7 +88,7 @@ namespace FieldMgt.API.Infrastructure.MiddleWares.ErrorHandler
                     statusCode = HttpStatusCode.InternalServerError;
                     Log = "Some unknown error occoured";
                 }
-               // _exceptionService.SaveLogs(new FieldMgtExceptions() { Browser = BrowserName, ExceptionId = ExceptionId.ToString(), ErrorMessage = Message, ErrorCode = statusCode.ToString() });
+                _exceptionService.SaveLogs(new ExceptionLog() { Browser = BrowserName, ExceptionBy = CurrentUserId, ExceptionId = ExceptionId.ToString(), ErrorMessage = Message, ErrorCode = statusCode.ToString(), ErrorDetails = exception.StackTrace.ToString() });
             }
             CreateLogFiles.Log(_pathProvider, Log);
             httpContext.Response.ContentType = "application/json";
@@ -94,13 +96,4 @@ namespace FieldMgt.API.Infrastructure.MiddleWares.ErrorHandler
             return httpContext.Response.WriteAsync(Log);
         }
     }
-
-    // Extension method used to add the middleware to the HTTP request pipeline.
-    //public static class ErrorHandlingMiddlewareExtensions
-    //{
-    //    public static IApplicationBuilder UseErrorHandlingMiddleware(this IApplicationBuilder builder)
-    //    {
-    //        return builder.UseMiddleware<ErrorHandlingMiddleware>();
-    //    }
-    //}
 }

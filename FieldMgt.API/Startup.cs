@@ -17,6 +17,7 @@ using FieldMgt.API.Infrastructure.MiddleWares.ErrorHandler;
 using FieldMgt.API.Infrastructure.Factories.PathProvider;
 using Excepticon.Extensions;
 using Excepticon.AspNetCore;
+using FieldMgt.Repository.Repository.Exception;
 
 namespace FieldMgt
 {
@@ -51,6 +52,7 @@ namespace FieldMgt
             services.AddTransient<ICurrentUserService, CurrentUserService>();
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IAuthorizationHandler, CustomRequireClaimHandler>();
+            services.AddTransient<IExceptionInterface, ExceptionRepository>();
             services.AddAutoMapper(typeof(Startup));            
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
