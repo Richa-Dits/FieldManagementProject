@@ -48,6 +48,8 @@ namespace FieldMgt
             services.AddSingleton<IPathProvider, PathProvider>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IRoleRepository, RoleRepository>();
+            services.AddTransient<IAddressRepository, AddressRepository>();
+            services.AddTransient<IContactDetailRepository, ContactDetailRepository>();
             services.AddTransient<IUnitofWork, UnitofWork>();
             services.AddTransient<ICurrentUserService, CurrentUserService>();
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));

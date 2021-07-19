@@ -19,9 +19,13 @@ namespace FieldMgt.Repository.UOW
 <<<<<<< HEAD
             EmployeeRepositories = new StaffRepository(_dbcontext);
             VendorRepositories = new VendorRepository(_dbcontext);
+<<<<<<< HEAD
 =======
             StaffRepositories = new StaffRepository(_dbcontext);
 >>>>>>> fm-boilerplate
+=======
+            AddressRepositories = new AddressRepository(_dbcontext);
+>>>>>>> ef4520a6e7dfe0f38542af7a7fb72274d25103b1
         }
         public ILeadRepository LeadServices { get; }
         public IUserRepository USerServices { get; }
@@ -29,10 +33,15 @@ namespace FieldMgt.Repository.UOW
         public ILeadContactRepository LeadContactRepositories { get; }
 <<<<<<< HEAD
         public IStaffRepository  EmployeeRepositories { get; }
+<<<<<<< HEAD
         public IVendorRepository VendorRepositories { get; }
 =======
         public IStaffRepository  StaffRepositories { get; }
 >>>>>>> fm-boilerplate
+=======
+        public IAddressRepository AddressRepositories { get; }
+        public IVendorRepository VendorRepositories { get; }        
+>>>>>>> ef4520a6e7dfe0f38542af7a7fb72274d25103b1
         public async Task SaveAsync()
         {
             using (_dbcontext.Database.BeginTransaction())
