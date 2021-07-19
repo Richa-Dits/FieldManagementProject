@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FieldMgt.Repository.Repository.Exception
+namespace FieldMgt.Repository.Repository.Exceptions
 {
     public class ExceptionRepository : GenericRepository<ExceptionLog>,IExceptionInterface
     {

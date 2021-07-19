@@ -17,7 +17,7 @@ using FieldMgt.API.Infrastructure.MiddleWares.ErrorHandler;
 using FieldMgt.API.Infrastructure.Factories.PathProvider;
 using Excepticon.Extensions;
 using Excepticon.AspNetCore;
-using FieldMgt.Repository.Repository.Exception;
+using FieldMgt.Repository.Repository.Exceptions;
 
 namespace FieldMgt
 {

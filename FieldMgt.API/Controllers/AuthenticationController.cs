@@ -69,8 +69,8 @@ namespace FieldMgt.Controllers
                         permanentAddressModelDTO.ZipCode = model.PermanentZipCode;
                         permanentAddressModelDTO.CreatedBy = _currentUserService.GetUserId();
                         permanentAddressModelDTO.CreatedOn = System.DateTime.Now;
-                        AddressDetail permanentPayload = _mapper.Map<CreateAddressDTO, AddressDetail>(permanentAddressModelDTO);
-                        CreateAddressDTO correspondenceAddressModelDTO = new CreateAddressDTO();
+                    AddressDetail permanentPayload = _mapper.Map<CreateAddressDTO, AddressDetail>(permanentAddressModelDTO);
+                    CreateAddressDTO correspondenceAddressModelDTO = new CreateAddressDTO();
                         correspondenceAddressModelDTO.Address = model.CorrespondenceAddress;
                         correspondenceAddressModelDTO.City = model.CorrespondenceCity;
                         correspondenceAddressModelDTO.State = model.CorrespondenceState;
@@ -78,16 +78,16 @@ namespace FieldMgt.Controllers
                         correspondenceAddressModelDTO.ZipCode = model.CorrespondenceZipCode;
                         correspondenceAddressModelDTO.CreatedBy = _currentUserService.GetUserId();
                         correspondenceAddressModelDTO.CreatedOn = System.DateTime.Now;
-                        AddressDetail correspondencePayload = _mapper.Map<CreateAddressDTO, AddressDetail>(correspondenceAddressModelDTO);
-                        CreateContactDetailDTO contactModelDTO = new CreateContactDetailDTO();
+                    AddressDetail correspondencePayload = _mapper.Map<CreateAddressDTO, AddressDetail>(correspondenceAddressModelDTO);
+                    CreateContactDetailDTO contactModelDTO = new CreateContactDetailDTO();
                         contactModelDTO.PrimaryPhone = model.PrimaryPhone;
                         contactModelDTO.AlternatePhone = model.AlternatePhone;
                         contactModelDTO.PrimaryEmail = model.PrimaryEmail;
                         contactModelDTO.AlternateEmail = model.AlternateEmail;
                         contactModelDTO.CreatedBy= _currentUserService.GetUserId();
                         contactModelDTO.CreatedOn= System.DateTime.Now;
-                        ContactDetail contactPayload = _mapper.Map<CreateContactDetailDTO, ContactDetail>(contactModelDTO);
-                        var result1 = await _uow.SaveAsync1();
+                    ContactDetail contactPayload = _mapper.Map<CreateContactDetailDTO, ContactDetail>(contactModelDTO);
+                    var result1 = await _uow.SaveAsync1();
                         if (result1.Equals(1))
                         {
                             return Ok(result);//status code 200
