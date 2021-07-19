@@ -20,7 +20,8 @@ namespace FieldMgt.Repository.Repository
         }
         public IEnumerable<Vendor> GetVendorsAsync()
         {
-            return GetAll();
+            var vendors = _dbcontext.Vendors.Where(a => a.IsDeleted == true).ToList();
+            return vendors;
         }
         public Vendor GetVendorbyIdAsync(int id)
         {
