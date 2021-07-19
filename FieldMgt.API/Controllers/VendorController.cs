@@ -39,6 +39,7 @@ namespace FieldMgt.API.Controllers
                 addressDTO.StateId = model.PermanentState;
                 addressDTO.CountryId = model.PermanentCountry;
                 addressDTO.AddressType = model.AddressType;
+                addressDTO.ZipCode = model.ZipCode;
                 AddressDetail addressDetail = _mapper.Map<CreateAddressDTO, AddressDetail>(addressDTO);
                 var resp=_uow.AddressRepositories.SaveAddress(addressDetail);
                 var result = await _uow.SaveAsync1();
