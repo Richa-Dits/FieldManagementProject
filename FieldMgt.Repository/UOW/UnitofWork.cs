@@ -7,7 +7,6 @@ using FieldMgt.Core.UOW;
 
 namespace FieldMgt.Repository.UOW
 {
-
     public class UnitofWork : IUnitofWork
     {
         private readonly ApplicationDbContext _dbcontext;        
@@ -16,13 +15,22 @@ namespace FieldMgt.Repository.UOW
             _dbcontext = dbContext;
             LeadServices = new LeadRepository(_dbcontext);
             LeadContactRepositories = new LeadContactRepository(_dbcontext);
+            //EmployeeRepositories = new StaffRepository(_dbcontext);
+            VendorRepositories = new VendorRepository(_dbcontext);
             StaffRepositories = new StaffRepository(_dbcontext);
+            AddressRepositories = new AddressRepository(_dbcontext);
         }
         public ILeadRepository LeadServices { get; }
         public IUserRepository USerServices { get; }
         public IRoleRepository RoleServices { get; }
         public ILeadContactRepository LeadContactRepositories { get; }
+
+        public IVendorRepository VendorRepositories { get; }
+
         public IStaffRepository  StaffRepositories { get; }
+
+        public IAddressRepository AddressRepositories { get; }  
+
         public async Task SaveAsync()
         {
             using (_dbcontext.Database.BeginTransaction())
