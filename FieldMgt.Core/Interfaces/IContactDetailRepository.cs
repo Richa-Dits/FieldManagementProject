@@ -8,6 +8,7 @@ namespace FieldMgt.Core.Interfaces
 {
     public interface IContactDetailRepository
     {
-        Task<int> SaveContactDtails(ContactDetail model);
+        Task<int> SaveContactDetails(ContactDetail model);
+        ContactDetail DeleteContact(int contactId, string deletedBy);
     }
 }

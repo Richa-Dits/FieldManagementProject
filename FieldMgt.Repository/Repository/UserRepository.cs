@@ -22,12 +22,12 @@ namespace FieldMgt.Repository.Repository
         private readonly UserManager<ApplicationUser> _userManager;
 
         private IConfiguration _configuration;
-        private ApplicationDbContext _dbcontext;
+        private ApplicationDbContext _dbContext;
         public UserRepository(UserManager<ApplicationUser> userManager, ApplicationDbContext dbcontext, IConfiguration configuration)
         {
             _userManager = userManager;
             _configuration = configuration;
-            _dbcontext = dbcontext;            
+            _dbContext = dbcontext;            
         }
         public async Task<UserManagerReponse> RegisterUserAsync(RegisterUserDTO model)
         {
@@ -145,9 +145,9 @@ namespace FieldMgt.Repository.Repository
                 user.IsDeleted = true;
                 user.DeletedBy = deletedBy;
                 user.DeletedOn = System.DateTime.Now;
-                _dbcontext.Attach(user);
-                _dbcontext.Entry(user).State = EntityState.Modified;
-                await _dbcontext.SaveChangesAsync();
+                _dbContext.Attach(user);
+                _dbContext.Entry(user).State = EntityState.Modified;
+                await _dbContext.SaveChangesAsync();
                 return user.Id;
             }
             

@@ -9,10 +9,10 @@ namespace FieldMgt.Repository.Repository
 {
     public class VendorRepository : GenericRepository<Vendor>, IVendorRepository
     {
-        private readonly ApplicationDbContext _dbcontext;
+        private readonly ApplicationDbContext _dbContext;
         public VendorRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
-            _dbcontext = dbContext;
+            _dbContext = dbContext;
         }
         public async Task CreateVendorAsync(Vendor model)
         {
@@ -20,12 +20,12 @@ namespace FieldMgt.Repository.Repository
         }
         public IEnumerable<Vendor> GetVendorsAsync()
         {
-            var vendors = _dbcontext.Vendors.Where(a => a.IsDeleted == true).ToList();
+            var vendors = _dbContext.Vendors.Where(a => a.IsDeleted == true).ToList();
             return vendors;
         }
         public Vendor GetVendorbyIdAsync(int id)
         {
-            var result = _dbcontext.Vendors.FirstOrDefault(l => l.VendorId == id);
+            var result = _dbContext.Vendors.FirstOrDefault(l => l.VendorId == id);
             return result;
         }
         public Vendor UpdateVendorStatusAsync(Vendor lead)

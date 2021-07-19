@@ -9,16 +9,17 @@ namespace FieldMgt.Repository.UOW
 {
     public class UnitofWork : IUnitofWork
     {
-        private readonly ApplicationDbContext _dbcontext;        
+        private readonly ApplicationDbContext _dbContext;        
         public UnitofWork(ApplicationDbContext dbContext)
         {
-            _dbcontext = dbContext;
-            LeadServices = new LeadRepository(_dbcontext);
-            LeadContactRepositories = new LeadContactRepository(_dbcontext);
-            //EmployeeRepositories = new StaffRepository(_dbcontext);
-            VendorRepositories = new VendorRepository(_dbcontext);
-            StaffRepositories = new StaffRepository(_dbcontext);
-            AddressRepositories = new AddressRepository(_dbcontext);
+            _dbContext = dbContext;
+            LeadServices = new LeadRepository(_dbContext);
+            LeadContactRepositories = new LeadContactRepository(_dbContext);
+            //EmployeeRepositories = new StaffRepository(_dbContext);
+            VendorRepositories = new VendorRepository(_dbContext);
+            StaffRepositories = new StaffRepository(_dbContext);
+            AddressRepositories = new AddressDetailRepository(_dbContext);
+            ContactDetailRepositories = new ContactDetailRepository(_dbContext);
         }
         public ILeadRepository LeadServices { get; }
         public IUserRepository USerServices { get; }
@@ -29,37 +30,38 @@ namespace FieldMgt.Repository.UOW
 
         public IStaffRepository  StaffRepositories { get; }
 
-        public IAddressRepository AddressRepositories { get; }  
+        public IAddressDetailRepository AddressRepositories { get; }  
+        public IContactDetailRepository ContactDetailRepositories { get; }
 
         public async Task SaveAsync()
         {
-            using (_dbcontext.Database.BeginTransaction())
+            using (_dbContext.Database.BeginTransaction())
             {
                 try
                 {
-                    await _dbcontext.SaveChangesAsync();
-                    _dbcontext.Database.CommitTransaction();
+                    await _dbContext.SaveChangesAsync();
+                    _dbContext.Database.CommitTransaction();
                 }
                 catch (Exception ex)
                 {
-                    _dbcontext.Database.RollbackTransaction();
+                    _dbContext.Database.RollbackTransaction();
                     throw new Exception(ex.Message);
                 }
             }
         }
         public async Task<int> SaveAsync1()
         {
-            using (_dbcontext.Database.BeginTransaction())
+            using (_dbContext.Database.BeginTransaction())
             {
                 try
                 {
-                    var result = await _dbcontext.SaveChangesAsync();
-                    _dbcontext.Database.CommitTransaction();
+                    var result = await _dbContext.SaveChangesAsync();
+                    _dbContext.Database.CommitTransaction();
                     return result;
                 }
                 catch (Exception ex)
                 {
-                    _dbcontext.Database.RollbackTransaction();
+                    _dbContext.Database.RollbackTransaction();
                     throw new Exception(ex.Message);
                 }
             }

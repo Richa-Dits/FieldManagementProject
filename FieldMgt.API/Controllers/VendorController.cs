@@ -18,9 +18,9 @@ namespace FieldMgt.API.Controllers
         private readonly IUnitofWork _uow;
         private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
-        private readonly IAddressRepository _addressRepository1;
+        private readonly IAddressDetailRepository _addressRepository1;
         private readonly IContactDetailRepository _contactRepository;
-        public VendorController(IUnitofWork uow, IMapper mapper, ICurrentUserService currentUserService, IAddressRepository addressRepository, IContactDetailRepository contactRepository)
+        public VendorController(IUnitofWork uow, IMapper mapper, ICurrentUserService currentUserService, IAddressDetailRepository addressRepository, IContactDetailRepository contactRepository)
         {
             _uow = uow;
             _mapper = mapper;
@@ -37,7 +37,8 @@ namespace FieldMgt.API.Controllers
                 addressDTO.Address = model.PermanentAddress;
                 addressDTO.CityId = model.PermanentCity;
                 addressDTO.StateId = model.PermanentState;
-                addressDTO.CountryId = model.PermanentCountry;
+                addressDTO.CountryId
+                    = model.PermanentCountry;
                 addressDTO.AddressType = model.AddressType;
                 addressDTO.ZipCode = model.ZipCode;
                 AddressDetail addressDetail = _mapper.Map<CreateAddressDTO, AddressDetail>(addressDTO);
@@ -53,7 +54,7 @@ namespace FieldMgt.API.Controllers
                     contactDetailDTO.CreatedBy= _currentUserService.GetUserId();
                     contactDetailDTO.CreatedOn= System.DateTime.Now;
                     ContactDetail contactDetail = _mapper.Map<CreateContactDetailDTO, ContactDetail>(contactDetailDTO);
-                    var response = _contactRepository.SaveContactDtails(contactDetail);
+                    var response = _contactRepository.SaveContactDetails(contactDetail);
                     if (response != null)
                     {
                         CreateVendorDTO modelDTO = new CreateVendorDTO();

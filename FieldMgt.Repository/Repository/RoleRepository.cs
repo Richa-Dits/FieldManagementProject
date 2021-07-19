@@ -13,17 +13,17 @@ namespace FieldMgt.Repository.Repository
     public class RoleRepository:IRoleRepository
     {
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly ApplicationDbContext _dbcontext;
+        private readonly ApplicationDbContext _dbContext;
         private readonly UserManager<ApplicationUser> _userManager;
         public RoleRepository(RoleManager<IdentityRole> roleManager, ApplicationDbContext dbcontext, UserManager<ApplicationUser> userManager)
         {
             _roleManager = roleManager;
-            _dbcontext = dbcontext;
+            _dbContext = dbcontext;
             _userManager = userManager;
         }
         public RoleRepository(ApplicationDbContext dbcontext)
         {
-            _dbcontext = dbcontext;
+            _dbContext = dbcontext;
         }
         /// <summary>
         /// Add new Role in database table
@@ -57,7 +57,7 @@ namespace FieldMgt.Repository.Repository
         /// <returns></returns>
         public IEnumerable<string> ListRoles()
         {
-           var roles= _dbcontext.Roles.ToList();
+           var roles= _dbContext.Roles.ToList();
             foreach(var role in roles)
             {
                 yield return role.Name;

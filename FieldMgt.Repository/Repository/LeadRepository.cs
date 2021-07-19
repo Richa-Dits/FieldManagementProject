@@ -9,10 +9,10 @@ namespace FieldMgt.Repository.Repository
 { 
     public class LeadRepository:GenericRepository<Lead>,ILeadRepository
     {
-        private readonly ApplicationDbContext _dbcontext;
+        private readonly ApplicationDbContext _dbContext;
         public LeadRepository(ApplicationDbContext dbContext):base(dbContext)
         {
-            _dbcontext = dbContext;
+            _dbContext = dbContext;
         }        
         public async Task CreateLeadAsync(Lead model)
         {
@@ -21,11 +21,11 @@ namespace FieldMgt.Repository.Repository
         public  IEnumerable<Lead> GetLeadsAsync()
         {
             return GetAll();
-            //return  _dbcontext.Leads.ToList();
+            //return  _dbContext.Leads.ToList();
         }
         public Lead GetLeadbyIdAsync(int id)
         {
-            var result= _dbcontext.Leads.FirstOrDefault(l =>l.LeadId == id);            
+            var result= _dbContext.Leads.FirstOrDefault(l =>l.LeadId == id);            
             return result;
         }
         public Lead UpdateLeadStatusAsync(Lead lead)

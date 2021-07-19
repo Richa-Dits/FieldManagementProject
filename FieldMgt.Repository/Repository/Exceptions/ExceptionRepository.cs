@@ -10,15 +10,15 @@ namespace FieldMgt.Repository.Repository.Exceptions
 {
     public class ExceptionRepository : GenericRepository<ExceptionLog>,IExceptionInterface
     {
-        private readonly ApplicationDbContext _dbcontext;
+        private readonly ApplicationDbContext _dbContext;
         public ExceptionRepository(ApplicationDbContext dbContext):base(dbContext)
         {
-            _dbcontext = dbContext;
+            _dbContext = dbContext;
         }
         public async Task SaveLogs(ExceptionLog model)
         {
             await InsertAsync(model);
-            await _dbcontext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

@@ -28,7 +28,7 @@ namespace FieldMgt.Controllers
             _currentUserService = currentUserService;
             _uow = uow;
         }        
-        [Authorize(Policy = "Admin")]
+        //[Authorize(Policy = "Admin")]
         [HttpPost]
         [Route("api/auth/Register")]
         public async Task<IActionResult> RegisterAsync([FromBody]CreateEmployeeDTO model)
@@ -43,50 +43,56 @@ namespace FieldMgt.Controllers
                 registerDTO.CreatedOn = System.DateTime.Now;
                     var result = await _userRepository.RegisterUserAsync(registerDTO);
                     if (result.IsSuccess)
-                    {
-                        RegistrationDTO modelDTO = new RegistrationDTO();
-                        modelDTO.EmployeeId = null;
-                        modelDTO.Email = model.Email;
-                        modelDTO.FirstName = model.FirstName;
-                        modelDTO.LastName = model.LastName;
-                        modelDTO.Gender = model.Gender;
-                        modelDTO.DOB = model.DOB;
-                        //modelDTO.PermanentAddressId = model.PermanentAddressId;
-                        //modelDTO.CorrespondenceAddressId = model.PermanentAddressId;
-                        //modelDTO.ContactDetailId = model.PermanentAddressId;
-                        modelDTO.IsActive = true;
-                        modelDTO.UserId = result.Id;
-                        modelDTO.Designation = model.Designation;
-                        modelDTO.CreatedOn = System.DateTime.Now;
-                        modelDTO.CreatedBy = _currentUserService.GetUserId();
-                        Staff payload = _mapper.Map<RegistrationDTO, Staff>(modelDTO);
-                        await _uow.StaffRepositories.CreateStaffAsync(payload);
+                    {                        
                         CreateAddressDTO permanentAddressModelDTO = new CreateAddressDTO();
                         permanentAddressModelDTO.Address = model.PermanentAddress;
-                        permanentAddressModelDTO.City = model.PermanentCity;
-                        permanentAddressModelDTO.State = model.PermanentState;
-                        permanentAddressModelDTO.Country = model.PermanentCountry;
+                        permanentAddressModelDTO.CityId = model.PermanentCity;
+                        permanentAddressModelDTO.StateId = model.PermanentState;
+                        permanentAddressModelDTO.CountryId = model.PermanentCountry;
                         permanentAddressModelDTO.ZipCode = model.PermanentZipCode;
                         permanentAddressModelDTO.CreatedBy = _currentUserService.GetUserId();
                         permanentAddressModelDTO.CreatedOn = System.DateTime.Now;
-                    AddressDetail permanentPayload = _mapper.Map<CreateAddressDTO, AddressDetail>(permanentAddressModelDTO);
-                    CreateAddressDTO correspondenceAddressModelDTO = new CreateAddressDTO();
+                        permanentAddressModelDTO.AddressType = 1;
+                        AddressDetail permanentPayload = _mapper.Map<CreateAddressDTO, AddressDetail>(permanentAddressModelDTO);
+                        var permanentAddressResponse = _uow.AddressRepositories.SaveAddress(permanentPayload);
+                        CreateAddressDTO correspondenceAddressModelDTO = new CreateAddressDTO();
                         correspondenceAddressModelDTO.Address = model.CorrespondenceAddress;
-                        correspondenceAddressModelDTO.City = model.CorrespondenceCity;
-                        correspondenceAddressModelDTO.State = model.CorrespondenceState;
-                        correspondenceAddressModelDTO.Country = model.CorrespondenceCountry;
+                        correspondenceAddressModelDTO.CityId = model.CorrespondenceCity;
+                        correspondenceAddressModelDTO.StateId = model.CorrespondenceState;
+                        correspondenceAddressModelDTO.CountryId = model.CorrespondenceCountry;
                         correspondenceAddressModelDTO.ZipCode = model.CorrespondenceZipCode;
                         correspondenceAddressModelDTO.CreatedBy = _currentUserService.GetUserId();
                         correspondenceAddressModelDTO.CreatedOn = System.DateTime.Now;
-                    AddressDetail correspondencePayload = _mapper.Map<CreateAddressDTO, AddressDetail>(correspondenceAddressModelDTO);
-                    CreateContactDetailDTO contactModelDTO = new CreateContactDetailDTO();
+                        correspondenceAddressModelDTO.AddressType = 2;
+                        AddressDetail correspondencePayload = _mapper.Map<CreateAddressDTO, AddressDetail>(correspondenceAddressModelDTO);
+                        var correspondenceAddressResponse = _uow.AddressRepositories.SaveAddress(correspondencePayload);
+                        CreateContactDetailDTO contactModelDTO = new CreateContactDetailDTO();
                         contactModelDTO.PrimaryPhone = model.PrimaryPhone;
                         contactModelDTO.AlternatePhone = model.AlternatePhone;
                         contactModelDTO.PrimaryEmail = model.PrimaryEmail;
                         contactModelDTO.AlternateEmail = model.AlternateEmail;
                         contactModelDTO.CreatedBy= _currentUserService.GetUserId();
                         contactModelDTO.CreatedOn= System.DateTime.Now;
-                    ContactDetail contactPayload = _mapper.Map<CreateContactDetailDTO, ContactDetail>(contactModelDTO);
+                    
+                        ContactDetail contactPayload = _mapper.Map<CreateContactDetailDTO, ContactDetail>(contactModelDTO);
+                        var contactResponse = _uow.ContactDetailRepositories.SaveContactDetails(contactPayload);
+                    RegistrationDTO modelDTO = new RegistrationDTO();
+                    modelDTO.EmployeeId = null;
+                    modelDTO.Email = model.Email;
+                    modelDTO.FirstName = model.FirstName;
+                    modelDTO.LastName = model.LastName;         
+                    modelDTO.Gender = model.Gender;
+                    modelDTO.DOB = model.DOB;
+                    modelDTO.PermanentAddressId = permanentAddressResponse.Id;
+                    modelDTO.CorrespondenceAddressId = correspondenceAddressResponse.Id;
+                    modelDTO.ContactDetailId = contactResponse.Id;
+                    modelDTO.IsActive = true;
+                    modelDTO.UserId = result.Id;
+                    modelDTO.Designation = model.Designation;
+                    modelDTO.CreatedOn = System.DateTime.Now;
+                    modelDTO.CreatedBy = _currentUserService.GetUserId();
+                    Staff payload = _mapper.Map<RegistrationDTO, Staff>(modelDTO);
+                    await _uow.StaffRepositories.CreateStaffAsync(payload);
                     var result1 = await _uow.SaveAsync1();
                         if (result1.Equals(1))
                         {
@@ -133,20 +139,20 @@ namespace FieldMgt.Controllers
                     var updatedstaff = _uow.StaffRepositories.DeleteStaff(staffId, deletedBy);
                     if(updatedstaff !=null)
                     {
-                        var permanentId = updatedstaff.PermanentAddressId;
-                        var correspondenceId = updatedstaff.CorrespondenceAddressId;
-                        var contactId = updatedstaff.ContactDetailId;
+                        int permanentId = (int)updatedstaff.PermanentAddressId;
+                        int correspondenceId = (int)updatedstaff.CorrespondenceAddressId;
+                        int contactId = (int)updatedstaff.ContactDetailId;
                         if(permanentId!=0)
                         {
-                            
+                            _uow.AddressRepositories.DeleteAddress(permanentId,deletedBy);
                         }
                         if(correspondenceId!=0)
                         {
-
+                            _uow.AddressRepositories.DeleteAddress(correspondenceId, deletedBy);
                         }
                         if(contactId!=0)
                         {
-
+                            _uow.AddressRepositories.DeleteAddress(contactId, deletedBy);
                         }
                     }
                     else

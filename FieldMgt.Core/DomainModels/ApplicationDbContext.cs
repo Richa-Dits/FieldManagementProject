@@ -664,6 +664,21 @@ namespace FieldMgt.Core.DomainModels
                 .WithMany(fk => fk.AddressTypeRef)
                 .HasForeignKey(fk => fk.AddressType)
                 .HasConstraintName("AddressTypeRef_FK");
+
+                act.HasOne(field => field.AddressCreatedBy)
+                .WithMany(fk => fk.Ref93Navigation)
+                .HasForeignKey(fk => fk.CreatedBy)
+                .HasConstraintName("AddressCreatedBy_FK");
+
+                act.HasOne(field => field.AddressModifiedBy)
+                .WithMany(fk => fk.Ref94Navigation)
+                .HasForeignKey(fk => fk.ModifiedBy)
+                .HasConstraintName("AddressModifiedBy_FK");
+
+                act.HasOne(field => field.AddressDeletedBy)
+                .WithMany(fk => fk.Ref95Navigation)
+                .HasForeignKey(fk => fk.DeletedBy)
+                .HasConstraintName("AddressDeletedBy_FK");
             });
             modelBuilder.Entity<ClientContact>(act =>
             {

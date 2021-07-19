@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace FieldMgt.Core.Interfaces
 {
-    public interface IAddressRepository
+    public interface IAddressDetailRepository
     {
         Task<int> SaveAddress(AddressDetail model);
-        //Task SaveContactDetals(ContactDetail model);
+        AddressDetail DeleteAddress(int addressId, string deletedBy);        
     }
 }

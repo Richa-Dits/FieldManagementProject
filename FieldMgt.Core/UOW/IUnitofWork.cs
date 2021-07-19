@@ -13,7 +13,8 @@ namespace FieldMgt.Core.UOW
         ILeadContactRepository LeadContactRepositories { get; }
         IVendorRepository VendorRepositories { get; }
         IStaffRepository StaffRepositories { get; }
-        IAddressRepository AddressRepositories { get; }  
+        IAddressDetailRepository AddressRepositories { get; }  
+        IContactDetailRepository ContactDetailRepositories { get; }
         Task SaveAsync();
         Task<int> SaveAsync1();
     }
