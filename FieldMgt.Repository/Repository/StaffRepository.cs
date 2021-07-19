@@ -5,6 +5,7 @@ using FieldMgt.Repository.UOW;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
 
 namespace FieldMgt.Repository.Repository
 {
@@ -29,26 +30,27 @@ namespace FieldMgt.Repository.Repository
             var emp = _dbContext.Staffs.Where(a => a.IsDeleted == true).ToList();
             return emp;
         }
-        public UserManagerReponse DeleteStaff(string userName, string deletedBy)
+        public Staff DeleteStaff(string staffId, string deletedBy)
         {
-            var emp = _dbContext.Staffs.FirstOrDefault();
-            //commented to create the db
-            //var emp = _dbContext.Staff.Where(a => a.Email == userName).Single();
-            if(!(emp==null|| emp.IsDeleted==true))
+            try
             {
-                emp.IsDeleted = true;
-                emp.DeletedBy =deletedBy;
-                emp.DeletedOn = System.DateTime.Now;
-                var emp1= Update(emp);              
-                return new UserManagerReponse
+                //var emp = _dbContext.Staffs.FirstOrDefault();
+                //commented to create the db
+                var emp = _dbContext.Staffs.Where(a => a.UserId == staffId).Single();
+                if (!(emp == null || emp.IsDeleted == true))
                 {
-                    Message = "Staff has been deleted"
-                };
+                    emp.IsDeleted = true;
+                    emp.DeletedBy = deletedBy;
+                    emp.DeletedOn = System.DateTime.Now;
+                    var emp1 = Update(emp);
+                    return emp;
+                }
+                return null;
             }
-            return new UserManagerReponse 
-            { 
-                Message ="Staff Not Found"
-            };
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public Staff UpdateStaffAsync(Staff model)
         {

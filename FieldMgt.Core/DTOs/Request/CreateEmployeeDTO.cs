@@ -19,6 +19,11 @@ namespace FieldMgt.Core.DTOs.Request
         public string ConfirmPassword { get; set; }
         public string FirstName { get; set; }        
         public string LastName { get; set; }
+        public int? Gender { get; set; }
+        public DateTime? DOB { get; set; }
+        //public int? PermanentAddressId { get; set; }
+        //public int? CorrespondenceAddressId { get; set; }
+        //public int? ContactDetailId { get; set; }
         [StringLength(100, MinimumLength = 5)]
         public string PermanentAddress { get; set; }
         public int PermanentCity { get; set; }
@@ -33,9 +38,15 @@ namespace FieldMgt.Core.DTOs.Request
         public string CorrespondenceZipCode { get; set; }
         [DefaultValue(true)]
         public bool IsActive { get; set; }
-        public string UserId { get; set; }   
-        [Phone]
-        public string Phone { get; set; }
+        public string UserId { get; set; }
+        [Phone(ErrorMessage = "Please Enter valid Phone Number")]
+        public string PrimaryPhone { get; set; }
+        [Phone(ErrorMessage = "Please Enter valid Phone Number")]
+        public string AlternatePhone { get; set; }
+        [EmailAddress(ErrorMessage = "Please Enter valid Email Address")]
+        public string PrimaryEmail { get; set; }
+        [EmailAddress(ErrorMessage = "Please Enter valid Email Address")]
+        public string AlternateEmail { get; set; }
         public int Designation { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }

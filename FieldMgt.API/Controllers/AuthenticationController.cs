@@ -15,15 +15,15 @@ namespace FieldMgt.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]    
-    public class AuthController : ControllerBase
+    public class AuthenticationController : ControllerBase
     {
-        private readonly IUserRepository _userService;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly IUnitofWork _uow;
         private readonly ICurrentUserService _currentUserService;
-        public AuthController(IUserRepository userService, IUnitofWork uow, IMapper mapper,ICurrentUserService currentUserService)
+        public AuthenticationController(IUserRepository userRepository, IUnitofWork uow, IMapper mapper,ICurrentUserService currentUserService)
         {
-            _userService=userService;
+            _userRepository = userRepository;
             _mapper = mapper;
             _currentUserService = currentUserService;
             _uow = uow;
@@ -41,7 +41,7 @@ namespace FieldMgt.Controllers
                 registerDTO.ConfirmPassword = model.ConfirmPassword;
                 registerDTO.CreatedBy = _currentUserService.GetUserId();
                 registerDTO.CreatedOn = System.DateTime.Now;
-                    var result = await _userService.RegisterUserAsync(registerDTO);
+                    var result = await _userRepository.RegisterUserAsync(registerDTO);
                     if (result.IsSuccess)
                     {
                         RegistrationDTO modelDTO = new RegistrationDTO();
@@ -49,27 +49,45 @@ namespace FieldMgt.Controllers
                         modelDTO.Email = model.Email;
                         modelDTO.FirstName = model.FirstName;
                         modelDTO.LastName = model.LastName;
+                        modelDTO.Gender = model.Gender;
+                        modelDTO.DOB = model.DOB;
+                        //modelDTO.PermanentAddressId = model.PermanentAddressId;
+                        //modelDTO.CorrespondenceAddressId = model.PermanentAddressId;
+                        //modelDTO.ContactDetailId = model.PermanentAddressId;
                         modelDTO.IsActive = true;
                         modelDTO.UserId = result.Id;
-                        modelDTO.Phone = model.Phone;
                         modelDTO.Designation = model.Designation;
                         modelDTO.CreatedOn = System.DateTime.Now;
                         modelDTO.CreatedBy = _currentUserService.GetUserId();
                         Staff payload = _mapper.Map<RegistrationDTO, Staff>(modelDTO);
-                        await _uow.EmployeeRepositories.CreateStaffAsync(payload);
+                        await _uow.StaffRepositories.CreateStaffAsync(payload);
                         CreateAddressDTO permanentAddressModelDTO = new CreateAddressDTO();
                         permanentAddressModelDTO.Address = model.PermanentAddress;
                         permanentAddressModelDTO.City = model.PermanentCity;
                         permanentAddressModelDTO.State = model.PermanentState;
                         permanentAddressModelDTO.Country = model.PermanentCountry;
                         permanentAddressModelDTO.ZipCode = model.PermanentZipCode;
-                        CreateAddressDTO correspondenceAddressModelDTO = new CreateAddressDTO();
+                        permanentAddressModelDTO.CreatedBy = _currentUserService.GetUserId();
+                        permanentAddressModelDTO.CreatedOn = System.DateTime.Now;
+                    AddressDetail permanentPayload = _mapper.Map<CreateAddressDTO, AddressDetail>(permanentAddressModelDTO);
+                    CreateAddressDTO correspondenceAddressModelDTO = new CreateAddressDTO();
                         correspondenceAddressModelDTO.Address = model.CorrespondenceAddress;
                         correspondenceAddressModelDTO.City = model.CorrespondenceCity;
                         correspondenceAddressModelDTO.State = model.CorrespondenceState;
                         correspondenceAddressModelDTO.Country = model.CorrespondenceCountry;
                         correspondenceAddressModelDTO.ZipCode = model.CorrespondenceZipCode;
-                        var result1 = await _uow.SaveAsync1();
+                        correspondenceAddressModelDTO.CreatedBy = _currentUserService.GetUserId();
+                        correspondenceAddressModelDTO.CreatedOn = System.DateTime.Now;
+                    AddressDetail correspondencePayload = _mapper.Map<CreateAddressDTO, AddressDetail>(correspondenceAddressModelDTO);
+                    CreateContactDetailDTO contactModelDTO = new CreateContactDetailDTO();
+                        contactModelDTO.PrimaryPhone = model.PrimaryPhone;
+                        contactModelDTO.AlternatePhone = model.AlternatePhone;
+                        contactModelDTO.PrimaryEmail = model.PrimaryEmail;
+                        contactModelDTO.AlternateEmail = model.AlternateEmail;
+                        contactModelDTO.CreatedBy= _currentUserService.GetUserId();
+                        contactModelDTO.CreatedOn= System.DateTime.Now;
+                    ContactDetail contactPayload = _mapper.Map<CreateContactDetailDTO, ContactDetail>(contactModelDTO);
+                    var result1 = await _uow.SaveAsync1();
                         if (result1.Equals(1))
                         {
                             return Ok(result);//status code 200
@@ -92,7 +110,7 @@ namespace FieldMgt.Controllers
         {
             try
             {
-                var result = await _userService.LoginUserAsync(model);
+                var result = await _userRepository.LoginUserAsync(model);
                 return Ok(result);//status code 200
             }
             catch (Exception ex)
@@ -105,25 +123,56 @@ namespace FieldMgt.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteUser(string userName)
         {
-            var deletedBy = _currentUserService.GetUserId();
-            var resultUser=await _userService.DeleteUser(userName,deletedBy);
-            if (resultUser.Equals(1))
+            try
             {
-                var updated = _uow.EmployeeRepositories.DeleteStaff(userName, deletedBy);
-                var result = await _uow.SaveAsync1();
-                if (result.Equals(1))
+                var deletedBy = _currentUserService.GetUserId();
+                var resultUser = await _userRepository.DeleteUser(userName, deletedBy);
+                if (resultUser!=null)
                 {
-                    return Ok(result);//status code 200
+                    var staffId = resultUser;
+                    var updatedstaff = _uow.StaffRepositories.DeleteStaff(staffId, deletedBy);
+                    if(updatedstaff !=null)
+                    {
+                        var permanentId = updatedstaff.PermanentAddressId;
+                        var correspondenceId = updatedstaff.CorrespondenceAddressId;
+                        var contactId = updatedstaff.ContactDetailId;
+                        if(permanentId!=0)
+                        {
+                            
+                        }
+                        if(correspondenceId!=0)
+                        {
+
+                        }
+                        if(contactId!=0)
+                        {
+
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                    var result = await _uow.SaveAsync1();
+                    if (result.Equals(1))
+                    {
+                        return Ok(result);//status code 200
+                    }
+                    else
+                    {
+                        return BadRequest("User can not be deleted");
+                    }
                 }
                 else
                 {
-                    return BadRequest("User can not be deleted");
+                    return BadRequest("User Doesn't Exist");
                 }
             }
-            else
+            catch(Exception ex)
             {
-                return BadRequest("User Doesn't Exist");
+                throw ex;
             }
+            
         }
     }
 }

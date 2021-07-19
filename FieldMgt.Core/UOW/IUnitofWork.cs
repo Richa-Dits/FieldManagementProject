@@ -11,7 +11,7 @@ namespace FieldMgt.Core.UOW
         IUserRepository USerServices { get; }
         IRoleRepository RoleServices { get; }
         ILeadContactRepository LeadContactRepositories { get; }
-        IStaffRepository EmployeeRepositories { get; }
+        IStaffRepository StaffRepositories { get; }
         Task SaveAsync();
         Task<int> SaveAsync1();
     }

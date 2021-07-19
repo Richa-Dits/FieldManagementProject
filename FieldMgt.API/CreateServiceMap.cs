@@ -11,6 +11,8 @@ namespace FieldMgt
             CreateMap<CreateLeadDTO, Lead>().ReverseMap();
             CreateMap<CreateLeadContactDTO, LeadContact>().ReverseMap();
             CreateMap<RegistrationDTO, Staff>().ReverseMap();
+            CreateMap<CreateAddressDTO, AddressDetail>().ReverseMap();
+            CreateMap<CreateContactDetailDTO, ContactDetail>().ReverseMap();
         }
     }
 }

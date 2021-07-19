@@ -133,12 +133,12 @@ namespace FieldMgt.Repository.Repository
                 Role = userrole
             };
         }
-        public async Task<int> DeleteUser(string userName, string deletedBy)
+        public async Task<string> DeleteUser(string userName, string deletedBy)
         {
             var user = _userManager.Users.FirstOrDefault(x => x.UserName == userName);
             if(user.IsDeleted==true || user==null)
             {
-                return 0;
+                return null;
             }
             else
             {
@@ -148,7 +148,7 @@ namespace FieldMgt.Repository.Repository
                 _dbcontext.Attach(user);
                 _dbcontext.Entry(user).State = EntityState.Modified;
                 await _dbcontext.SaveChangesAsync();
-                return 1;
+                return user.Id;
             }
             
         }

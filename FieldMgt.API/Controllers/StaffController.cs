@@ -27,13 +27,13 @@ namespace FieldMgt.API.Controllers
         [HttpGet]
         public IEnumerable<Staff> GetStaff()
         {
-            return  _uow.EmployeeRepositories.GetStaff();
+            return  _uow.StaffRepositories.GetStaff();
         }
         [Route("~/api/Staff/ById/{id}")]
         [HttpGet]
         public IActionResult GetStaffbyId(int id)
         {
-            var result = _uow.EmployeeRepositories.GetStaffbyId(id);
+            var result = _uow.StaffRepositories.GetStaffbyId(id);
             if (result == null)
             {
                 return BadRequest("Staff Member doesnt exist");
@@ -44,7 +44,7 @@ namespace FieldMgt.API.Controllers
         [HttpPatch]
         public async Task<IActionResult> UpdateStaffAsync(Staff model)
         {
-            var updated= _uow.EmployeeRepositories.UpdateStaffAsync(model);
+            var updated= _uow.StaffRepositories.UpdateStaffAsync(model);
             var result = await _uow.SaveAsync1();
             if (result.Equals(1))
             {

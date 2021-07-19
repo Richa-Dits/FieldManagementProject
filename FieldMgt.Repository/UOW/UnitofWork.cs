@@ -16,13 +16,13 @@ namespace FieldMgt.Repository.UOW
             _dbcontext = dbContext;
             LeadServices = new LeadRepository(_dbcontext);
             LeadContactRepositories = new LeadContactRepository(_dbcontext);
-            EmployeeRepositories = new StaffRepository(_dbcontext);
+            StaffRepositories = new StaffRepository(_dbcontext);
         }
         public ILeadRepository LeadServices { get; }
         public IUserRepository USerServices { get; }
         public IRoleRepository RoleServices { get; }
         public ILeadContactRepository LeadContactRepositories { get; }
-        public IStaffRepository  EmployeeRepositories { get; }
+        public IStaffRepository  StaffRepositories { get; }
         public async Task SaveAsync()
         {
             using (_dbcontext.Database.BeginTransaction())
@@ -35,6 +35,7 @@ namespace FieldMgt.Repository.UOW
                 catch (Exception ex)
                 {
                     _dbcontext.Database.RollbackTransaction();
+                    throw new Exception(ex.Message);
                 }
             }
         }
@@ -51,7 +52,7 @@ namespace FieldMgt.Repository.UOW
                 catch (Exception ex)
                 {
                     _dbcontext.Database.RollbackTransaction();
-                    return 0;
+                    throw new Exception(ex.Message);
                 }
             }
         }
