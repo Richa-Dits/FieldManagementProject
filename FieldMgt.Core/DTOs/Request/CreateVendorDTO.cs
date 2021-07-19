@@ -17,6 +17,7 @@ namespace FieldMgt.Core.DTOs.Request
         public string VendorIFSCCode { get; set; }
         public string VendorBankName { get; set; }
         public string VendorBankBranch { get; set; }
+        public string ZipCode { get; set; }
         //public int? PermanentAddressId { get; set; }
         //public int? BillingAddressId { get; set; }
         //public int? ContactDetailId { get; set; }
