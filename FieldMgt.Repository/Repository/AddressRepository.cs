@@ -20,10 +20,10 @@ namespace FieldMgt.Repository.Repository
         {
             //var result= InsertAsync(addressDetail);
             //return result;
-            if (model == null)
-            {
-                throw new NullReferenceException("Register Model is Empty");
-            }
+            //if (model == null)
+            //{
+            //    throw new NullReferenceException("Register Model is Empty");
+            //}
             //if (model.Password != model.ConfirmPassword)
             //    return new UserManagerReponse
             //    {
