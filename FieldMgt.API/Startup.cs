@@ -17,7 +17,7 @@ using FieldMgt.API.Infrastructure.MiddleWares.ErrorHandler;
 using FieldMgt.API.Infrastructure.Factories.PathProvider;
 using Excepticon.Extensions;
 using Excepticon.AspNetCore;
-using FieldMgt.Repository.Repository.Exception;
+using FieldMgt.Repository.Repository.Exceptions;
 
 namespace FieldMgt
 {
@@ -48,6 +48,8 @@ namespace FieldMgt
             services.AddSingleton<IPathProvider, PathProvider>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IRoleRepository, RoleRepository>();
+            services.AddTransient<IAddressDetailRepository, AddressDetailRepository>();
+            services.AddTransient<IContactDetailRepository, ContactDetailRepository>();
             services.AddTransient<IUnitofWork, UnitofWork>();
             services.AddTransient<ICurrentUserService, CurrentUserService>();
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));

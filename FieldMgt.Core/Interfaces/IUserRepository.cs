@@ -7,7 +7,7 @@ namespace FieldMgt.Core.Interfaces
     {
         Task<UserManagerReponse> RegisterUserAsync(RegisterUserDTO model);
         Task<LoginManagerResponse> LoginUserAsync(LoginViewDTO model);
-        Task<int> DeleteUser(string userName, string deletedBY);
+        Task<string> DeleteUser(string userName, string deletedBY);
     }
    
 }

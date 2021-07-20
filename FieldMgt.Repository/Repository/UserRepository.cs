@@ -22,12 +22,12 @@ namespace FieldMgt.Repository.Repository
         private readonly UserManager<ApplicationUser> _userManager;
 
         private IConfiguration _configuration;
-        private ApplicationDbContext _dbcontext;
+        private ApplicationDbContext _dbContext;
         public UserRepository(UserManager<ApplicationUser> userManager, ApplicationDbContext dbcontext, IConfiguration configuration)
         {
             _userManager = userManager;
             _configuration = configuration;
-            _dbcontext = dbcontext;            
+            _dbContext = dbcontext;            
         }
         public async Task<UserManagerReponse> RegisterUserAsync(RegisterUserDTO model)
         {
@@ -71,42 +71,42 @@ namespace FieldMgt.Repository.Repository
         }        
 }
         public async Task<LoginManagerResponse> LoginUserAsync(LoginViewDTO model)
-        {  
+        {
             var user = await _userManager.FindByEmailAsync(model.Email);
-            ////if (user == null || user.IsDeleted==true)
-            ////{
-            ////    return new LoginManagerResponse
-            ////    {
-            ////        Message = "User doesn't exist",
-            ////        IsSuccess = false
-            ////    };
-            ////}
-            //else if(!user.IsActive)
-            //{
-            //    return new LoginManagerResponse
-            //    {
-            //        Message = "User has been disabled by the Admin",
-            //        IsSuccess = false
-            //    };
-            //}
+            if (user == null || user.IsDeleted == true)
+            {
+                return new LoginManagerResponse
+                {
+                    Message = "User doesn't exist",
+                    IsSuccess = false
+                };
+            }
+            else if (!user.IsActive)
+            {
+                return new LoginManagerResponse
+                {
+                    Message = "User has been disabled by the Admin",
+                    IsSuccess = false
+                };
+            }
             var result = await _userManager.CheckPasswordAsync(user, model.Password);
-            //if (!result)
-            //    return new LoginManagerResponse
-            //    {
-            //        Message = "Invalid Password",
-            //        IsSuccess = false
-            //    };
-            
+            if (!result)
+                return new LoginManagerResponse
+                {
+                    Message = "Invalid Password",
+                    IsSuccess = false
+                };
+
             IList<string> role = await _userManager.GetRolesAsync(user);
             string userrole = role.FirstOrDefault();
-            //if(userrole==null)
-            //{
-            //    return new LoginManagerResponse
-            //    {
-            //        Message = "User is not assigned a role to Login",
-            //        IsSuccess = false
-            //    };
-            //}
+            if (userrole == null)
+            {
+                return new LoginManagerResponse
+                {
+                    Message = "User is not assigned a role to Login",
+                    IsSuccess = false
+                };
+            }
             Claim[] claims = new[]
             {
                 new Claim("Email", model.Email),
@@ -115,15 +115,15 @@ namespace FieldMgt.Repository.Repository
                 new Claim("UserName",user.UserName)
         };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["AuthSettings:Key"]));
-            var token = new JwtSecurityToken(                
+            var token = new JwtSecurityToken(
                 issuer: _configuration["AuthSettings:Issuer"],
                 audience: _configuration["AuthSettings:Audience"],
-                claims: claims,                
-                expires:DateTime.Now.AddDays(30),
+                claims: claims,
+                expires: DateTime.Now.AddDays(30),
                 signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
-                string tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);
+            string tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);                                                 
 
-            var flag = await _userManager.IsInRoleAsync(user,"Admin");
+            var flag = await _userManager.IsInRoleAsync(user, "Admin");
             return new LoginManagerResponse
             {
                 Message = tokenAsString,
@@ -133,22 +133,22 @@ namespace FieldMgt.Repository.Repository
                 Role = userrole
             };
         }
-        public async Task<int> DeleteUser(string userName, string deletedBy)
+        public async Task<string> DeleteUser(string userName, string deletedBy)
         {
             var user = _userManager.Users.FirstOrDefault(x => x.UserName == userName);
             if(user.IsDeleted==true || user==null)
             {
-                return 0;
+                return null;
             }
             else
             {
                 user.IsDeleted = true;
                 user.DeletedBy = deletedBy;
                 user.DeletedOn = System.DateTime.Now;
-                _dbcontext.Attach(user);
-                _dbcontext.Entry(user).State = EntityState.Modified;
-                await _dbcontext.SaveChangesAsync();
-                return 1;
+                _dbContext.Attach(user);
+                _dbContext.Entry(user).State = EntityState.Modified;
+                await _dbContext.SaveChangesAsync();
+                return user.Id;
             }
             
         }

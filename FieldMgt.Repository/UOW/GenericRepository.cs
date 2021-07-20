@@ -35,10 +35,9 @@ namespace FieldMgt.Repository.UOW
         }
         public async Task InsertAsync(TEntity entity)
         {
-             await _dbSet.AddAsync(entity);
-            
+             await _dbSet.AddAsync(entity);            
         }
-        //void method
+                //void method
         public TEntity Update(TEntity entity)
         {            
             _dbSet.Attach(entity);
