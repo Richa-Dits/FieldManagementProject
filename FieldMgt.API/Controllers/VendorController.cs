@@ -37,25 +37,28 @@ namespace FieldMgt.API.Controllers
                 addressDTO.Address = model.PermanentAddress;
                 addressDTO.CityId = model.PermanentCity;
                 addressDTO.StateId = model.PermanentState;
-                addressDTO.CountryId
-                    = model.PermanentCountry;
+                addressDTO.CountryId = model.PermanentCountry;
                 addressDTO.AddressType = model.AddressType;
-                addressDTO.ZipCode = model.ZipCode;
+                addressDTO.ZipCode = model.PermanentZipCode;
+                addressDTO.CreatedBy= model.CreatedBy;
+                addressDTO.CreatedOn = System.DateTime.Now;
+                addressDTO.IsActive = true;
+                addressDTO.AddressDetailId = 0;
                 AddressDetail addressDetail = _mapper.Map<CreateAddressDTO, AddressDetail>(addressDTO);
-                var resp=_uow.AddressRepositories.SaveAddress(addressDetail);
-                var result = await _uow.SaveAsync1();
-                if (result != 0)
+                var resp=_uow.AddressRepositories.SaveAddress(addressDTO);
+                if (resp.Result != null)
                 {
                     CreateContactDetailDTO contactDetailDTO = new CreateContactDetailDTO();
                     contactDetailDTO.PrimaryPhone = model.PrimaryPhone;
                     contactDetailDTO.AlternatePhone = model.AlternatePhone;
                     contactDetailDTO.PrimaryEmail = model.PrimaryEmail;
-                    contactDetailDTO.AlternatePhone = model.AlternatePhone;
-                    contactDetailDTO.CreatedBy= _currentUserService.GetUserId();
+                    contactDetailDTO.AlternateEmail = model.AlternateEmail;
+                    contactDetailDTO.CreatedBy= model.CreatedBy;
                     contactDetailDTO.CreatedOn= System.DateTime.Now;
+                    contactDetailDTO.IsActive = true;
                     ContactDetail contactDetail = _mapper.Map<CreateContactDetailDTO, ContactDetail>(contactDetailDTO);
-                    var response = _contactRepository.SaveContactDetails(contactDetail);
-                    if (response != null)
+                    var response = _uow.ContactDetailRepositories.SaveContactDetails(contactDetailDTO);
+                    if (response.Result != null)
                     {
                         CreateVendorDTO modelDTO = new CreateVendorDTO();
                         modelDTO.VendorCompanyName = model.VendorCompanyName;
@@ -69,12 +72,13 @@ namespace FieldMgt.API.Controllers
                         modelDTO.VendorIFSCCode = model.VendorIFSCCode;
                         modelDTO.VendorBankName = model.VendorBankName;
                         modelDTO.VendorBankBranch = model.VendorBankBranch;
-                        modelDTO.PermanentAddressId = response.Id;
-                        modelDTO.BillingAddressId = response.Id;
-                        //modelDTO.ContactDetailId = result.Id;
+                        modelDTO.PermanentAddressId = resp.Result.AddressDetailId;
+                        modelDTO.BillingAddressId = resp.Result.AddressDetailId;
+                        modelDTO.ContactDetailId = response.Result.ContactDetailId;
                         Vendor vendor = _mapper.Map<CreateVendorDTO, Vendor>(modelDTO);
                         await _uow.VendorRepositories.CreateVendorAsync(vendor);
-                        await _uow.SaveAsync();                        
+                        await _uow.SaveAsync();
+                        return Ok("Create vendor successfully.");
                     }
                 }
                 return BadRequest("Some Properties are not valid"); //status Code 400

@@ -5,6 +5,7 @@ using FieldMgt.Core.DomainModels;
 using FieldMgt.Repository.UOW;
 using System.Threading.Tasks;
 using System;
+using FieldMgt.Core.DTOs.Request;
 
 namespace FieldMgt.Repository.Repository
 {
@@ -15,11 +16,10 @@ namespace FieldMgt.Repository.Repository
         {
             _dbContext = dbContext;
         }
-        public Task<int> SaveContactDetails(ContactDetail addressDetail)
+        public async Task<ContactDetail> SaveContactDetails(CreateContactDetailDTO addressDetail)
         {
-            var result = InsertAsync(addressDetail);
-            _dbContext.SaveChangesAsync();
-            return Task.FromResult(result.Id);
+            var response = await SingleAsync<ContactDetail>("sp_SaveContactDetail", addressDetail);
+            return response;
         }
         public ContactDetail DeleteContact(int contactId, string deletedBy)
         {

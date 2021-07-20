@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using FieldMgt.Core.UOW;
 using System.Threading.Tasks;
+using System.Data;
+using Microsoft.Data.SqlClient;
+using Dapper;
 
 namespace FieldMgt.Repository.UOW
 {
@@ -55,6 +58,57 @@ namespace FieldMgt.Repository.UOW
             return values.AsEnumerable<TEntity>();
            // return _dbSet.Where(x => x.GetType().GetProperty(colName).GetValue(x).ToString() == value).ToList();
         }
+        private IDbConnection CreateConnection()
+        {
+            string cn = _dbContext.Database.GetDbConnection().ConnectionString;
+            return new SqlConnection(cn);
+        }
         
+        /// <summary>
+        /// Return the collection of T type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        protected async Task<IEnumerable<T>> CollectionsAsync<T>(string sql, object parameters = null)
+        {
+            using (var connection = CreateConnection())
+            {
+                var QueryResponse = await connection.QueryAsync<T>(sql: sql, param: parameters, commandType: CommandType.StoredProcedure);
+
+                return QueryResponse;
+            }
+        }
+        /// <summary>
+        /// Return the single row
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        protected async Task<T> SingleAsync<T>(string sql, object parameters = null)
+        {
+            using (var connection = CreateConnection())
+            {
+                var QueryResponse = await connection.QuerySingleAsync<T>(sql: sql, param: parameters, commandType: CommandType.StoredProcedure);
+                return QueryResponse;
+            }
+        }
+        /// <summary>
+        /// Used to perform insert, update, delete
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        protected async Task<T> CommandAsync<T>(string sql, object parameters = null)
+        {
+            using (var connection = CreateConnection())
+            {
+                var QueryResponse = await connection.QuerySingleAsync<T>(sql: sql, param: parameters, commandType: CommandType.StoredProcedure);
+                return QueryResponse;
+            }
+        }
     }
 }
