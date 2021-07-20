@@ -27,6 +27,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FieldMgt.Core", "src\soluti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FieldMgt.Repository", "src\solution\FieldMgt.Repository\FieldMgt.Repository.csproj", "{23029174-2A62-435A-A80F-D6E7634CA087}"
 EndProject
+<<<<<<< Updated upstream
+=======
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FieldMgtTest", "FieldMgtTest\FieldMgtTest.csproj", "{32A6C51F-1A7D-4E6A-AF75-31D334018363}"
+EndProject
+>>>>>>> Stashed changes
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +50,13 @@ Global
 		{23029174-2A62-435A-A80F-D6E7634CA087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23029174-2A62-435A-A80F-D6E7634CA087}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23029174-2A62-435A-A80F-D6E7634CA087}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< Updated upstream
+=======
+		{32A6C51F-1A7D-4E6A-AF75-31D334018363}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32A6C51F-1A7D-4E6A-AF75-31D334018363}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32A6C51F-1A7D-4E6A-AF75-31D334018363}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32A6C51F-1A7D-4E6A-AF75-31D334018363}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> Stashed changes
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +73,7 @@ Global
 		{169EB004-AA30-4AAF-8FA2-0E97A316983F} = {30212CBA-9B8A-4FAB-A110-13F000F7F1EF}
 		{A4A04632-07D1-4BF1-BE71-637750BCF3FC} = {30212CBA-9B8A-4FAB-A110-13F000F7F1EF}
 		{23029174-2A62-435A-A80F-D6E7634CA087} = {30212CBA-9B8A-4FAB-A110-13F000F7F1EF}
+		{32A6C51F-1A7D-4E6A-AF75-31D334018363} = {848A53AB-DA3E-49BA-ACED-4A464A5A0515}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {02868F94-C344-473B-96BA-F883FFD297D8}
