@@ -17,7 +17,6 @@ namespace FieldMgt.Core.DTOs.Request
         [StringLength(100, MinimumLength = 8)]
         [EmailAddress(ErrorMessage = "Please Enter valid Email Address")]
         public string AlternateEmail { get; set; }
-
         [DefaultValue(true)]
         public bool? IsActive { get; set; }
         public string CreatedBy { get; set; }
@@ -25,6 +24,6 @@ namespace FieldMgt.Core.DTOs.Request
     }
     public class BaseContactModel
     {
-        public int? ContactDetailId { get; set; }
+        //public int? ContactDetailId { get; set; }
     }
 }

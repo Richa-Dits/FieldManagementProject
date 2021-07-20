@@ -1,4 +1,5 @@
 ﻿using FieldMgt.Core.DomainModels;
+using FieldMgt.Core.DTOs.Request;
 using FieldMgt.Core.DTOs.Response;
 using FieldMgt.Core.Interfaces;
 using FieldMgt.Repository.UOW;
@@ -17,11 +18,10 @@ namespace FieldMgt.Repository.Repository
         {
             _dbContext = dbContext;
         }
-        public Task<int> SaveAddress(AddressDetail model)
+        public async Task<AddressDetail> SaveAddress(CreateAddressDTO model)
         {
-            var result = InsertAsync(model);
-            _dbContext.SaveChangesAsync();
-            return Task.FromResult(result.Id);
+            var response= await SingleAsync<AddressDetail>("sp_SaveVendorDetail", model);
+            return response;
         }
         public AddressDetail DeleteAddress(int addressId, string deletedBy)
         {
