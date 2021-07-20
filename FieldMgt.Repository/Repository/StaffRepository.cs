@@ -20,7 +20,6 @@ namespace FieldMgt.Repository.Repository
         public async Task CreateStaffAsync(Staff model)
         {
              await InsertAsync(model);
-            await _dbContext.SaveChangesAsync();
         }
         public Staff GetStaffbyId(int id)
         {

@@ -54,7 +54,7 @@ namespace FieldMgt.Controllers
                         permanentAddressModelDTO.CreatedOn = System.DateTime.Now;
                         permanentAddressModelDTO.AddressType = 1;
                         AddressDetail permanentPayload = _mapper.Map<CreateAddressDTO, AddressDetail>(permanentAddressModelDTO);
-                        var permanentAddressResponse = _uow.AddressRepositories.SaveAddress(permanentPayload);
+                        //var permanentAddressResponse = _uow.AddressRepositories.SaveAddress(permanentPayload);
                         CreateAddressDTO correspondenceAddressModelDTO = new CreateAddressDTO();
                         correspondenceAddressModelDTO.Address = model.CorrespondenceAddress;
                         correspondenceAddressModelDTO.CityId = model.CorrespondenceCity;
@@ -65,7 +65,7 @@ namespace FieldMgt.Controllers
                         correspondenceAddressModelDTO.CreatedOn = System.DateTime.Now;
                         correspondenceAddressModelDTO.AddressType = 2;
                         AddressDetail correspondencePayload = _mapper.Map<CreateAddressDTO, AddressDetail>(correspondenceAddressModelDTO);
-                        var correspondenceAddressResponse = _uow.AddressRepositories.SaveAddress(correspondencePayload);
+                        //var correspondenceAddressResponse = _uow.AddressRepositories.SaveAddress(correspondencePayload);
                         CreateContactDetailDTO contactModelDTO = new CreateContactDetailDTO();
                         contactModelDTO.PrimaryPhone = model.PrimaryPhone;
                         contactModelDTO.AlternatePhone = model.AlternatePhone;
@@ -75,7 +75,7 @@ namespace FieldMgt.Controllers
                         contactModelDTO.CreatedOn= System.DateTime.Now;
                     
                         ContactDetail contactPayload = _mapper.Map<CreateContactDetailDTO, ContactDetail>(contactModelDTO);
-                        var contactResponse = _uow.ContactDetailRepositories.SaveContactDetails(contactPayload);
+                        //var contactResponse = _uow.ContactDetailRepositories.SaveContactDetails(contactPayload);
                     RegistrationDTO modelDTO = new RegistrationDTO();
                     modelDTO.EmployeeId = null;
                     modelDTO.Email = model.Email;
@@ -83,9 +83,12 @@ namespace FieldMgt.Controllers
                     modelDTO.LastName = model.LastName;         
                     modelDTO.Gender = model.Gender;
                     modelDTO.DOB = model.DOB;
-                    modelDTO.PermanentAddressId = permanentAddressResponse.Id;
-                    modelDTO.CorrespondenceAddressId = correspondenceAddressResponse.Id;
-                    modelDTO.ContactDetailId = contactResponse.Id;
+                    modelDTO.PermanentAddressId =19;
+                    modelDTO.CorrespondenceAddressId = 20;
+                    modelDTO.ContactDetailId = 12;
+                    //modelDTO.PermanentAddressId = permanentAddressResponse.Id;
+                    //modelDTO.CorrespondenceAddressId = correspondenceAddressResponse.Id;
+                    //modelDTO.ContactDetailId = contactResponse.Id;
                     modelDTO.IsActive = true;
                     modelDTO.UserId = result.Id;
                     modelDTO.Designation = model.Designation;
@@ -152,7 +155,7 @@ namespace FieldMgt.Controllers
                         }
                         if(contactId!=0)
                         {
-                            _uow.AddressRepositories.DeleteAddress(contactId, deletedBy);
+                            _uow.ContactDetailRepositories.DeleteContact(contactId, deletedBy);
                         }
                     }
                     else
@@ -160,7 +163,7 @@ namespace FieldMgt.Controllers
 
                     }
                     var result = await _uow.SaveAsync1();
-                    if (result.Equals(1))
+                    if (!(result.Equals(0)))
                     {
                         return Ok(result);//status code 200
                     }
