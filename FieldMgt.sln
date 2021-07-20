@@ -27,12 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FieldMgt.Core", "src\soluti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FieldMgt.Repository", "src\solution\FieldMgt.Repository\FieldMgt.Repository.csproj", "{23029174-2A62-435A-A80F-D6E7634CA087}"
 EndProject
-<<<<<<< Updated upstream
-=======
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FieldMgtTest", "FieldMgtTest\FieldMgtTest.csproj", "{32A6C51F-1A7D-4E6A-AF75-31D334018363}"
-EndProject
->>>>>>> Stashed changes
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FieldMgtTest", "FieldMgtTest\FieldMgtTest.csproj", "{32A6C51F-1A7D-4E6A-AF75-31D334018363}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,24 +35,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-<<<<<<< HEAD
-		{D236704A-8C06-4168-A04F-97EE2A3E8D5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D236704A-8C06-4168-A04F-97EE2A3E8D5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D236704A-8C06-4168-A04F-97EE2A3E8D5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D236704A-8C06-4168-A04F-97EE2A3E8D5F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C457060A-D3D8-4A1B-A1DC-35805CE08C05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C457060A-D3D8-4A1B-A1DC-35805CE08C05}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C457060A-D3D8-4A1B-A1DC-35805CE08C05}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C457060A-D3D8-4A1B-A1DC-35805CE08C05}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AB3BBB10-23D2-4E4B-93CC-420DD8EDDC9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AB3BBB10-23D2-4E4B-93CC-420DD8EDDC9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AB3BBB10-23D2-4E4B-93CC-420DD8EDDC9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AB3BBB10-23D2-4E4B-93CC-420DD8EDDC9B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{32A6C51F-1A7D-4E6A-AF75-31D334018363}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{32A6C51F-1A7D-4E6A-AF75-31D334018363}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{32A6C51F-1A7D-4E6A-AF75-31D334018363}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{32A6C51F-1A7D-4E6A-AF75-31D334018363}.Release|Any CPU.Build.0 = Release|Any CPU
-=======
 		{169EB004-AA30-4AAF-8FA2-0E97A316983F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{169EB004-AA30-4AAF-8FA2-0E97A316983F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{169EB004-AA30-4AAF-8FA2-0E97A316983F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -70,14 +47,10 @@ Global
 		{23029174-2A62-435A-A80F-D6E7634CA087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23029174-2A62-435A-A80F-D6E7634CA087}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23029174-2A62-435A-A80F-D6E7634CA087}.Release|Any CPU.Build.0 = Release|Any CPU
-<<<<<<< Updated upstream
-=======
 		{32A6C51F-1A7D-4E6A-AF75-31D334018363}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{32A6C51F-1A7D-4E6A-AF75-31D334018363}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32A6C51F-1A7D-4E6A-AF75-31D334018363}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32A6C51F-1A7D-4E6A-AF75-31D334018363}.Release|Any CPU.Build.0 = Release|Any CPU
->>>>>>> Stashed changes
->>>>>>> master
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
