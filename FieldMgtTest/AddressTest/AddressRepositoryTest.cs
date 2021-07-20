@@ -19,10 +19,10 @@ namespace FieldMgtTest.AddressTest
         {
             _mockUOW = mockUOW;
         }
-        public void DeleteAddress_ShouldDeleteStaffMember()
+        public void DeleteAddress_ShouldDeleteStaffMember(int id, string user)
         {
             //Arrange
-           _mockUOW.AddressRepositories.DeleteAddress
+            _mockUOW.AddressRepositories.DeleteAddress(id, user);
             //Act           
 
             //Assert
