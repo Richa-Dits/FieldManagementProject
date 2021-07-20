@@ -20,7 +20,7 @@ namespace FieldMgt.Repository.Repository
         }
         public async Task<AddressDetail> SaveAddress(CreateAddressDTO model)
         {
-            var response= await SingleAsync<AddressDetail>("sp_SaveVendorDetail", model);
+            var response= await SingleAsync<AddressDetail>("sp_SaveAddressDetail", model);
             return response;
         }
         public AddressDetail DeleteAddress(int addressId, string deletedBy)
