@@ -7,8 +7,6 @@ using FieldMgt.Core.UOW;
 using FieldMgt.API.Infrastructure.Services;
 using FieldMgt.Core.DTOs.Request;
 using System;
-using Microsoft.AspNetCore.Authorization;
-using FieldMgt.API.Infrastructure.MiddleWares.ErrorDetail;
 using FieldMgt.API.Infrastructure.MiddleWares.Exceptions;
 
 namespace FieldMgt.Controllers

@@ -101,17 +101,24 @@ namespace FieldMgt.API.Controllers
             var result = _uow.VendorRepositories.GetVendorbyIdAsync(id);
             if (result == null)
             {
-                return BadRequest("Lead Contact doesnt exist");
+                return BadRequest("vendor doesnt exist");
             }
-            return Ok(result);//status code 200
+            return Ok(result);
         }
-        [Route("~/api/Vendor/Update")]
+        [Route("~/api/Vendor/Update/{id}")]
         [HttpPatch]
-        public Vendor UpdateVendorStatusAsync(Vendor lead)
+        public async Task<Vendor> UpdateVendorStatusAsync(Vendor vendor)
         {
-            var updatedLead = _uow.VendorRepositories.UpdateVendorStatusAsync(lead);
-            _uow.SaveAsync();
-            return updatedLead;
+            var updatedVendor = await _uow.VendorRepositories.UpdateVendorStatusAsync(vendor);
+            return updatedVendor;
         }
+        //[Route("~/api/Vendor/Update")]
+        //[HttpDelete]
+        //public Vendor DeleteVendorStatusAsync(int id)
+        //{
+        //    //var deletedVendor = _uow.VendorRepositories.UpdateVendorStatusAsync(vendor);
+        //    //_uow.SaveAsync();
+        //    //return deletedVendor;
+        //}
     }
 }

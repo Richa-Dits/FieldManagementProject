@@ -11,6 +11,6 @@ namespace FieldMgt.Core.Interfaces
         Task CreateVendorAsync(Vendor model);
         IEnumerable<Vendor> GetVendorsAsync();
         Vendor GetVendorbyIdAsync(int id);
-        Vendor UpdateVendorStatusAsync(Vendor lead);
+        Task<Vendor> UpdateVendorStatusAsync(Vendor lead);
     }
 }

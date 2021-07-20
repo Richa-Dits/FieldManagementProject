@@ -28,9 +28,10 @@ namespace FieldMgt.Repository.Repository
             var result = _dbContext.Vendors.FirstOrDefault(l => l.VendorId == id);
             return result;
         }
-        public Vendor UpdateVendorStatusAsync(Vendor lead)
+        public async Task<Vendor> UpdateVendorStatusAsync(Vendor vendor)
         {
-            return Update(lead);
+            var response = await SingleAsync<Vendor>("sp_UpdateVendorDetail", vendor);
+            return response;
         }
     }
 }

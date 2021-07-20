@@ -1,9 +1,6 @@
 ﻿using FieldMgt.Core.DomainModels;
 using FieldMgt.Core.Interfaces;
 using FieldMgt.Repository.UOW;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FieldMgt.Repository.Repository.Exceptions
