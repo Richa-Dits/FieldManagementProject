@@ -15,4 +15,8 @@
     <ProjectReference Include="..\FieldMgt.Core\FieldMgt.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\Consts\" />
+  </ItemGroup>
+
 </Project>
