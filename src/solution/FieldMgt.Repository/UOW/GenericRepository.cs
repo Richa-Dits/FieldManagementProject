@@ -39,8 +39,7 @@ namespace FieldMgt.Repository.UOW
         public async Task InsertAsync(TEntity entity)
         {
              await _dbSet.AddAsync(entity);            
-        }
-                //void method
+        }                
         public TEntity Update(TEntity entity)
         {            
             _dbSet.Attach(entity);
@@ -49,21 +48,14 @@ namespace FieldMgt.Repository.UOW
         }
         public IEnumerable<TEntity> GetAllConditional(string colName,string value)
         {
-           // var emp = _dbSet.Where(a => a.. == value).Single();
-            //var query = _dbSet.Where( c=> c.GetType(colName) == criteria[1].Value).ToString();
             var values = _dbSet.Where(x => x.GetType().GetProperty(colName).ToString()==value);
-            //criteria.Add(new KeyValuePair<string, string>(colName, value));
-            //return _dbSet.Where(e => criteria.Select(c => e.GetType().GetProperty(c.Value).GetValue(e).ToString() == c.Value)
-            //                                          .All(c => c == true));
             return values.AsEnumerable<TEntity>();
-           // return _dbSet.Where(x => x.GetType().GetProperty(colName).GetValue(x).ToString() == value).ToList();
         }
         private IDbConnection CreateConnection()
         {
             string cn = _dbContext.Database.GetDbConnection().ConnectionString;
             return new SqlConnection(cn);
-        }
-        
+        }        
         /// <summary>
         /// Return the collection of T type
         /// </summary>

@@ -25,13 +25,13 @@ namespace FieldMgt.Core.DomainModels
         public int? ClientId { get; set; }
         [ForeignKey("ClientId")]
         public Client Client { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(450)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(450)")]
         public string ModifiedBy { get; set; }
         public DateTime? ModifiedOn { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(450)")]
         public string DeletedBy { get; set; }
         public DateTime? DeletedOn { get; set; }
         [DefaultValue(true)]

@@ -8,7 +8,7 @@ namespace FieldMgt.Core.DomainModels
 {
     public class ApplicationDbContext:IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions options):base(options)
+        public ApplicationDbContext(DbContextOptions <ApplicationDbContext> options):base(options)
         {
 
         }

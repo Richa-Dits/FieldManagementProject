@@ -19,13 +19,41 @@ namespace FieldMgtTest.AddressTest
         {
             _mockUOW = mockUOW;
         }
+        [Fact]
+        public void DeleteAddressfact_ShouldDeleteStaffMember()
+        {
+
+            var address = _mockUOW.AddressRepositories.DeleteAddress(22, "Hello");
+            _mockUOW.SaveAsync1();
+            Assert.Equal(true, address.IsDeleted);
+            //Assert.Equal(user, address.DeletedBy);
+
+        }
+        [Theory]
+        [InlineData(22,"Hello")]
         public void DeleteAddress_ShouldDeleteStaffMember(int id, string user)
         {
-            //Arrange
-            _mockUOW.AddressRepositories.DeleteAddress(id, user);
-            //Act           
+        
+            var address=_mockUOW.AddressRepositories.DeleteAddress(id, user);
+            _mockUOW.SaveAsync1();          
+            Assert.Equal(true, address.IsDeleted);
+            //Assert.Equal(user, address.DeletedBy);          
+        }
+        [Fact]
+        public void GetStaff_ShouldGetAllStaff()
+        {
+            IEnumerable<Staff> result = _mockUOW.StaffRepositories.GetStaff();
+            Assert.IsAssignableFrom<IEnumerable<Staff>>(result);
+        }
+        [Theory]
+        [InlineData(22, "Hello")]
+        public void Delete_ShouldDeleteStaffMember(int id, string user)
+        {
 
-            //Assert
+            var address = _mockUOW.AddressRepositories.DeleteAddress(id, user);
+            _mockUOW.SaveAsync1();
+            Assert.Equal(true, address.IsDeleted);
+            //Assert.Equal(user, address.DeletedBy);          
         }
     }
 }

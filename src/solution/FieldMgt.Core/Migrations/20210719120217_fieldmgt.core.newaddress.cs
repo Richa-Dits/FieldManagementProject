@@ -158,59 +158,60 @@ namespace FieldMgt.Core.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "SPModifiedById",
                 table: "ServiceProviders",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)",
+                oldType: "nvarchar(450)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "SPDeletedById",
                 table: "ServiceProviders",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)",
+                oldType: "nvarchar(450)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "SPCreatedById",
                 table: "ServiceProviders",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)",
+                oldType: "nvarchar(450)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "DeletedBy",
                 table: "OrderTransactions",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)",
+                oldType: "nvarchar(450)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "ID",
                 table: "ExceptionLogs",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)",
+                oldType: "nvarchar(450)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "ExceptionId",
                 table: "ExceptionLogs",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                name: "ErrorMessage",
+                name: "
+                Message",
                 table: "ExceptionLogs",
                 type: "nvarchar(500)",
                 nullable: true,
@@ -221,7 +222,7 @@ namespace FieldMgt.Core.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "ErrorCode",
                 table: "ExceptionLogs",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
@@ -230,103 +231,103 @@ namespace FieldMgt.Core.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
                 table: "AspNetUserTokens",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "LoginProvider",
                 table: "AspNetUserTokens",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "UserId",
                 table: "AspNetUserTokens",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "Id",
                 table: "AspNetUsers",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "RoleId",
                 table: "AspNetUserRoles",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "UserId",
                 table: "AspNetUserRoles",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "UserId",
                 table: "AspNetUserLogins",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "ProviderKey",
                 table: "AspNetUserLogins",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "LoginProvider",
                 table: "AspNetUserLogins",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "UserId",
                 table: "AspNetUserClaims",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "Id",
                 table: "AspNetRoles",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "RoleId",
                 table: "AspNetRoleClaims",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AddColumn<string>(
                 name: "CreatedBy",
                 table: "AddressDetails",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: true);
 
             migrationBuilder.AddColumn<DateTime>(
@@ -338,7 +339,7 @@ namespace FieldMgt.Core.Migrations
             migrationBuilder.AddColumn<string>(
                 name: "DeletedBy",
                 table: "AddressDetails",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: true);
 
             migrationBuilder.AddColumn<DateTime>(
@@ -362,7 +363,7 @@ namespace FieldMgt.Core.Migrations
             migrationBuilder.AddColumn<string>(
                 name: "ModifiedBy",
                 table: "AddressDetails",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: true);
 
             migrationBuilder.AddColumn<DateTime>(
@@ -916,46 +917,46 @@ namespace FieldMgt.Core.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "SPModifiedById",
                 table: "ServiceProviders",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)",
+                oldType: "nvarchar(450)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "SPDeletedById",
                 table: "ServiceProviders",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)",
+                oldType: "nvarchar(450)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "SPCreatedById",
                 table: "ServiceProviders",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)",
+                oldType: "nvarchar(450)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "DeletedBy",
                 table: "OrderTransactions",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)",
+                oldType: "nvarchar(450)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "ID",
                 table: "ExceptionLogs",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)",
+                oldType: "nvarchar(450)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
@@ -964,7 +965,7 @@ namespace FieldMgt.Core.Migrations
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)",
+                oldType: "nvarchar(450)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
@@ -982,104 +983,104 @@ namespace FieldMgt.Core.Migrations
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)",
+                oldType: "nvarchar(450)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
                 table: "AspNetUserTokens",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "LoginProvider",
                 table: "AspNetUserTokens",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "UserId",
                 table: "AspNetUserTokens",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "Id",
                 table: "AspNetUsers",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "RoleId",
                 table: "AspNetUserRoles",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "UserId",
                 table: "AspNetUserRoles",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "UserId",
                 table: "AspNetUserLogins",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "ProviderKey",
                 table: "AspNetUserLogins",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "LoginProvider",
                 table: "AspNetUserLogins",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "UserId",
                 table: "AspNetUserClaims",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "Id",
                 table: "AspNetRoles",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "RoleId",
                 table: "AspNetRoleClaims",
-                type: "nvarchar(255)",
+                type: "nvarchar(450)",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(255)");
+                oldType: "nvarchar(450)");
 
             migrationBuilder.AddForeignKey(
                 name: "AddressTypeRef_FK",

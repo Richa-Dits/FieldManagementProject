@@ -7,15 +7,15 @@ namespace FieldMgt.Core.DTOs.Request
 
     public class CreateContactDetailDTO:BaseContactModel
    {
-        [Phone(ErrorMessage = "Please Enter valid Phone Number")]
+        [Phone]
         public string PrimaryPhone { get; set; }
-        [Phone(ErrorMessage = "Please Enter valid Phone Number")]
+        [Phone]
         public string AlternatePhone { get; set; }
         [StringLength(100, MinimumLength = 8)]
-        [EmailAddress(ErrorMessage = "Please Enter valid Email Address")]
+        [EmailAddress]
         public string PrimaryEmail { get; set; }
         [StringLength(100, MinimumLength = 8)]
-        [EmailAddress(ErrorMessage = "Please Enter valid Email Address")]
+        [EmailAddress]
         public string AlternateEmail { get; set; }
         [DefaultValue(true)]
         public bool? IsActive { get; set; }

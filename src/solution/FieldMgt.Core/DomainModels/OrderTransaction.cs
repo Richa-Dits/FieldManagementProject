@@ -16,10 +16,10 @@ namespace FieldMgt.Core.DomainModels
         public decimal? AmountPaid { get; set; }
         public int? PaymentMethod { get; set; }
         public string PaymentReferenceNumber { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(450)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(450)")]
         public string ModifiedBy { get; set; }
         public DateTime? ModifiedOn { get; set; }
         [DefaultValue(false)]

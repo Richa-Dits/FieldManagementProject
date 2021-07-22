@@ -14,18 +14,18 @@ namespace FieldMgt.Core.DomainModels
         public int ProductIssuedId { get; set; }
         [Column(TypeName = "decimal(8,2)")]
         public decimal? QuantityIssued { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(450)")]
         public string IssuedBy { get; set; }
         public DateTime? IssuedOn { get; set; }
         [DefaultValue(true)]
         public bool? IsActive { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(450)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(450)")]
         public string ModifiedBy { get; set; }
         public DateTime? ModifiedOn { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(450)")]
         public string DeletedBy { get; set; }
         [DefaultValue(false)]
         public bool? IsDeleted { get; set; }

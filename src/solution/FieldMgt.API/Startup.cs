@@ -18,6 +18,7 @@ using FieldMgt.API.Infrastructure.Factories.PathProvider;
 using Excepticon.Extensions;
 using Excepticon.AspNetCore;
 using FieldMgt.Repository.Repository.Exceptions;
+using Microsoft.EntityFrameworkCore.InMemory;
 
 namespace FieldMgt
 {
@@ -31,7 +32,11 @@ namespace FieldMgt
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            ////for Production & Development
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //for Unit Testing
+            services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase("FieldManagement"));
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("FieldManagement"));
             services.AddControllers();
             services.AddHttpClient();
             services.AddSwaggerGen(c =>

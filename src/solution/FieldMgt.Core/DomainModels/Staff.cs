@@ -24,17 +24,17 @@ namespace FieldMgt.Core.DomainModels
         public ContactDetail ContactDetail { get; set; }
         [DefaultValue(true)]
         public bool IsActive { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(450)")]
         public string UserId { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(450)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(450)")]
         public string ModifiedBy { get; set; }
         public DateTime? ModifiedOn { get; set; }
         [DefaultValue(false)]
         public bool? IsDeleted { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(450)")]
         public string DeletedBy { get; set; }
         public DateTime? DeletedOn { get; set; }
         public GlobalCode StaffDesignation { get; set; }

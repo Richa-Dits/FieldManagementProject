@@ -13,7 +13,7 @@ namespace FieldMgt.Core.DomainModels
         [Required]
         public int? ClientId { get; set; }
         public Client Client { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(450)")]
         public string OrderDescription { get; set; }
         public int? OrderStatus { get; set; }        
         public int? ContactDetailId { get; set; }
@@ -27,7 +27,7 @@ namespace FieldMgt.Core.DomainModels
         public bool? IsComplete { get; set; }        
         public DateTime? DueDate { get; set; }        
         public DateTime? ActualCompletionDate { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(450)")]
         public string AssignedTo { get; set; }
         [Column(TypeName = "decimal(16,2)")]
         public decimal? OrderAmount { get; set; }
@@ -36,15 +36,15 @@ namespace FieldMgt.Core.DomainModels
         [Column(TypeName = "decimal(16,2)")]
         public decimal? BalanceAmount { get; set; }
         public int? PaymentStatus { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(450)")]
         public string CompletionCertifcate { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(450)")]
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(450)")]
         public string ModifiedBy { get; set; }
         public DateTime? ModifiedOn { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
+        [Column(TypeName = "nvarchar(450)")]
         public string DeletedBy { get; set; }
         [DefaultValue(false)]
         public bool? IsDeleted { get; set; }

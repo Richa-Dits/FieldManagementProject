@@ -25,7 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FieldMgt.Repository\FieldMgt.Repository.csproj" />
     <ProjectReference Include="..\src\solution\FieldMgt.Core\FieldMgt.Core.csproj" />
     <ProjectReference Include="..\src\solution\FieldMgt.Repository\FieldMgt.Repository.csproj" />
   </ItemGroup>

@@ -16,7 +16,7 @@ namespace FieldMgt.Repository.Repository
             _dbContext = dbContext;
         }
         /// <summary>
-        /// Save Vendor Address
+        /// Save Address for Staff Member, Vendor, Service Provider
         /// </summary>
         /// <param name="model">typeof CreateAddressDTO</param>
         /// <returns>It is returning AdressDetail object</returns>

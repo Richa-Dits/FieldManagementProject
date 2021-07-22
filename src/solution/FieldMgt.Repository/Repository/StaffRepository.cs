@@ -34,8 +34,6 @@ namespace FieldMgt.Repository.Repository
         {
             try
             {
-                //var emp = _dbContext.Staffs.FirstOrDefault();
-                //commented to create the db
                 var emp = _dbContext.Staffs.Where(a => a.UserId == staffId).Single();
                 if (!(emp == null || emp.IsDeleted == true))
                 {

@@ -32,7 +32,7 @@ namespace FieldMgt.Repository.Repository
         /// <paramtype="string"></paramtype>
         /// <paramname ="role"></param>
         /// <returns></returns>
-        public async Task<UserManagerReponse> AddRoleAsync(string role)
+        public async Task<UserManagerReponse> AddRoleAsync(string role)500
         {
             IdentityRole userRole = new IdentityRole(role) ;
             var result = await _roleManager.CreateAsync(userRole);
@@ -40,13 +40,13 @@ namespace FieldMgt.Repository.Repository
             {
                 return new UserManagerReponse
                 {
-                    Message = "Role Created Successfully",
+                    Message = ResponseMessages.RoleCreated,
                     IsSuccess = true
                 };
             }
             return new UserManagerReponse
             {
-                Message = "Role not created",
+                Message = ResponseMessages.RoleNotCreated,
                 IsSuccess = false,
                 Errors = result.Errors.Select(e => e.Description)
             };
@@ -74,16 +74,16 @@ namespace FieldMgt.Repository.Repository
         {
             var user = _userManager.Users.FirstOrDefault(x => x.UserName == userName);
             var roles=_roleManager.FindByNameAsync(role);
-            if(roles.Result==null)
+            if (roles == null)
             {
                 return new UserManagerReponse
                 {
-                    Message = "Role doesn't exist"
+                    Message = ResponseMessages.RoleNotExit,
                 };
             }
-            else { 
-            string roleName = roles.Result.Name.ToString();
-            var result=await _userManager.AddToRoleAsync(user, roleName);            
+            else
+            {
+                var result = await _userManager.AddToRoleAsync(user, roles.Name);
                 return new UserManagerReponse
                 {
                     Message = result.ToString()
